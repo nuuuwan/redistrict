@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Box from "@mui/material/Box";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import AppColors from "./view/_constants/AppColors";
+import HomePage from "./view/pages/HomePage.js";
+
+const THEME = createTheme({
+  palette: {
+    primary: {
+      main: AppColors.Primary,
+    },
+    secondary: {
+      main: AppColors.Secondary,
+    },
+    success: {
+      main: AppColors.Success,
+    },
+    neutral: {
+      main: AppColors.Light,
+    },
+  },
+  typography: {
+    fontFamily: ["Duru Sans", "Dosis", "Darker Grotesque", "sans-serif"].join(
+      ","
+    ),
+  },
+});
+
+const STYLE = {
+  maxWidth: 800,
+  margin: "auto",
+  marginBottom: 10,
+};
+
+export default class App extends Component {
+  render() {
+    return (
+      <ThemeProvider theme={THEME}>
+        <Box sx={STYLE}>
+          <HomePage />
+        </Box>
+      </ThemeProvider>
+    );
+  }
 }
-
-export default App;

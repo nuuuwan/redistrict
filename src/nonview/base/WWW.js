@@ -1,0 +1,36 @@
+import Cache from "../../nonview/base/Cache";
+
+const JSON_HEADERS = {
+  headers: {
+    Accept: "application/json",
+  },
+};
+
+export default class WWW {
+  constructor(url) {
+    this.url = url;
+  }
+
+  static open(url) {
+    window.history.pushState("", "", url);
+    window.location.reload(true);
+  }
+}
+
+export class JSONWWW extends WWW {
+  async readNoCache() {
+    try {
+      const response = await fetch(this.url, JSON_HEADERS);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  async read() {
+    const cacheKey = "cache-" + this.url;
+    const cache = new Cache(cacheKey);
+    return await cache.get(this.readNoCache.bind(this));
+  }
+}
