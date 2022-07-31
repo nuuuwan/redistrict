@@ -11,7 +11,7 @@ import { toPng } from "html-to-image";
 export default function ScreenshotView({ refHomePage }) {
   const takeScreenshot = async (node) => {
     const dataURI = await toPng(node, { backgroundColor: "#fefefe" });
-    download(dataURI, "politicians.png");
+    download(dataURI, "redistrict.png");
   };
 
   const onClickGetImage = function () {

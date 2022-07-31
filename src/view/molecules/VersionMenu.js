@@ -14,7 +14,7 @@ import { t } from "../../nonview/base/I18N";
 import GroundTruth from "../../nonview/core/GroundTruth";
 
 const MESSAGE =
-  "Hi Nuwan, I'd like to submit criteria for the PoliticiansLKApp";
+  "Hi Nuwan, I'd like to submit criteria for the RedistrictLKApp";
 const URL_MESSAGE =
   "https://twitter.com/messages/compose?recipient_id=57874373&text=" +
   MESSAGE.replace(" ", "+");

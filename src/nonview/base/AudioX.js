@@ -1,6 +1,6 @@
 const URL_BASE = [
   "https://raw.githubusercontent.com",
-  "nuuuwan/politicians_lk/main/public",
+  "nuuuwan/redistrict/main/public",
 ].join("/");
 
 const URL_SHORT = URL_BASE + "/tabla-short.mp3";
