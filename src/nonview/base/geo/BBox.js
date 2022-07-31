@@ -31,7 +31,7 @@ export default class BBox {
       this.maxLngLat.lat,
     ];
     const [lngSpan, latSpan] = [maxLng - minLng, maxLat - minLat];
-    const r = lngSpan / latSpan;
+    const r = (lngSpan * height) / latSpan / width;
     let [widthActual, heightActual] = [
       width - padding * 2,
       height - padding * 2,

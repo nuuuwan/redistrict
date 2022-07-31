@@ -1,6 +1,6 @@
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
-import GeoJSON from "../../nonview/core/GeoJSON";
+import GeoJSON from "../../nonview/base/geo/GeoJSON";
 
 import AppColors from "../../view/_constants/AppColors";
 import GeoJSONView from "../../view/molecules/GeoJSONView";
@@ -27,7 +27,7 @@ export default class MapPage extends AbstractInnerPage {
   }
 
   async componentDidMount() {
-    const geoJSON = await new GeoJSON("ed").read();
+    const geoJSON = await new GeoJSON("LK-11", "dsd").read();
     this.setState({ geoJSON });
   }
 
