@@ -52,7 +52,7 @@ export default function HelpMenu() {
   };
 
   return (
-    <Box>
+    <Box sx={{ m: 1 }}>
       <Box>
         <IconButton onClick={onClick}>
           <SettingsIcon sx={{ color: "primary" }} />
