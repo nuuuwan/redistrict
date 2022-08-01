@@ -1,6 +1,8 @@
 import BBox from "../../nonview/base/geo/BBox";
 import MathX from "../../nonview/base/MathX";
 
+import GeoJSONFeatureView from "../../view/molecules/GeoJSONFeatureView";
+
 const PADDING = 10;
 
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
@@ -23,45 +25,17 @@ function getFeatureToColor(features) {
     cumPopulation += feature.properties.population;
     const pPopulation = cumPopulation / totalPopulation;
     let color;
+
     if (pPopulation < 0.5) {
       color = "green";
     } else {
       color = "maroon";
     }
-    if (prevColor !== color) {
-      console.debug("-----------");
-    }
-    console.debug(feature.properties.name, pPopulation, color);
+
     featureToColor[feature.id] = color;
     prevColor = color;
   }
   return featureToColor;
-}
-
-function PolygonView({ funcTransform, polygon, color }) {
-  const dList = polygon.map(function (coordinate, iCoordinate) {
-    const [x, y] = funcTransform(coordinate);
-    const label = iCoordinate === 0 ? "M" : "L";
-    return label + parseInt(x) + "," + parseInt(y);
-  });
-  const d = dList.join("");
-  return <path d={d} fill={color} stroke="white" strokeWidth="1" />;
-}
-
-function GeoJSONFeatureView({ funcTransform, feature, color }) {
-  return feature.geometry.coordinates.map(function (polygonList, iPolygonList) {
-    return polygonList.map(function (polygon, iPolygon) {
-      const key = "polygon-" + iPolygonList + "-" + iPolygon;
-      return (
-        <PolygonView
-          key={key}
-          funcTransform={funcTransform}
-          polygon={polygon}
-          color={color}
-        />
-      );
-    });
-  });
 }
 
 export default function GeoJSONView({ geoJSON }) {
