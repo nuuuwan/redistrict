@@ -20,7 +20,6 @@ function getFeatureToColor(features) {
   });
 
   let cumPopulation = 0;
-  let prevColor = null;
   for (let feature of sortedFeatures) {
     cumPopulation += feature.properties.population;
     const pPopulation = cumPopulation / totalPopulation;
@@ -33,7 +32,6 @@ function getFeatureToColor(features) {
     }
 
     featureToColor[feature.id] = color;
-    prevColor = color;
   }
   return featureToColor;
 }
