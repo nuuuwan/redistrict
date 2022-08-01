@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/redistrict/static/js/main.cc67d797.js",
+    "main.js": "/redistrict/static/js/main.5b5b32ff.js",
     "static/js/787.0f5fd1dc.chunk.js": "/redistrict/static/js/787.0f5fd1dc.chunk.js",
     "index.html": "/redistrict/index.html",
-    "main.cc67d797.js.map": "/redistrict/static/js/main.cc67d797.js.map",
+    "main.5b5b32ff.js.map": "/redistrict/static/js/main.5b5b32ff.js.map",
     "787.0f5fd1dc.chunk.js.map": "/redistrict/static/js/787.0f5fd1dc.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.cc67d797.js"
+    "static/js/main.5b5b32ff.js"
   ]
 }
