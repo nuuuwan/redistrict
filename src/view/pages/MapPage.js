@@ -12,8 +12,8 @@ import GeoJSONView from "../../view/molecules/GeoJSONView";
 import PartitionView from "../../view/molecules/PartitionView";
 import AbstractInnerPage from "../../view/pages/AbstractInnerPage";
 
-const DEFAULT_N_SEATS = 19;
-const DEFAULT_MAX_SEATS_PER_GROUP = 19;
+const DEFAULT_N_SEATS = 10;
+const DEFAULT_MAX_SEATS_PER_GROUP = 5;
 const DEFAULT_SUBREGION_TYPE = "dsd";
 const DEFAULT_REGION_ID = "LK-11";
 export default class MapPage extends AbstractInnerPage {
