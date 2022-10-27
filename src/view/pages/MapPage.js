@@ -9,11 +9,11 @@ import SliderSeats from "../../view/atoms/SliderSeats";
 import GeoJSONView from "../../view/molecules/GeoJSONView";
 import PartitionView from "../../view/molecules/PartitionView";
 import AbstractInnerPage from "../../view/pages/AbstractInnerPage";
-
+const DEFAULT_N_SEATS = 3;
 export default class MapPage extends AbstractInnerPage {
   constructor(props) {
     super(props);
-    this.state = { geoJSON: null, partition: null, idToGroup: null, nSeats: 1 };
+    this.state = { geoJSON: null, partition: null, idToGroup: null, nSeats: DEFAULT_N_SEATS };
   }
   get page() {
     return "MapPage";
