@@ -61,4 +61,9 @@ export default class BBox {
     };
     return funcTransform;
   }
+
+  static getCentroid(lngLatList) {
+    const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(lngLatList);
+    return [(minLat + maxLat) / 2,(minLng + maxLng) / 2 ];
+  }
 }
