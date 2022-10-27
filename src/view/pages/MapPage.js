@@ -5,6 +5,7 @@ import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import Partition from "../../nonview/core/Partition";
 
 import AppColors from "../../view/_constants/AppColors";
+import SelectRegionID from "../../view/atoms/SelectRegionID";
 import SliderMaxSeatsPerGroup from "../../view/atoms/SliderMaxSeatsPerGroup";
 import SliderSeats from "../../view/atoms/SliderSeats";
 import SliderSubRegionType from "../../view/atoms/SliderSubRegionType";
@@ -85,6 +86,22 @@ export default class MapPage extends AbstractInnerPage {
     });
   }
 
+  async setRegionID(regionID) {
+    const { subRegionType, nSeats, maxSeatsPerGroup } = this.state;
+    const geoJSON = await new GeoJSON(regionID, subRegionType).read();
+    const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
+      nSeats,
+      maxSeatsPerGroup,
+      geoJSON
+    );
+    this.setState({
+      regionID,
+      geoJSON,
+      partition,
+      groupToIDListAndNSeats,
+    });
+  }
+
   async loadStateGeo(nSeats, maxSeatsPerGroup, geoJSON) {
     const partition = Partition.fromGeoJSONFeatures(geoJSON.features, nSeats);
     partition.partitionAll(maxSeatsPerGroup);
@@ -110,12 +127,17 @@ export default class MapPage extends AbstractInnerPage {
       geoJSON,
       partition,
       groupToIDListAndNSeats,
+      regionID,
     } = this.state;
     if (!geoJSON) {
       return "Loading...";
     }
     return (
       <Box>
+        <SelectRegionID
+          regionID={regionID}
+          setRegionID={this.setRegionID.bind(this)}
+        />
         <SliderSubRegionType
           subRegionType={subRegionType}
           setSubRegionType={this.setSubRegionType.bind(this)}
