@@ -9,11 +9,17 @@ import SliderSeats from "../../view/atoms/SliderSeats";
 import GeoJSONView from "../../view/molecules/GeoJSONView";
 import PartitionView from "../../view/molecules/PartitionView";
 import AbstractInnerPage from "../../view/pages/AbstractInnerPage";
+
 const DEFAULT_N_SEATS = 3;
 export default class MapPage extends AbstractInnerPage {
   constructor(props) {
     super(props);
-    this.state = { geoJSON: null, partition: null, idToGroup: null, nSeats: DEFAULT_N_SEATS };
+    this.state = {
+      geoJSON: null,
+      partition: null,
+      idToGroup: null,
+      nSeats: DEFAULT_N_SEATS,
+    };
   }
   get page() {
     return "MapPage";
@@ -31,20 +37,21 @@ export default class MapPage extends AbstractInnerPage {
   }
 
   async setNSeats(nSeats) {
-    const { geoJSON, partition, idToGroup } = await this.loadStateGeo(nSeats);
+    const geoJSON = this.state.geoJSON;
+    const { partition, idToGroup } = await this.loadStateGeo(nSeats, geoJSON);
     this.setState({ geoJSON, partition, idToGroup, nSeats });
   }
 
-  async loadStateGeo(nSeats) {
-    const geoJSON = await new GeoJSON("LK-11", "dsd").read();
+  async loadStateGeo(nSeats, geoJSON) {
     const partition = Partition.fromGeoJSONFeatures(geoJSON.features, nSeats);
     partition.partitionAll();
     const idToGroup = partition.idToGroup;
-    return { geoJSON, partition, idToGroup };
+    return { partition, idToGroup };
   }
   async componentDidMount() {
     const { nSeats } = this.state;
-    const { geoJSON, partition, idToGroup } = await this.loadStateGeo(nSeats);
+    const geoJSON = await new GeoJSON("LK-11", "dsd").read();
+    const { partition, idToGroup } = await this.loadStateGeo(nSeats, geoJSON);
     this.setState({ geoJSON, partition, idToGroup });
   }
 
