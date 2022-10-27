@@ -28,16 +28,19 @@ export default class Partition {
     let cumPop = 0;
     const sortedIdList = this.partitionRegionIdx.getSortedByLongerSpan(idList);
 
-    let nPartition = undefined;
+    let bestDiff = undefined;
+    let bestI = undefined;
     for (let i in sortedIdList) {
       const id = sortedIdList[i];
       const pop = this.partitionRegionIdx.get(id).pop;
-      cumPop += pop;
-      if (cumPop > partitionPop) {
-        nPartition = i;
-        break;
+      const diff = Math.abs(cumPop - partitionPop)
+      if (bestDiff === undefined || diff < bestDiff) {
+        bestDiff = diff;
+        bestI = i;
       }
+      cumPop += pop;      
     }
+    const nPartition = bestI;
 
     return {
       N: {
