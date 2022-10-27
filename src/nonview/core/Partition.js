@@ -1,17 +1,18 @@
-import PartitionRegion from "../../nonview/core/PartitionRegion";
+import PartitionRegionIdx from "../../nonview/core/PartitionRegionIdx";
 
 const N_GROUPS = 3;
 
 export default class Partition {
   static getGroupToIDs(geojsonFeatures) {
-    const partitionRegionList = geojsonFeatures.map((geojsonFeature) =>
-      PartitionRegion.fromGeoJSONFeature(geojsonFeature)
-    );
-    const totalPop = PartitionRegion.getTotalPop(partitionRegionList);
+    const partitionRegionIdx =
+      PartitionRegionIdx.fromGeoJSONFeatures(geojsonFeatures);
 
-    const sortedPartitionRegionList = partitionRegionList.sort(function (a, b) {
-      return a.lat > b.lat;
-    });
+    const totalPop = partitionRegionIdx.totalPop;
+
+    const sortedPartitionRegionList =
+      partitionRegionIdx.partitionRegionList.sort(function (a, b) {
+        return a.lat > b.lat;
+      });
 
     let cumPop = 0;
     let groupToIDs = {};

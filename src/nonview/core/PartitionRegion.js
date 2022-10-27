@@ -1,13 +1,4 @@
-import MathX from "../../nonview/base/MathX";
-
 export default class PartitionRegion {
-  static getTotalPop(partitionRegionList) {
-    return MathX.sumGeneric(
-      partitionRegionList,
-      (partitionRegion) => partitionRegion.pop
-    );
-  }
-
   static fromGeoJSONFeature(geojsonFeature) {
     return new PartitionRegion(
       geojsonFeature.properties.id,
