@@ -23,6 +23,7 @@ export default function GeoJSONView({ geoJSON, idToGroup }) {
         funcTransform={funcTransform}
         feature={feature}
         color={color}
+        group={group}
       />
     );
   });
