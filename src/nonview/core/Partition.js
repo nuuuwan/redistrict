@@ -1,15 +1,15 @@
 import MathX from "../../nonview/base/MathX";
 
 export default class Partition {
-  static getFeatureToGroup(features) {
+  static getFeatureToGroup(geojsonFeatures) {
     let featureToGroup = {};
 
     const totalPopulation = MathX.sumGeneric(
-      features,
+      geojsonFeatures,
       (feature) => feature.properties.population
     );
 
-    const sortedFeatures = features.sort(function (a, b) {
+    const sortedFeatures = geojsonFeatures.sort(function (a, b) {
       return a.properties.centroid[1] > b.properties.centroid[1];
     });
 
