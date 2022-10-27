@@ -14,4 +14,9 @@ export default class MathX {
   static forceRange(min, max, value) {
     return Math.max(min, Math.min(max, value));
   }
+
+  static range(min, max) {
+    const span = max - min;
+    return [...Array(span).keys()].map((x) => x + min);
+  }
 }
