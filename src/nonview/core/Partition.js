@@ -1,8 +1,8 @@
 import MathX from "../../nonview/base/MathX";
 
 export default class Partition {
-  static getFeatureToColor(features) {
-    let featureToColor = {};
+  static getFeatureToGroup(features) {
+    let featureToGroup = {};
 
     const totalPopulation = MathX.sumGeneric(
       features,
@@ -17,16 +17,9 @@ export default class Partition {
     for (let feature of sortedFeatures) {
       cumPopulation += feature.properties.population;
       const pPopulation = cumPopulation / totalPopulation;
-      let color;
-
-      if (pPopulation < 0.5) {
-        color = "green";
-      } else {
-        color = "maroon";
-      }
-
-      featureToColor[feature.id] = color;
+      const group = parseInt(pPopulation * 2);
+      featureToGroup[feature.id] = group;
     }
-    return featureToColor;
+    return featureToGroup;
   }
 }
