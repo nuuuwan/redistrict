@@ -1,13 +1,11 @@
-function getRandomBit() {
-  return parseInt(Math.random() * 256);
+function getRandomInt(min, max) {
+  return parseInt(min + Math.random() * (max - min));
 }
 export default class Color {
   static getRandom() {
-    const r = getRandomBit();
-    const g = getRandomBit();
-    const b = getRandomBit();
-
-    return Color.rgba(r, g, b, 1);
+    const h = getRandomInt(0, 360);
+    const [s, l, a] = [100, 50, 1];
+    return Color.hsla(h, s, l, a);
   }
 
   static rgba(r, g, b, a) {
