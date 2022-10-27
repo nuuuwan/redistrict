@@ -84,13 +84,13 @@ export default class MapPage extends AbstractInnerPage {
     }
     return (
       <Box>
-        <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />
         <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
         <SliderMaxSeatsPerGroup
           maxSeatsPerGroup={maxSeatsPerGroup}
           setMaxSeatsPerGroup={this.setMaxSeatsPerGroup.bind(this)}
         />
         <PartitionView partition={partition} nSeats={nSeats} />
+        <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />        
       </Box>
     );
   }
