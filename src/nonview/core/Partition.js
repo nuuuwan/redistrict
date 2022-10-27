@@ -1,31 +1,26 @@
-import MathX from "../../nonview/base/MathX";
+import PartitionRegion from "../../nonview/core/PartitionRegion";
 
-const N_GROUPS = 6;
+const N_GROUPS = 3;
 
 export default class Partition {
-  static getTotalPop(geojsonFeatures) {
-    return MathX.sumGeneric(
-      geojsonFeatures,
-      (feature) => feature.properties.population
-    );
-  }
-
   static getIDToGroup(geojsonFeatures) {
-    let idToGroup = {};
+    const partitionRegionList = geojsonFeatures.map((geojsonFeature) =>
+      PartitionRegion.fromGeoJSONFeature(geojsonFeature)
+    );
+    const totalPop = PartitionRegion.getTotalPop(partitionRegionList);
 
-    const totalPop = Partition.getTotalPop(geojsonFeatures);
-
-    const sortedFeatures = geojsonFeatures.sort(function (a, b) {
-      return a.properties.centroid[1] > b.properties.centroid[1];
+    const sortedPartitionRegionList = partitionRegionList.sort(function (a, b) {
+      return a.lat > b.lat;
     });
 
     let cumPop = 0;
-    for (let feature of sortedFeatures) {
-      const pop = feature.properties.population;
+    let idToGroup = {};
+    for (let partitionRegion of sortedPartitionRegionList) {
+      const pop = partitionRegion.pop;
       cumPop += pop;
       const pPop = (cumPop - pop) / totalPop;
       const group = parseInt(pPop * N_GROUPS);
-      idToGroup[feature.id] = group;
+      idToGroup[partitionRegion.id] = group;
     }
     return idToGroup;
   }
