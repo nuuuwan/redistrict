@@ -54,8 +54,7 @@ export default class Partition {
     };
   }
 
-  partitionAll() {
-    const maxSeatsPerGroup = 1;
+  partitionAll(maxSeatsPerGroup) {
     while (true) {
       let newGroupToIDListAndNSeats = {};
       let nPartitioned = 0;
