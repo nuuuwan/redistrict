@@ -5,15 +5,13 @@ export default class MathX {
     }, 0);
   }
 
-  static sum(arr) {
-    return MathX.sumGeneric(arr, (x) => x);
+  static sum(numList) {
+    return numList.reduce(function (_sum, num) {
+      return _sum + num;
+    }, 0);
   }
 
-  static sumL1(arr) {
-    return MathX.sumGeneric(arr, (x) => Math.abs(x));
-  }
-
-  static sumL2(arr) {
-    return MathX.sumGeneric(arr, (x) => x * x);
+  static forceRange(min, max, value) {
+    return Math.max(min, Math.min(max, value));
   }
 }
