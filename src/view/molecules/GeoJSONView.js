@@ -11,7 +11,7 @@ export default function GeoJSONView({ geoJSON, idToGroup }) {
   const bbox = BBox.fromGeoJSON(geoJSON);
   const [width, height] = [
     window.innerWidth - MARGIN_WIDTH,
-    window.innerHeight - MARGIN_HEIGHT,
+    (window.innerHeight - MARGIN_HEIGHT) / 2,
   ];
   const funcTransform = bbox.getTransform(width, height, PADDING);
   const inner = geoJSON.features.map(function (feature, iFeature) {
