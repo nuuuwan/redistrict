@@ -10,8 +10,8 @@ export default class Partition {
     );
   }
 
-  static getFeatureToGroup(geojsonFeatures) {
-    let featureToGroup = {};
+  static getIDToGroup(geojsonFeatures) {
+    let idToGroup = {};
 
     const totalPop = Partition.getTotalPop(geojsonFeatures);
 
@@ -25,8 +25,8 @@ export default class Partition {
       cumPop += pop;
       const pPop = (cumPop - pop) / totalPop;
       const group = parseInt(pPop * N_GROUPS);
-      featureToGroup[feature.id] = group;
+      idToGroup[feature.id] = group;
     }
-    return featureToGroup;
+    return idToGroup;
   }
 }

@@ -28,10 +28,10 @@ export default function GeoJSONView({ geoJSON }) {
     window.innerHeight - MARGIN_HEIGHT,
   ];
   const funcTransform = bbox.getTransform(width, height, PADDING);
-  const featureToGroup = Partition.getFeatureToGroup(geoJSON.features);
+  const idToGroup = Partition.getIDToGroup(geoJSON.features);
 
   const inner = geoJSON.features.map(function (feature, iFeature) {
-    const group = featureToGroup[feature.id];
+    const group = idToGroup[feature.id];
     const color = getGroupColor(group);
     return (
       <GeoJSONFeatureView
