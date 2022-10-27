@@ -3,7 +3,7 @@ import PartitionRegion from "../../nonview/core/PartitionRegion";
 const N_GROUPS = 3;
 
 export default class Partition {
-  static getIDToGroup(geojsonFeatures) {
+  static getGroupToIDs(geojsonFeatures) {
     const partitionRegionList = geojsonFeatures.map((geojsonFeature) =>
       PartitionRegion.fromGeoJSONFeature(geojsonFeature)
     );
@@ -14,14 +14,31 @@ export default class Partition {
     });
 
     let cumPop = 0;
-    let idToGroup = {};
+    let groupToIDs = {};
     for (let partitionRegion of sortedPartitionRegionList) {
       const pop = partitionRegion.pop;
       cumPop += pop;
       const pPop = (cumPop - pop) / totalPop;
       const group = `Group-${parseInt(pPop * N_GROUPS)}`;
-      idToGroup[partitionRegion.id] = group;
+      if (!groupToIDs[group]) {
+        groupToIDs[group] = [];
+      }
+      groupToIDs[group].push(partitionRegion.id);
     }
-    return idToGroup;
+    return groupToIDs;
+  }
+
+  static getIDToGroup(geojsonFeatures) {
+    const groupToIDs = Partition.getGroupToIDs(geojsonFeatures);
+    return Object.entries(groupToIDs).reduce(function (
+      idToGroup,
+      [group, ids]
+    ) {
+      for (let id of ids) {
+        idToGroup[id] = group;
+      }
+      return idToGroup;
+    },
+    {});
   }
 }
