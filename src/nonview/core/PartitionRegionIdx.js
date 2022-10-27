@@ -56,5 +56,8 @@ export default class PartitionRegionIdx {
       this.partitionRegionList,
       (partitionRegion) => partitionRegion.pop
     );
+  getLatLngList(idList) {
+    return idList.map((id) => this.get(id).centroid);
+  }
   }
 }
