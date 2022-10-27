@@ -29,7 +29,6 @@ export default function SliderMaxSeatsPerGroup({
         onChange={onChange}
         aria-label="Small"
         size="small"
-        valueLabelDisplay="on"
       />
     </Box>
   );

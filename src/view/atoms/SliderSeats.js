@@ -26,7 +26,6 @@ export default function SliderSeats({ nSeats, setNSeats }) {
         onChange={onChange}
         aria-label="Small"
         size="small"
-        valueLabelDisplay="on"
       />
     </Box>
   );
