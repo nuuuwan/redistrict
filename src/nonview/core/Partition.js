@@ -26,7 +26,6 @@ export default class Partition {
       const pPop = (cumPop - pop) / totalPop;
       const group = parseInt(pPop * N_GROUPS);
       featureToGroup[feature.id] = group;
-      console.debug(feature.id, group);
     }
     return featureToGroup;
   }
