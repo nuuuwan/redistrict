@@ -5,5 +5,5 @@ export default function GeoJSONPolygonView({ funcTransform, polygon, color }) {
     return label + parseInt(x) + "," + parseInt(y);
   });
   const d = dList.join("");
-  return <path d={d} fill={color} stroke="white" strokeWidth="1" />;
+  return <path d={d} fill={color} stroke={color} strokeWidth="1" />;
 }
