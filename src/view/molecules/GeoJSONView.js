@@ -23,7 +23,8 @@ export default function GeoJSONView({ geoJSON }) {
     window.innerHeight - MARGIN_HEIGHT,
   ];
   const funcTransform = bbox.getTransform(width, height, PADDING);
-  const partition = Partition.fromGeoJSONFeatures(geoJSON.features, 2);
+  const partition = Partition.fromGeoJSONFeatures(geoJSON.features, 5);
+  partition.partitionAll();
   const idToGroup = partition.idToGroup;
 
   const inner = geoJSON.features.map(function (feature, iFeature) {
