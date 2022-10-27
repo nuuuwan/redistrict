@@ -44,6 +44,9 @@ export default function PartitionViewTableRow({
       <TableCell align="right" sx={{ background: colorFairness }}>
         {StringX.formatFloat(nSeatsFair)}
       </TableCell>
+      <TableCell align="right" sx={{ background: colorFairness }}>
+        {StringX.formatFloatSigned(row.nSeats2 - nSeatsFair)}
+      </TableCell>
       <TableCell align="right">{StringX.formatInt(totalGroupPop)}</TableCell>
       <TableCell align="left">{regions}</TableCell>
     </TableRow>

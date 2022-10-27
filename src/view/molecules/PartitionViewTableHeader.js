@@ -10,6 +10,7 @@ export default function PartitionViewTableHeader() {
         <TableCell align="right">Seats</TableCell>
         <TableCell align="right">Seats[2]</TableCell>
         <TableCell align="right">Seats[Fair]</TableCell>
+        <TableCell align="right">(delta)</TableCell>
         <TableCell align="right">Pop.</TableCell>
         <TableCell align="left">Regions</TableCell>
       </TableRow>

@@ -1,13 +1,12 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 
-import Color from "../../nonview/base/Color";
 import StringX from "../../nonview/base/StringX";
 
 export default function PartitionViewTableTotalRow({
   totalNSeats,
-  totalNSeats2,
   totalPop,
+  totalNSeats2,
 }) {
   return (
     <TableRow>
@@ -15,6 +14,7 @@ export default function PartitionViewTableTotalRow({
       <TableCell align="right">{totalNSeats}</TableCell>
       <TableCell align="right">{totalNSeats2}</TableCell>
       <TableCell align="right">{totalNSeats2}</TableCell>
+      <TableCell align="right">{0}</TableCell>
       <TableCell align="right">{StringX.formatInt(totalPop)}</TableCell>
       <TableCell />
     </TableRow>
