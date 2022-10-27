@@ -7,6 +7,14 @@ export default class Color {
     const g = getRandomBit();
     const b = getRandomBit();
 
-    return `rgb(${r},${g},${b})`;
+    return Color.rgba(r, g, b, 1);
+  }
+
+  static rgba(r, g, b, a) {
+    return `rgba(${r},${g}%,${b}%,${a})`;
+  }
+
+  static hsla(h, s, l, a) {
+    return `hsla(${h},${s}%,${l}%,${a})`;
   }
 }
