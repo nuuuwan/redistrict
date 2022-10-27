@@ -24,25 +24,31 @@ export default class PartitionRegionIdx {
     return Object.keys(this.idx);
   }
 
-  getSorted(funcKey) {
-    return this.idList.sort(
   get partitionRegionList() {
     return Object.keys(this.idx);
   }
+
+  getSorted(idList, funcKey) {
+    return idList.sort(
       function (idA, idB) {
         return funcKey(this.idx[idA]) - funcKey(this.idx[idB]);
       }.bind(this)
     );
   }
 
-  get sortedByLat() {
-    return this.getSorted((x) => x.lat);
+  getSortedByLat(idList) {
+    return this.getSorted(idList, (x) => x.lat);
   }
 
-  get sortedByLng() {
-    return this.getSorted((x) => x.lng);
+  getSortedByLng(idList) {
+    return this.getSorted(idList, (x) => x.lng);
   }
 
+  getSortedByLongerSpan(idList) {
+    if (this.isLatSpanLongerThanLngSpan(idList)) {
+      return this.getSortedByLat(idList);
+    }
+    return this.getSortedByLng(idList);
   }
 
   get totalPop() {
