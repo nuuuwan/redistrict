@@ -13,8 +13,14 @@ export default class Color {
     return keyToColor[key];
   }
 
+  static getForIter(i, n) {
+    const h = parseInt((i * 240) / n);
+    const [s, l, a] = DEFAULT_SLA;
+    return Color.hsla(h, s, l, a);
+  }
+
   static getRandom() {
-    const h = getRandomInt(0, 360);
+    const h = getRandomInt(0, 240);
     const [s, l, a] = DEFAULT_SLA;
     return Color.hsla(h, s, l, a);
   }
