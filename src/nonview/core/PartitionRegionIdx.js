@@ -26,6 +26,9 @@ export default class PartitionRegionIdx {
 
   getSorted(funcKey) {
     return this.idList.sort(
+  get partitionRegionList() {
+    return Object.keys(this.idx);
+  }
       function (idA, idB) {
         return funcKey(this.idx[idA]) - funcKey(this.idx[idB]);
       }.bind(this)
@@ -40,8 +43,6 @@ export default class PartitionRegionIdx {
     return this.getSorted((x) => x.lng);
   }
 
-  get partitionRegionList() {
-    return Object.values(this.idx);
   }
 
   get totalPop() {
