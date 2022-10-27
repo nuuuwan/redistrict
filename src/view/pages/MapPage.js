@@ -3,6 +3,7 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import Partition from "../../nonview/core/Partition";
+
 import AppColors from "../../view/_constants/AppColors";
 import SliderMaxSeatsPerGroup from "../../view/atoms/SliderMaxSeatsPerGroup";
 import SliderSeats from "../../view/atoms/SliderSeats";
@@ -10,8 +11,8 @@ import GeoJSONView from "../../view/molecules/GeoJSONView";
 import PartitionView from "../../view/molecules/PartitionView";
 import AbstractInnerPage from "../../view/pages/AbstractInnerPage";
 
-const DEFAULT_N_SEATS = 3;
-const DEFAULT_MAX_SEATS_PER_GROUP = 1;
+const DEFAULT_N_SEATS = 19;
+const DEFAULT_MAX_SEATS_PER_GROUP = 19;
 export default class MapPage extends AbstractInnerPage {
   constructor(props) {
     super(props);
