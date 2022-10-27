@@ -19,7 +19,6 @@ export default class Partition {
   }
 
   partitionSingle(idList, nSeats) {
-    console.debug(idList, nSeats);
     const nSeats1 = parseInt(nSeats / 2);
     const totalPop = MathX.sumGeneric(
       idList,
