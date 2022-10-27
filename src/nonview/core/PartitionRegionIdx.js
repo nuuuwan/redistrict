@@ -16,6 +16,10 @@ export default class PartitionRegionIdx {
     this.idx = idx;
   }
 
+  get idList() {
+    return Object.keys(this.idx);
+  }
+
   get partitionRegionList() {
     return Object.values(this.idx);
   }
