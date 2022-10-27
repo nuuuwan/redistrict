@@ -13,6 +13,8 @@ import AbstractInnerPage from "../../view/pages/AbstractInnerPage";
 
 const DEFAULT_N_SEATS = 19;
 const DEFAULT_MAX_SEATS_PER_GROUP = 19;
+const DEFAULT_SUBREGION_TYPE = 'dsd';
+const DEFAULT_REGION_ID = 'LK-11';
 export default class MapPage extends AbstractInnerPage {
   constructor(props) {
     super(props);
@@ -22,6 +24,7 @@ export default class MapPage extends AbstractInnerPage {
       idToGroup: null,
       nSeats: DEFAULT_N_SEATS,
       maxSeatsPerGroup: DEFAULT_MAX_SEATS_PER_GROUP,
+      regionID: DEFAULT_REGION_ID, subRegionType: DEFAULT_SUBREGION_TYPE,
     };
   }
   get page() {
@@ -66,8 +69,8 @@ export default class MapPage extends AbstractInnerPage {
     return { partition, idToGroup };
   }
   async componentDidMount() {
-    const { nSeats, maxSeatsPerGroup } = this.state;
-    const geoJSON = await new GeoJSON("LK-11", "dsd").read();
+    const { nSeats, maxSeatsPerGroup,regionID, subRegionType } = this.state;
+    const geoJSON = await new GeoJSON(regionID, subRegionType).read();
     const { partition, idToGroup } = await this.loadStateGeo(
       nSeats,
       maxSeatsPerGroup,
@@ -89,7 +92,7 @@ export default class MapPage extends AbstractInnerPage {
           maxSeatsPerGroup={maxSeatsPerGroup}
           setMaxSeatsPerGroup={this.setMaxSeatsPerGroup.bind(this)}
         />
-        <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />        
+        <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />
         <PartitionView partition={partition} nSeats={nSeats} />
 
       </Box>
