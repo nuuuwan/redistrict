@@ -11,9 +11,9 @@ export default function PartitionViewTableRow({ row, partitionRegionIdx }) {
   return (
     <TableRow>
       <TableCell align="left">{row.group}</TableCell>
-      <TableCell align="left">{regions}</TableCell>
-      <TableCell align="left">{StringX.formatInt(totalPop)}</TableCell>
       <TableCell align="right">{row.nSeats}</TableCell>
+      <TableCell align="right">{StringX.formatInt(totalPop)}</TableCell>
+      <TableCell align="left">{regions}</TableCell>
     </TableRow>
   );
 }

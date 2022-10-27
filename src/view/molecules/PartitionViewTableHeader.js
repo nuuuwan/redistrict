@@ -6,10 +6,10 @@ export default function PartitionViewTableHeader() {
   return (
     <TableHead>
       <TableRow>
-        <TableCell>Group</TableCell>
-        <TableCell>Regions</TableCell>
-        <TableCell>Pop.</TableCell>
-        <TableCell>Seats</TableCell>
+        <TableCell align="left">Group</TableCell>
+        <TableCell align="right">Seats</TableCell>
+        <TableCell align="right">Pop.</TableCell>
+        <TableCell align="left">Regions</TableCell>
       </TableRow>
     </TableHead>
   );
