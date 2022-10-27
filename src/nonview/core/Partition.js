@@ -1,6 +1,6 @@
 import MathX from "../../nonview/base/MathX";
 
-const N_GROUPS= 6;
+const N_GROUPS = 6;
 
 export default class Partition {
   static getTotalPop(geojsonFeatures) {

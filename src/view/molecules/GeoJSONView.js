@@ -1,18 +1,23 @@
 import BBox from "../../nonview/base/geo/BBox";
+import Partition from "../../nonview/core/Partition";
 
 import GeoJSONFeatureView from "../../view/molecules/GeoJSONFeatureView";
-import Partition from "../../nonview/core/Partition";
 
 const PADDING = 10;
 
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
 function getGroupColor(group) {
-  switch(group) {
-    case 0: return 'green';
-    case 1: return 'orange';
-    case 2: return 'yellow';
-    case 3: return 'maroon';
-    default: return 'gray';
+  switch (group) {
+    case 0:
+      return "green";
+    case 1:
+      return "orange";
+    case 2:
+      return "yellow";
+    case 3:
+      return "maroon";
+    default:
+      return "gray";
   }
 }
 
