@@ -112,4 +112,8 @@ export default class StringX {
 
     return <span style={style}>{numPart}</span>;
   }
+
+  static formatFloat(x) {
+    return x.toFixed(2);
+  }
 }
