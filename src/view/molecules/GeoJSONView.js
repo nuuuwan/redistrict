@@ -8,14 +8,6 @@ const PADDING = 10;
 
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
 
-let groupToColor = {};
-function getGroupColor(group) {
-  if (!groupToColor[group]) {
-    groupToColor[group] = Color.getRandom();
-  }
-  return groupToColor[group];
-}
-
 export default function GeoJSONView({ geoJSON }) {
   const bbox = BBox.fromGeoJSON(geoJSON);
   const [width, height] = [
@@ -29,7 +21,7 @@ export default function GeoJSONView({ geoJSON }) {
 
   const inner = geoJSON.features.map(function (feature, iFeature) {
     const group = idToGroup[feature.id];
-    const color = getGroupColor(group);
+    const color = Color.getForKey(group);
     return (
       <GeoJSONFeatureView
         key={"feature-" + feature.id}
