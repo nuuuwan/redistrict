@@ -19,7 +19,7 @@ export default class Partition {
       const pop = partitionRegion.pop;
       cumPop += pop;
       const pPop = (cumPop - pop) / totalPop;
-      const group = parseInt(pPop * N_GROUPS);
+      const group = `Group-${parseInt(pPop * N_GROUPS)}`;
       idToGroup[partitionRegion.id] = group;
     }
     return idToGroup;
