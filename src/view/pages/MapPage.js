@@ -89,8 +89,9 @@ export default class MapPage extends AbstractInnerPage {
           maxSeatsPerGroup={maxSeatsPerGroup}
           setMaxSeatsPerGroup={this.setMaxSeatsPerGroup.bind(this)}
         />
-        <PartitionView partition={partition} nSeats={nSeats} />
         <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />        
+        <PartitionView partition={partition} nSeats={nSeats} />
+
       </Box>
     );
   }
