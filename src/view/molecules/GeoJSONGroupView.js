@@ -30,23 +30,16 @@ export default function GeoJSONGroupView({
           </g>
         );
       })}
-      {featureList.map(function (feature, iFeature) {
-        const key = "feature-" + iFeature;
-        return (
-          <g key={key}>
-            <text
-              x={x}
-              y={y}
-              fill="black"
-              stroke="none"
-              fontFamily="sans-serif"
-              fontSize={10}
-            >
-              {group}
-            </text>
-          </g>
-        );
-      })}
+      <text
+        x={x}
+        y={y}
+        fill="black"
+        stroke="none"
+        fontFamily="sans-serif"
+        fontSize={10}
+      >
+        {group}
+      </text>
     </g>
   );
 }
