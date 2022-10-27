@@ -1,5 +1,4 @@
 export default class LngLat {
-
   constructor(lng, lat) {
     this.lng = lng;
     this.lat = lat;
@@ -29,21 +28,20 @@ export default class LngLat {
     }, []);
   }
 
+  static fromPolygonListListList(polygonListListList) {
+    return polygonListListList.reduce(function (lngLatList, polygonListList) {
+      return [].concat(lngLatList, LngLat.fromPolygonListList(polygonListList));
+    }, []);
+  }
+
   static fromGeoJSON(geoJSON) {
     return geoJSON.features.reduce(function (lngLatList, feature) {
       const geometry = feature.geometry;
       const geoType = geometry.type;
       if (geoType === "MultiPolygon") {
-        return geometry.coordinates.reduce(function (
-          lngLatList,
-          polygonList
-        ) {
-          return [].concat(
-            lngLatList,
-            LngLat.fromPolygonList(polygonList)
-          );
-        },
-        lngLatList);
+        return geometry.coordinates.reduce(function (lngLatList, polygonList) {
+          return [].concat(lngLatList, LngLat.fromPolygonList(polygonList));
+        }, lngLatList);
       }
       throw Error("Unknown geometry.type: " + geoType);
     }, []);
