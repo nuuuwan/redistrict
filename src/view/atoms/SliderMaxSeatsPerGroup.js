@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import MathX from "../../nonview/base/MathX";
 
-const [MIN, MAX] = [1, 20];
+const [MIN, MAX] = [1, 10];
 
 export default function SliderMaxSeatsPerGroup({
   maxSeatsPerGroup,
@@ -19,7 +19,7 @@ export default function SliderMaxSeatsPerGroup({
     return { value, label: value };
   });
   return (
-    <Box width={500}>
+    <Box width={200}>
       <Typography variant="caption">Max. Seats per Group</Typography>
       <Slider
         min={MIN}

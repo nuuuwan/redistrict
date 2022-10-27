@@ -16,7 +16,7 @@ export default function SliderSeats({ nSeats, setNSeats }) {
     return { value, label: value };
   });
   return (
-    <Box width={500}>
+    <Box width={300}>
       <Typography variant="caption">Total Seats</Typography>
       <Slider
         min={MIN}

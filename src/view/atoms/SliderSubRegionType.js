@@ -33,7 +33,7 @@ export default function SliderSubRegionType({
   };
 
   return (
-    <Box width={200}>
+    <Box width={100}>
       <Typography variant="caption">Sub-Region Type</Typography>
       <Slider
         value={selectedValue}
