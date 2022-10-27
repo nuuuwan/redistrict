@@ -33,12 +33,12 @@ export default class Partition {
     for (let i in sortedIdList) {
       const id = sortedIdList[i];
       const pop = this.partitionRegionIdx.get(id).pop;
-      const diff = Math.abs(cumPop - partitionPop)
+      const diff = Math.abs(cumPop - partitionPop);
       if (bestDiff === undefined || diff < bestDiff) {
         bestDiff = diff;
         bestI = i;
       }
-      cumPop += pop;      
+      cumPop += pop;
     }
     const nPartition = bestI;
 
