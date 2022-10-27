@@ -20,6 +20,22 @@ export default class PartitionRegionIdx {
     return Object.keys(this.idx);
   }
 
+  getSorted(funcKey) {
+    return this.idList.sort(
+      function (idA, idB) {
+        return funcKey(this.idx[idA]) - funcKey(this.idx[idB]);
+      }.bind(this)
+    );
+  }
+
+  get sortedByLat() {
+    return this.getSorted((x) => x.lat);
+  }
+
+  get sortedByLng() {
+    return this.getSorted((x) => x.lng);
+  }
+
   get partitionRegionList() {
     return Object.values(this.idx);
   }
