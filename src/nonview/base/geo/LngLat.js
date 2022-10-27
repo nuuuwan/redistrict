@@ -1,4 +1,5 @@
 export default class LngLat {
+
   constructor(lng, lat) {
     this.lng = lng;
     this.lat = lat;
@@ -16,9 +17,15 @@ export default class LngLat {
     }, []);
   }
 
-  static fromPolygonListList(polygonListList) {
-    return polygonListList.reduce(function (lngLatList, polygon) {
+  static fromPolygonList(polygonList) {
+    return polygonList.reduce(function (lngLatList, polygon) {
       return [].concat(lngLatList, LngLat.fromPolygon(polygon));
+    }, []);
+  }
+
+  static fromPolygonListList(polygonListList) {
+    return polygonListList.reduce(function (lngLatList, polygonList) {
+      return [].concat(lngLatList, LngLat.fromPolygonList(polygonList));
     }, []);
   }
 
@@ -29,11 +36,11 @@ export default class LngLat {
       if (geoType === "MultiPolygon") {
         return geometry.coordinates.reduce(function (
           lngLatList,
-          polygonListList
+          polygonList
         ) {
           return [].concat(
             lngLatList,
-            LngLat.fromPolygonListList(polygonListList)
+            LngLat.fromPolygonList(polygonList)
           );
         },
         lngLatList);
