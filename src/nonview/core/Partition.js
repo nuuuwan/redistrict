@@ -9,15 +9,21 @@ export default class Partition {
   }
   constructor(partitionRegionIdx, nSeats) {
     this.partitionRegionIdx = partitionRegionIdx;
-    this.groupToIDList = { "group-0": partitionRegionIdx.idList };
+    this.groupToIDListAndNSeats = { "group-0": {
+      idList: partitionRegionIdx.idList,
+      nSeats,
+    } };
   }
 
+
+
+
   get idToGroup() {
-    return Object.entries(this.groupToIDList).reduce(function (
+    return Object.entries(this.groupToIDListAndNSeats).reduce(function (
       idToGroup,
-      [group, ids]
+      [group, {idList, nSeats}]
     ) {
-      for (let id of ids) {
+      for (let id of idList) {
         idToGroup[id] = group;
       }
       return idToGroup;
