@@ -1,5 +1,7 @@
 import MathX from "../../nonview/base/MathX";
 
+const N_GROUPS= 6;
+
 export default class Partition {
   static getFeatureToGroup(geojsonFeatures) {
     let featureToGroup = {};
@@ -15,10 +17,12 @@ export default class Partition {
 
     let cumPopulation = 0;
     for (let feature of sortedFeatures) {
-      cumPopulation += feature.properties.population;
-      const pPopulation = cumPopulation / totalPopulation;
-      const group = parseInt(pPopulation * 2);
+      const population = feature.properties.population;
+      cumPopulation += population;
+      const pPopulation = (cumPopulation - population) / totalPopulation;
+      const group = parseInt(pPopulation * N_GROUPS);
       featureToGroup[feature.id] = group;
+      console.debug(feature.id, group);
     }
     return featureToGroup;
   }
