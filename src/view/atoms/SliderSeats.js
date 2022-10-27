@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import MathX from "../../nonview/base/MathX";
 
-const [MIN, MAX] = [1, 20];
+const [MIN, MAX] = [1, 25];
 
 export default function SliderSeats({ nSeats, setNSeats }) {
   const onChange = function (_, nSeats) {
@@ -16,7 +16,7 @@ export default function SliderSeats({ nSeats, setNSeats }) {
     return { value, label: value };
   });
   return (
-    <Box width={300}>
+    <Box width={400}>
       <Typography variant="caption">Total Seats</Typography>
       <Slider
         min={MIN}
