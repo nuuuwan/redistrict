@@ -8,10 +8,12 @@ const PADDING = 10;
 
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
 const N_COLORS = 7;
-function getGroupColor(i) {
-  const h = (240 * (i % N_COLORS)) / N_COLORS;
-  const [s, l, a] = [100, 50, 1];
-  return Color.hsla(h, s, l, a);
+let groupToColor = {};
+function getGroupColor(group) {
+  if (!groupToColor[group]) {
+    groupToColor[group] = Color.getRandom();
+  }
+  return groupToColor[group];
 }
 
 export default function GeoJSONView({ geoJSON }) {
