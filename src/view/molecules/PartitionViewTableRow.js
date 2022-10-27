@@ -12,6 +12,7 @@ export default function PartitionViewTableRow({
   partitionRegionIdx,
   nSeats,
   totalPop,
+  nGroups,
 }) {
   let regions = row.idList
     .slice(0, MAX_IDS_TO_DISPLAY)
@@ -23,7 +24,7 @@ export default function PartitionViewTableRow({
 
   const totalGroupPop = partitionRegionIdx.getTotalPop(row.idList);
   const sx = {
-    ...{ background: Color.getForKey(row.group) },
+    ...{ background: Color.getForIter(row.iGroup, nGroups) },
     ...STYLE_GROUP,
   };
   const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
