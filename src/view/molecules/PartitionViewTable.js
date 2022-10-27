@@ -11,6 +11,7 @@ export default function PartitionViewTable({
   partitionRegionIdx,
   totalPop,
   nSeats,
+  nGroups,
 }) {
   return (
     <TableContainer component={Paper}>
@@ -25,6 +26,7 @@ export default function PartitionViewTable({
                 partitionRegionIdx={partitionRegionIdx}
                 totalPop={totalPop}
                 nSeats={nSeats}
+                nGroups={nGroups}
               />
             );
           })}
