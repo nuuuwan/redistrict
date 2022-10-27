@@ -1,5 +1,7 @@
-import PartitionViewTable from "../../view/molecules/PartitionViewTable";
 import Seats from "../../nonview/core/Seats";
+
+import PartitionViewTable from "../../view/molecules/PartitionViewTable";
+
 export default function PartitionView({ nSeats, partition }) {
   const partitionRegionIdx = partition.partitionRegionIdx;
   const groupToSeats2 = Seats.divideSeats(nSeats, partition);
@@ -17,6 +19,11 @@ export default function PartitionView({ nSeats, partition }) {
     };
   });
   return (
-    <PartitionViewTable rows={rows} partitionRegionIdx={partitionRegionIdx} totalPop={totalPop} nSeats={nSeats}/>
+    <PartitionViewTable
+      rows={rows}
+      partitionRegionIdx={partitionRegionIdx}
+      totalPop={totalPop}
+      nSeats={nSeats}
+    />
   );
 }
