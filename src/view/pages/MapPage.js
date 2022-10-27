@@ -1,6 +1,7 @@
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
+import Partition from "../../nonview/core/Partition";
 
 import AppColors from "../../view/_constants/AppColors";
 import GeoJSONView from "../../view/molecules/GeoJSONView";
@@ -28,14 +29,19 @@ export default class MapPage extends AbstractInnerPage {
 
   async componentDidMount() {
     const geoJSON = await new GeoJSON("LK-11", "dsd").read();
-    this.setState({ geoJSON });
+
+    const partition = Partition.fromGeoJSONFeatures(geoJSON.features, 5);
+    partition.partitionAll();
+    const idToGroup = partition.idToGroup;
+
+    this.setState({ geoJSON, idToGroup });
   }
 
   render() {
-    const { geoJSON } = this.state;
+    const { geoJSON, idToGroup } = this.state;
     if (!geoJSON) {
       return "Loading...";
     }
-    return <GeoJSONView geoJSON={geoJSON} />;
+    return <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />;
   }
 }

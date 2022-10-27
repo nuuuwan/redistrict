@@ -1,6 +1,5 @@
 import BBox from "../../nonview/base/geo/BBox";
 import Color from "../../nonview/base/Color";
-import Partition from "../../nonview/core/Partition";
 
 import GeoJSONFeatureView from "../../view/molecules/GeoJSONFeatureView";
 
@@ -8,17 +7,13 @@ const PADDING = 10;
 
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
 
-export default function GeoJSONView({ geoJSON }) {
+export default function GeoJSONView({ geoJSON, idToGroup }) {
   const bbox = BBox.fromGeoJSON(geoJSON);
   const [width, height] = [
     window.innerWidth - MARGIN_WIDTH,
     window.innerHeight - MARGIN_HEIGHT,
   ];
   const funcTransform = bbox.getTransform(width, height, PADDING);
-  const partition = Partition.fromGeoJSONFeatures(geoJSON.features, 5);
-  partition.partitionAll();
-  const idToGroup = partition.idToGroup;
-
   const inner = geoJSON.features.map(function (feature, iFeature) {
     const group = idToGroup[feature.id];
     const color = Color.getForKey(group);
