@@ -1,4 +1,5 @@
 import BBox from "../../nonview/base/geo/BBox";
+import Color from "../../nonview/base/Color";
 import Partition from "../../nonview/core/Partition";
 
 import GeoJSONFeatureView from "../../view/molecules/GeoJSONFeatureView";
@@ -6,19 +7,11 @@ import GeoJSONFeatureView from "../../view/molecules/GeoJSONFeatureView";
 const PADDING = 10;
 
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
-function getGroupColor(group) {
-  switch (group) {
-    case 0:
-      return "green";
-    case 1:
-      return "orange";
-    case 2:
-      return "yellow";
-    case 3:
-      return "maroon";
-    default:
-      return "gray";
-  }
+const N_COLORS = 7;
+function getGroupColor(i) {
+  const h = (240 * (i % N_COLORS)) / N_COLORS;
+  const [s, l, a] = [100, 50, 1];
+  return Color.hsla(h, s, l, a);
 }
 
 export default function GeoJSONView({ geoJSON }) {
