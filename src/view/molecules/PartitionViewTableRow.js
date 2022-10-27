@@ -29,10 +29,13 @@ export default function PartitionViewTableRow({
   };
   const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
   const nSeatsFairPerNSeats2 = nSeatsFair / row.nSeats2;
+
   const log2NSeatsFairPerNSeats2 = Math.log(nSeatsFairPerNSeats2) / Math.log(2);
   const h = nSeatsFairPerNSeats2 < 1 ? 240 : 0;
-  const l = 100 - (40 * Math.min(2, Math.abs(log2NSeatsFairPerNSeats2))) / 2;
+  const p = Math.pow(Math.abs(log2NSeatsFairPerNSeats2), 2);
+  const l = 100 - (40 * Math.min(1, p)) / 2;
   const colorFairness = Color.hsla(h, 100, l, 1);
+  const popPerSeat = totalGroupPop / row.nSeats2;
 
   return (
     <TableRow>
@@ -45,9 +48,10 @@ export default function PartitionViewTableRow({
         {StringX.formatFloat(nSeatsFair)}
       </TableCell>
       <TableCell align="right" sx={{ background: colorFairness }}>
-        {StringX.formatFloatSigned(row.nSeats2 - nSeatsFair)}
+        {StringX.formatFloatSigned(log2NSeatsFairPerNSeats2)}
       </TableCell>
       <TableCell align="right">{StringX.formatInt(totalGroupPop)}</TableCell>
+      <TableCell align="right">{StringX.formatInt(popPerSeat)}</TableCell>
       <TableCell align="left">{regions}</TableCell>
     </TableRow>
   );
