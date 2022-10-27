@@ -22,4 +22,9 @@ export default class PartitionRegion {
   get lng() {
     return this.centroid[1];
   }
+
+  get lngLat() {
+    const [lat, lng] = this.centroid;
+    return { lng, lat };
+  }
 }
