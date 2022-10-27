@@ -6,7 +6,12 @@ import StringX from "../../nonview/base/StringX";
 
 const STYLE_GROUP = {};
 
-export default function PartitionViewTableRow({ row, partitionRegionIdx, nSeats, totalPop }) {
+export default function PartitionViewTableRow({
+  row,
+  partitionRegionIdx,
+  nSeats,
+  totalPop,
+}) {
   const regions = row.idList
     .map((id) => partitionRegionIdx.get(id).name)
     .join(", ");
@@ -15,8 +20,12 @@ export default function PartitionViewTableRow({ row, partitionRegionIdx, nSeats,
     ...{ background: Color.getForKey(row.group) },
     ...STYLE_GROUP,
   };
-  const nSeatsFair = totalGroupPop * nSeats / totalPop;
-  const fairness = nSeatsFair - row.nSeats2
+  const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
+  const nSeatsFairPerNSeats2 = nSeatsFair / row.nSeats2;
+  const log2NSeatsFairPerNSeats2 = Math.log(nSeatsFairPerNSeats2) / Math.log(2);
+  const h = nSeatsFairPerNSeats2 < 1 ? 240 : 0;
+  const l = 100 - 40 * Math.min(1, Math.abs(log2NSeatsFairPerNSeats2));
+  const colorFairness = Color.hsla(h, 100, l, 1);
 
   return (
     <TableRow>
@@ -25,10 +34,11 @@ export default function PartitionViewTableRow({ row, partitionRegionIdx, nSeats,
       </TableCell>
       <TableCell align="right">{row.nSeats}</TableCell>
       <TableCell align="right">{row.nSeats2}</TableCell>
+      <TableCell align="left" sx={{ background: colorFairness }}>
+        {StringX.formatFloat(nSeatsFair)}
+      </TableCell>
       <TableCell align="right">{StringX.formatInt(totalGroupPop)}</TableCell>
-      <TableCell align="left">{StringX.formatFloat(fairness)}</TableCell>
       <TableCell align="left">{regions}</TableCell>
-
     </TableRow>
   );
 }
