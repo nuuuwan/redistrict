@@ -110,11 +110,11 @@ export default class MapPage extends AbstractInnerPage {
           subRegionType={subRegionType}
           setSubRegionType={this.setSubRegionType.bind(this)}
         />
-        <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
         <SliderMaxSeatsPerGroup
           maxSeatsPerGroup={maxSeatsPerGroup}
           setMaxSeatsPerGroup={this.setMaxSeatsPerGroup.bind(this)}
         />
+        <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
         <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />
         <PartitionView partition={partition} nSeats={nSeats} />
       </Box>
