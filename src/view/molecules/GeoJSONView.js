@@ -1,32 +1,42 @@
 import BBox from "../../nonview/base/geo/BBox";
 import Color from "../../nonview/base/Color";
 
-import GeoJSONFeatureView from "../../view/molecules/GeoJSONFeatureView";
+import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
 
 const PADDING = 10;
 
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
 
-export default function GeoJSONView({ geoJSON, idToGroup }) {
-  const bbox = BBox.fromGeoJSON(geoJSON);
+export default function GeoJSONView({ geoJSON, groupToIDListAndNSeats }) {
   const [width, height] = [
     window.innerWidth - MARGIN_WIDTH,
     (window.innerHeight - MARGIN_HEIGHT) / 2,
   ];
+  const bbox = BBox.fromGeoJSON(geoJSON);
   const funcTransform = bbox.getTransform(width, height, PADDING);
-  const inner = geoJSON.features.map(function (feature, iFeature) {
-    const group = idToGroup[feature.id];
-    const color = Color.getForKey(group);
+
+  const idToFeature = geoJSON.features.reduce(function (idToFeature, feature) {
+    idToFeature[feature.id] = feature;
+    return idToFeature;
+  }, {});
+
+  const groups = Object.keys(groupToIDListAndNSeats).sort();
+  const nGroups = groups.length;
+  const inner = groups.map(function (group, iGroup) {
+    const { idList } = groupToIDListAndNSeats[group];
+    const featureList = idList.map((id) => idToFeature[id]);
+    const color = Color.getForIter(iGroup, nGroups);
     return (
-      <GeoJSONFeatureView
-        key={"feature-" + feature.id}
+      <GeoJSONGroupView
+        key={"group-" + group}
         funcTransform={funcTransform}
-        feature={feature}
+        featureList={featureList}
         color={color}
         group={group}
       />
     );
   });
+
   return (
     <svg width={width} height={height}>
       {inner}
