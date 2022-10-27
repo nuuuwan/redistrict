@@ -3,7 +3,7 @@ import MathX from "../../nonview/base/MathX";
 const N_GROUPS= 6;
 
 export default class Partition {
-  static getTotalPopulation(geojsonFeatures) {
+  static getTotalPop(geojsonFeatures) {
     return MathX.sumGeneric(
       geojsonFeatures,
       (feature) => feature.properties.population
@@ -13,18 +13,18 @@ export default class Partition {
   static getFeatureToGroup(geojsonFeatures) {
     let featureToGroup = {};
 
-    const totalPopulation = Partition.getTotalPopulation(geojsonFeatures);
+    const totalPop = Partition.getTotalPop(geojsonFeatures);
 
     const sortedFeatures = geojsonFeatures.sort(function (a, b) {
       return a.properties.centroid[1] > b.properties.centroid[1];
     });
 
-    let cumPopulation = 0;
+    let cumPop = 0;
     for (let feature of sortedFeatures) {
-      const population = feature.properties.population;
-      cumPopulation += population;
-      const pPopulation = (cumPopulation - population) / totalPopulation;
-      const group = parseInt(pPopulation * N_GROUPS);
+      const pop = feature.properties.population;
+      cumPop += pop;
+      const pPop = (cumPop - pop) / totalPop;
+      const group = parseInt(pPop * N_GROUPS);
       featureToGroup[feature.id] = group;
       console.debug(feature.id, group);
     }
