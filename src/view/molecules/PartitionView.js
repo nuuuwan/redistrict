@@ -7,11 +7,12 @@ export default function PartitionView({ nSeats, partition }) {
   const groupToSeats2 = Seats.divideSeats(nSeats, partition);
   const totalPop = partitionRegionIdx.getTotalPop(partitionRegionIdx.idList);
 
-  const rows = Object.entries(partition.groupToIDListAndNSeats).map(function ([
-    group,
-    { idList, nSeats },
-  ]) {
+  const sortedGroups = Object.keys(partition.groupToIDListAndNSeats).sort();
+  const nGroups = sortedGroups.length;
+  const rows = sortedGroups.map(function (group, iGroup) {
+    const { idList, nSeats } = partition.groupToIDListAndNSeats[group];
     return {
+      iGroup,
       group,
       idList,
       nSeats,
@@ -24,6 +25,7 @@ export default function PartitionView({ nSeats, partition }) {
       partitionRegionIdx={partitionRegionIdx}
       totalPop={totalPop}
       nSeats={nSeats}
+      nGroups={nGroups}
     />
   );
 }
