@@ -1,3 +1,4 @@
+import BBox from "../../nonview/base/geo/BBox";
 import MathX from "../../nonview/base/MathX";
 import PartitionRegion from "../../nonview/core/PartitionRegion";
 
@@ -51,14 +52,10 @@ export default class PartitionRegionIdx {
     return this.getSortedByLng(idList);
   }
 
-  get totalPop() {
-    return MathX.sumGeneric(
-      this.partitionRegionList,
-      (partitionRegion) => partitionRegion.pop
-    );
   getLatLngList(idList) {
     return idList.map((id) => this.get(id).centroid);
   }
+
   isLatSpanLongerThanLngSpan(idList) {
     const latLngList = this.getLatLngList(idList);
     const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(latLngList);
@@ -66,5 +63,8 @@ export default class PartitionRegionIdx {
     const lngSpan = maxLng - minLng;
     return latSpan > lngSpan;
   }
+
+  getTotalPop(idList) {
+    return MathX.sumGeneric(idList, (id) => this.get(id).pop);
   }
 }
