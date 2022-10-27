@@ -53,12 +53,12 @@ export default class PartitionRegionIdx {
   }
 
   getLatLngList(idList) {
-    return idList.map((id) => this.get(id).centroid);
+    return idList.map((id) => this.get(id).lngLat);
   }
 
   isLatSpanLongerThanLngSpan(idList) {
     const latLngList = this.getLatLngList(idList);
-    const [minLat, minLng, maxLat, maxLng] = BBox.fromLatLngList(latLngList);
+    const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(latLngList);
     const latSpan = maxLat - minLat;
     const lngSpan = maxLng - minLng;
     return latSpan > lngSpan;
