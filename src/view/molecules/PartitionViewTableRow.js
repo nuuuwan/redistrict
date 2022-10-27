@@ -5,7 +5,7 @@ import Color from "../../nonview/base/Color";
 import StringX from "../../nonview/base/StringX";
 
 const STYLE_GROUP = {};
-const MAX_IDS_TO_DISPLAY = 10;
+const MAX_IDS_TO_DISPLAY = 3;
 
 export default function PartitionViewTableRow({
   row,
