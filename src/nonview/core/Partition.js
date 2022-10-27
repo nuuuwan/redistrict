@@ -55,12 +55,13 @@ export default class Partition {
   }
 
   partitionAll() {
+    const maxSeatsPerGroup = 1;
     while (true) {
       let newGroupToIDListAndNSeats = {};
       let nPartitioned = 0;
       for (let group in this.groupToIDListAndNSeats) {
         const { idList, nSeats } = this.groupToIDListAndNSeats[group];
-        if (nSeats > 1) {
+        if (nSeats > maxSeatsPerGroup) {
           const partialGroupToIDListAndNSeats = this.partitionSingle(
             idList,
             nSeats
