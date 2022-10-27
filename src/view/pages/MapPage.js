@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
@@ -5,6 +6,7 @@ import Partition from "../../nonview/core/Partition";
 
 import AppColors from "../../view/_constants/AppColors";
 import GeoJSONView from "../../view/molecules/GeoJSONView";
+import PartitionView from "../../view/molecules/PartitionView";
 import AbstractInnerPage from "../../view/pages/AbstractInnerPage";
 
 export default class MapPage extends AbstractInnerPage {
@@ -34,14 +36,19 @@ export default class MapPage extends AbstractInnerPage {
     partition.partitionAll();
     const idToGroup = partition.idToGroup;
 
-    this.setState({ geoJSON, idToGroup });
+    this.setState({ geoJSON, partition, idToGroup });
   }
 
   render() {
-    const { geoJSON, idToGroup } = this.state;
+    const { geoJSON, partition, idToGroup } = this.state;
     if (!geoJSON) {
       return "Loading...";
     }
-    return <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />;
+    return (
+      <Box>
+        <GeoJSONView geoJSON={geoJSON} idToGroup={idToGroup} />
+        <PartitionView partition={partition} />
+      </Box>
+    );
   }
 }
