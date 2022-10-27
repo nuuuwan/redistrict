@@ -14,7 +14,7 @@ export default function PartitionViewTableRow({
   totalPop,
 }) {
 
-  let regions = row.idList.splice(0, MAX_IDS_TO_DISPLAY)
+  let regions = row.idList.slice(0, MAX_IDS_TO_DISPLAY)
     .map((id) => partitionRegionIdx.get(id).name)
     .join(", ");
   if (row.idList.length > MAX_IDS_TO_DISPLAY) {
