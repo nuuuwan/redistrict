@@ -2,6 +2,7 @@ import * as React from "react";
 
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
 
 import MathX from "../../nonview/base/MathX";
 
@@ -15,7 +16,8 @@ export default function SliderSeats({ nSeats, setNSeats }) {
     return { value, label: value };
   });
   return (
-    <Box width={300}>
+    <Box width={500}>
+      <Typography variant="caption">Total Seats</Typography>
       <Slider
         min={1}
         max={20}
