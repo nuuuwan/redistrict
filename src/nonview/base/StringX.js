@@ -114,6 +114,10 @@ export default class StringX {
   }
 
   static formatFloat(x) {
-    return x.toFixed(2);
+    return Math.abs(x).toFixed(2);
+  }
+
+  static formatFloatSigned(x) {
+    return (x > 0 ? "+" : "-") + " " + Math.abs(x).toFixed(2);
   }
 }
