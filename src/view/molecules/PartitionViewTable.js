@@ -6,14 +6,20 @@ import TableContainer from "@mui/material/TableContainer";
 import PartitionViewTableHeader from "../../view/molecules/PartitionViewTableHeader";
 import PartitionViewTableRow from "../../view/molecules/PartitionViewTableRow";
 
-export default function PartitionViewTable({ rows }) {
+export default function PartitionViewTable({ rows, partitionRegionIdx }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <PartitionViewTableHeader />
         <TableBody>
           {rows.map(function (row) {
-            return <PartitionViewTableRow key={row.group} row={row} />;
+            return (
+              <PartitionViewTableRow
+                key={row.group}
+                row={row}
+                partitionRegionIdx={partitionRegionIdx}
+              />
+            );
           })}
         </TableBody>
       </Table>
