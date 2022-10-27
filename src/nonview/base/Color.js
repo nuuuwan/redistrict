@@ -2,20 +2,15 @@ function getRandomInt(min, max) {
   return parseInt(min + Math.random() * (max - min));
 }
 
-let n = 0;
-let keyToN = {};
+let keyToColor = {};
 const DEFAULT_SLA = [100, 50, 1];
 
 export default class Color {
   static getForKey(key) {
-    if (!keyToN[key]) {
-      keyToN[key] = n;
-      n += 1;
+    if (!keyToColor[key]) {
+      keyToColor[key] = Color.getRandom();
     }
-    const incr = parseInt(360 / n);
-    const h = (keyToN[key] * incr) % 360;
-    const [s, l, a] = DEFAULT_SLA;
-    return Color.hsla(h, s, l, a);
+    return keyToColor[key];
   }
 
   static getRandom() {
