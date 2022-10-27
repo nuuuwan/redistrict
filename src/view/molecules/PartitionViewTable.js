@@ -5,6 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 
 import PartitionViewTableHeader from "../../view/molecules/PartitionViewTableHeader";
 import PartitionViewTableRow from "../../view/molecules/PartitionViewTableRow";
+import PartitionViewTableTotalRow from "../../view/molecules/PartitionViewTableTotalRow";
 
 export default function PartitionViewTable({
   rows,
@@ -13,6 +14,9 @@ export default function PartitionViewTable({
   nSeats,
   nGroups,
 }) {
+  const totalNSeats = nSeats;
+  const totalNSeats2 = nSeats;
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small">
@@ -30,6 +34,11 @@ export default function PartitionViewTable({
               />
             );
           })}
+          <PartitionViewTableTotalRow
+            totalNSeats={totalNSeats}
+            totalNSeats2={totalNSeats2}
+            totalPop={totalPop}
+          />
         </TableBody>
       </Table>
     </TableContainer>
