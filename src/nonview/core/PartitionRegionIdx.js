@@ -58,7 +58,7 @@ export default class PartitionRegionIdx {
 
   isLatSpanLongerThanLngSpan(idList) {
     const latLngList = this.getLatLngList(idList);
-    const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(latLngList);
+    const [minLat, minLng, maxLat, maxLng] = BBox.fromLatLngList(latLngList);
     const latSpan = maxLat - minLat;
     const lngSpan = maxLng - minLng;
     return latSpan > lngSpan;
