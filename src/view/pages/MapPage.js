@@ -3,7 +3,6 @@ import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import Partition from "../../nonview/core/Partition";
-
 import AppColors from "../../view/_constants/AppColors";
 import SliderMaxSeatsPerGroup from "../../view/atoms/SliderMaxSeatsPerGroup";
 import SliderSeats from "../../view/atoms/SliderSeats";
@@ -90,7 +89,7 @@ export default class MapPage extends AbstractInnerPage {
           maxSeatsPerGroup={maxSeatsPerGroup}
           setMaxSeatsPerGroup={this.setMaxSeatsPerGroup.bind(this)}
         />
-        <PartitionView partition={partition} />
+        <PartitionView partition={partition} nSeats={nSeats} />
       </Box>
     );
   }

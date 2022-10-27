@@ -1,7 +1,10 @@
 import PartitionViewTable from "../../view/molecules/PartitionViewTable";
-
-export default function PartitionView({ partition }) {
+import Seats from "../../nonview/core/Seats";
+export default function PartitionView({ nSeats, partition }) {
   const partitionRegionIdx = partition.partitionRegionIdx;
+  const groupToSeats2 = Seats.divideSeats(nSeats, partition);
+  const totalPop = partitionRegionIdx.getTotalPop(partitionRegionIdx.idList);
+
   const rows = Object.entries(partition.groupToIDListAndNSeats).map(function ([
     group,
     { idList, nSeats },
@@ -10,9 +13,10 @@ export default function PartitionView({ partition }) {
       group,
       idList,
       nSeats,
+      nSeats2: groupToSeats2[group],
     };
   });
   return (
-    <PartitionViewTable rows={rows} partitionRegionIdx={partitionRegionIdx} />
+    <PartitionViewTable rows={rows} partitionRegionIdx={partitionRegionIdx} totalPop={totalPop} nSeats={nSeats}/>
   );
 }

@@ -8,8 +8,11 @@ export default function PartitionViewTableHeader() {
       <TableRow>
         <TableCell align="left">Group</TableCell>
         <TableCell align="right">Seats</TableCell>
+        <TableCell align="right">Seats[2]</TableCell>
         <TableCell align="right">Pop.</TableCell>
+        <TableCell align="left">Fairness</TableCell>
         <TableCell align="left">Regions</TableCell>
+
       </TableRow>
     </TableHead>
   );
