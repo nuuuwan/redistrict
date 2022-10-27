@@ -48,13 +48,20 @@ export default class Partition {
     }
     const nPartition = bestI;
 
+    const idList1 = idList.slice(0, nPartition);
+    const idList2 = idList.slice(nPartition);
+
+    if (idList1.length === 0 || idList2.length === 0) {
+      return null;
+    }
+
     return {
       [group1]: {
-        idList: idList.slice(0, nPartition),
+        idList: idList1,
         nSeats: nSeats1,
       },
       [group2]: {
-        idList: idList.slice(nPartition),
+        idList: idList2,
         nSeats: nSeats - nSeats1,
       },
     };
@@ -66,19 +73,21 @@ export default class Partition {
       let nPartitioned = 0;
       for (let group in this.groupToIDListAndNSeats) {
         const { idList, nSeats } = this.groupToIDListAndNSeats[group];
-        if (nSeats > maxSeatsPerGroup) {
+        if (nSeats >= Math.max(2, maxSeatsPerGroup)) {
           const partialGroupToIDListAndNSeats = this.partitionSingle(
             idList,
             nSeats
           );
-          for (let subKey in partialGroupToIDListAndNSeats) {
-            newGroupToIDListAndNSeats[group + subKey] =
-              partialGroupToIDListAndNSeats[subKey];
+          if (partialGroupToIDListAndNSeats !== null) {
+            for (let subKey in partialGroupToIDListAndNSeats) {
+              newGroupToIDListAndNSeats[group + subKey] =
+                partialGroupToIDListAndNSeats[subKey];
+            }
+            nPartitioned += 1;
+            continue;
           }
-          nPartitioned += 1;
-        } else {
-          newGroupToIDListAndNSeats[group] = this.groupToIDListAndNSeats[group];
         }
+        newGroupToIDListAndNSeats[group] = this.groupToIDListAndNSeats[group];
       }
 
       if (nPartitioned > 0) {
