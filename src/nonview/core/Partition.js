@@ -26,7 +26,13 @@ export default class Partition {
     );
     const partitionPop = (totalPop * nSeats1) / nSeats;
     let cumPop = 0;
+    const isLatSpanLongerThanLngSpan =
+      this.partitionRegionIdx.isLatSpanLongerThanLngSpan(idList);
     const sortedIdList = this.partitionRegionIdx.getSortedByLongerSpan(idList);
+
+    const [group1, group2] = isLatSpanLongerThanLngSpan
+      ? ["S", "N"]
+      : ["W", "E"];
 
     let bestDiff = undefined;
     let bestI = undefined;
@@ -43,11 +49,11 @@ export default class Partition {
     const nPartition = bestI;
 
     return {
-      N: {
+      [group1]: {
         idList: idList.slice(0, nPartition),
         nSeats: nSeats1,
       },
-      S: {
+      [group2]: {
         idList: idList.slice(nPartition),
         nSeats: nSeats - nSeats1,
       },
