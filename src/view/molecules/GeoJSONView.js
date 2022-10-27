@@ -7,7 +7,7 @@ import GeoJSONFeatureView from "../../view/molecules/GeoJSONFeatureView";
 const PADDING = 10;
 
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
-const N_COLORS = 7;
+
 let groupToColor = {};
 function getGroupColor(group) {
   if (!groupToColor[group]) {
