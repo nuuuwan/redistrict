@@ -1,3 +1,4 @@
+import MathX from "../../nonview/base/MathX";
 import PartitionRegionIdx from "../../nonview/core/PartitionRegionIdx";
 
 export default class Partition {
@@ -11,23 +12,42 @@ export default class Partition {
     this.partitionRegionIdx = partitionRegionIdx;
     this.groupToIDListAndNSeats = {
       "-": {
-        idList: partitionRegionIdx.sortedByLat,
+        idList: partitionRegionIdx.idList,
         nSeats,
       },
     };
   }
 
-  static partitionSingle(idList, nSeats) {
-    const nPartition = parseInt(idList.length / 2);
-    const nSeatsNew = parseInt(nSeats / 2);
+  partitionSingle(idList, nSeats) {
+    console.debug(idList, nSeats);
+    const nSeats1 = parseInt(nSeats / 2);
+    const totalPop = MathX.sumGeneric(
+      idList,
+      (id) => this.partitionRegionIdx.get(id).pop
+    );
+    const partitionPop = (totalPop * nSeats1) / nSeats;
+    let cumPop = 0;
+    const sortedIdList = this.partitionRegionIdx.getSortedByLongerSpan(idList);
+
+    let nPartition = undefined;
+    for (let i in sortedIdList) {
+      const id = sortedIdList[i];
+      const pop = this.partitionRegionIdx.get(id).pop;
+      cumPop += pop;
+      if (cumPop > partitionPop) {
+        nPartition = i;
+        break;
+      }
+    }
+
     return {
       N: {
         idList: idList.slice(0, nPartition),
-        nSeats: nSeatsNew,
+        nSeats: nSeats1,
       },
       S: {
         idList: idList.slice(nPartition),
-        nSeats: nSeats - nSeatsNew,
+        nSeats: nSeats - nSeats1,
       },
     };
   }
@@ -39,7 +59,7 @@ export default class Partition {
       for (let group in this.groupToIDListAndNSeats) {
         const { idList, nSeats } = this.groupToIDListAndNSeats[group];
         if (nSeats > 1) {
-          const partialGroupToIDListAndNSeats = Partition.partitionSingle(
+          const partialGroupToIDListAndNSeats = this.partitionSingle(
             idList,
             nSeats
           );
@@ -55,7 +75,6 @@ export default class Partition {
 
       if (nPartitioned > 0) {
         this.groupToIDListAndNSeats = newGroupToIDListAndNSeats;
-        console.debug(nPartitioned, this.groupToIDListAndNSeats);
       } else {
         break;
       }
