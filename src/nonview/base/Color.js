@@ -15,7 +15,7 @@ export default class Color {
 
   static getForIter(i, n) {
     const h = parseInt((i * 240) / n);
-    const l = [40, 60, 80][i % 3];
+    const l = [60, 90][i % 2];
     const { s, a } = COLOR_DEFAULTS;
     return Color.hsla(h, s, l, a);
   }
