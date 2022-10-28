@@ -8,7 +8,7 @@ export default class Seats {
     for (let [group, { idList, nSeats }] of Object.entries(
       partition.groupToIDListAndNSeats
     )) {
-      const pop = partition.partitionRegionIdx.getTotalPop(idList);
+      const pop = partition.regionEntIdx.getTotalPop(idList);
       totalPop += pop;
       groupToPop[group] = pop;
     }

@@ -1,18 +1,7 @@
 import BBox from "../../nonview/base/geo/BBox";
 import MathX from "../../nonview/base/MathX";
-import PartitionRegion from "../../nonview/core/PartitionRegion";
 
-export default class PartitionRegionIdx {
-  static fromGeoJSONFeatures(geojsonFeatures) {
-    const idx = geojsonFeatures.reduce(function (idx, geojsonFeature) {
-      const partitionRegion =
-        PartitionRegion.fromGeoJSONFeature(geojsonFeature);
-      idx[partitionRegion.id] = partitionRegion;
-      return idx;
-    }, {});
-    return new PartitionRegionIdx(idx);
-  }
-
+export default class RegionEntIdx {
   constructor(idx) {
     this.idx = idx;
   }

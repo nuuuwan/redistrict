@@ -19,7 +19,7 @@ const STYLE_TABLE = {
 
 export default function PartitionViewTable({
   rows,
-  partitionRegionIdx,
+  regionEntIdx,
   totalPop,
   nSeats,
   nGroups,
@@ -42,7 +42,7 @@ export default function PartitionViewTable({
               <PartitionViewTableRow
                 key={row.group}
                 row={row}
-                partitionRegionIdx={partitionRegionIdx}
+                regionEntIdx={regionEntIdx}
                 totalPop={totalPop}
                 nSeats={nSeats}
                 nGroups={nGroups}

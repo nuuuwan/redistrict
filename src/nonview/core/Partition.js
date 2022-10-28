@@ -1,18 +1,13 @@
 import MathX from "../../nonview/base/MathX";
-import PartitionRegionIdx from "../../nonview/core/PartitionRegionIdx";
+import NamedRegions from "../../nonview/core/NamedRegions";
+import RegionEntIdx from "../../nonview/core/RegionEntIdx";
 
 export default class Partition {
-  static fromGeoJSONFeatures(geojsonFeatures, nSeats) {
-    return new Partition(
-      PartitionRegionIdx.fromGeoJSONFeatures(geojsonFeatures),
-      nSeats
-    );
-  }
-  constructor(partitionRegionIdx, nSeats) {
-    this.partitionRegionIdx = partitionRegionIdx;
+  constructor(regionEntIdx, nSeats) {
+    this.regionEntIdx = new RegionEntIdx(regionEntIdx);
     this.groupToIDListAndNSeats = {
       "-": {
-        idList: partitionRegionIdx.idList,
+        idList: this.regionEntIdx.idList,
         nSeats,
       },
     };
@@ -20,15 +15,14 @@ export default class Partition {
 
   partitionSingle(idList, nSeats) {
     const nSeats1 = parseInt(nSeats / 2);
-    const totalPop = MathX.sumGeneric(
-      idList,
-      (id) => this.partitionRegionIdx.get(id).pop
+    const totalPop = MathX.sumGeneric(idList, (id) =>
+      parseInt(this.regionEntIdx.get(id).population)
     );
     const partitionPop = (totalPop * nSeats1) / nSeats;
     let cumPop = 0;
     const isLatSpanLongerThanLngSpan =
-      this.partitionRegionIdx.isLatSpanLongerThanLngSpan(idList);
-    const sortedIdList = this.partitionRegionIdx.getSortedByLongerSpan(idList);
+      this.regionEntIdx.isLatSpanLongerThanLngSpan(idList);
+    const sortedIdList = this.regionEntIdx.getSortedByLongerSpan(idList);
 
     const [group1, group2] = isLatSpanLongerThanLngSpan
       ? ["S", "N"]
@@ -38,7 +32,7 @@ export default class Partition {
     let bestI = undefined;
     for (let i in sortedIdList) {
       const id = sortedIdList[i];
-      const pop = this.partitionRegionIdx.get(id).pop;
+      const pop = this.regionEntIdx.get(id).pop;
       const diff = Math.abs(cumPop - partitionPop);
       if (bestDiff === undefined || diff < bestDiff) {
         bestDiff = diff;
@@ -101,7 +95,9 @@ export default class Partition {
   getGroupToName() {
     let groupToName = {};
     let nameCount = {};
-    for (let [group, {idList}] of Object.entries(this.groupToIDListAndNSeats)) {
+    for (let [group, { idList }] of Object.entries(
+      this.groupToIDListAndNSeats
+    )) {
       const name = NamedRegions.infer(idList);
       if (!nameCount[name]) {
         nameCount[name] = 0;
@@ -111,6 +107,4 @@ export default class Partition {
     }
     return groupToName;
   }
-
-
 }

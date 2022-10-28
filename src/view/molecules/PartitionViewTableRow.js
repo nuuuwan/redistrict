@@ -10,20 +10,20 @@ const MAX_IDS_TO_DISPLAY = 20;
 
 export default function PartitionViewTableRow({
   row,
-  partitionRegionIdx,
+  regionEntIdx,
   nSeats,
   totalPop,
   nGroups,
 }) {
   let regions = row.idList
     .slice(0, MAX_IDS_TO_DISPLAY)
-    .map((id) => partitionRegionIdx.get(id).name)
+    .map((id) => regionEntIdx.get(id).name)
     .join(", ");
   if (row.idList.length > MAX_IDS_TO_DISPLAY) {
     regions += `...(${row.idList.length})`;
   }
 
-  const totalGroupPop = partitionRegionIdx.getTotalPop(row.idList);
+  const totalGroupPop = regionEntIdx.getTotalPop(row.idList);
   const sx = {
     ...{ background: Color.getForIter(row.iGroup, nGroups) },
     ...STYLE_GROUP,

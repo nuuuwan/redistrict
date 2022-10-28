@@ -3,9 +3,9 @@ import Seats from "../../nonview/core/Seats";
 import PartitionViewTable from "../../view/molecules/PartitionViewTable";
 
 export default function PartitionView({ nSeats, partition }) {
-  const partitionRegionIdx = partition.partitionRegionIdx;
+  const regionEntIdx = partition.regionEntIdx;
   const groupToSeats2 = Seats.divideSeats(nSeats, partition);
-  const totalPop = partitionRegionIdx.getTotalPop(partitionRegionIdx.idList);
+  const totalPop = regionEntIdx.getTotalPop(regionEntIdx.idList);
 
   const sortedGroups = Object.keys(partition.groupToIDListAndNSeats).sort();
   const nGroups = sortedGroups.length;
@@ -22,7 +22,7 @@ export default function PartitionView({ nSeats, partition }) {
   return (
     <PartitionViewTable
       rows={rows}
-      partitionRegionIdx={partitionRegionIdx}
+      regionEntIdx={regionEntIdx}
       totalPop={totalPop}
       nSeats={nSeats}
       nGroups={nGroups}

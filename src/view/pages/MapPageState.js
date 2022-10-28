@@ -1,6 +1,7 @@
 import { Component } from "react";
 
 import { ENT_TYPES } from "../../nonview/base/EntTypes";
+import Ents from "../../nonview/base/Ents";
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import CommonStore from "../../nonview/core/CommonStore";
 import Partition from "../../nonview/core/Partition";
@@ -23,7 +24,7 @@ export default class MapPageState extends Component {
       // Depends on: regionID, subRegionType
       geoJSON: null,
 
-      // Depends on: maxSeatsPerGroup, nSeats, geoJSON
+      // Depends on: regionID, subRegionType, maxSeatsPerGroup, nSeats, geoJSON
       groupToIDListAndNSeats: null,
       partition: null,
 
@@ -44,7 +45,12 @@ export default class MapPageState extends Component {
       geoJSON,
       partition,
       groupToIDListAndNSeats,
+      commonStoreSingleton,
     } = this.state;
+
+    if (!commonStoreSingleton) {
+      commonStoreSingleton = otherState.commonStoreSingleton;
+    }
 
     const isChanged = function (newA, a) {
       return newA !== undefined && newA !== a;
@@ -78,8 +84,19 @@ export default class MapPageState extends Component {
       geoJSON = await new GeoJSON(regionID, subRegionType).read();
     }
 
-    if (isChangedMaxSeatsPerGroup || isChangedNSeats || isChangedGeoJSON) {
-      partition = Partition.fromGeoJSONFeatures(geoJSON.features, nSeats);
+    if (
+      isChangedRegionID ||
+      isChangedSubRegionType ||
+      isChangedMaxSeatsPerGroup ||
+      isChangedNSeats ||
+      isChangedGeoJSON
+    ) {
+      const regionEntIdx = Ents.getEntIndexForSubRegions(
+        commonStoreSingleton.allEntIndex,
+        regionID,
+        subRegionType
+      );
+      partition = new Partition(regionEntIdx, nSeats);
       partition.partitionAll(maxSeatsPerGroup);
       groupToIDListAndNSeats = partition.groupToIDListAndNSeats;
     }
