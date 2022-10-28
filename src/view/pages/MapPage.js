@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
@@ -17,6 +18,16 @@ const DEFAULT_N_SEATS = 2;
 const DEFAULT_MAX_SEATS_PER_GROUP = 1;
 const DEFAULT_SUBREGION_TYPE = "dsd";
 const DEFAULT_REGION_ID = "LK-11";
+
+const STYLE_PAPER_OPTIONS = {
+  m: 1,
+  p: 2,
+  width: 300,
+  position: "fixed",
+  right: 0,
+  top: 0,
+};
+
 export default class MapPage extends AbstractInnerPage {
   constructor(props) {
     super(props);
@@ -134,19 +145,21 @@ export default class MapPage extends AbstractInnerPage {
     }
     return (
       <Box>
-        <SelectRegionID
-          regionID={regionID}
-          setRegionID={this.setRegionID.bind(this)}
-        />
-        <SliderSubRegionType
-          subRegionType={subRegionType}
-          setSubRegionType={this.setSubRegionType.bind(this)}
-        />
-        <SliderMaxSeatsPerGroup
-          maxSeatsPerGroup={maxSeatsPerGroup}
-          setMaxSeatsPerGroup={this.setMaxSeatsPerGroup.bind(this)}
-        />
-        <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
+        <Paper sx={STYLE_PAPER_OPTIONS}>
+          <SelectRegionID
+            regionID={regionID}
+            setRegionID={this.setRegionID.bind(this)}
+          />
+          <SliderSubRegionType
+            subRegionType={subRegionType}
+            setSubRegionType={this.setSubRegionType.bind(this)}
+          />
+          <SliderMaxSeatsPerGroup
+            maxSeatsPerGroup={maxSeatsPerGroup}
+            setMaxSeatsPerGroup={this.setMaxSeatsPerGroup.bind(this)}
+          />
+          <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
+        </Paper>
         <GeoJSONView
           geoJSON={geoJSON}
           groupToIDListAndNSeats={groupToIDListAndNSeats}
