@@ -7,6 +7,10 @@ import PartitionViewTableHeader from "../../view/molecules/PartitionViewTableHea
 import PartitionViewTableRow from "../../view/molecules/PartitionViewTableRow";
 import PartitionViewTableTotalRow from "../../view/molecules/PartitionViewTableTotalRow";
 
+const STYLE_TABLE = {
+  border: "none",
+};
+
 export default function PartitionViewTable({
   rows,
   partitionRegionIdx,
@@ -19,7 +23,7 @@ export default function PartitionViewTable({
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small">
+      <Table sx={STYLE_TABLE} size="small">
         <PartitionViewTableHeader />
         <TableBody>
           <PartitionViewTableTotalRow
