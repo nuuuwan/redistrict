@@ -28,7 +28,6 @@ export default function SliderSubRegionType({
 
   const onChange = function (_, newValue) {
     const subRegionType = marks[newValue].subRegionType;
-    console.debug(subRegionType);
     setSubRegionType(subRegionType);
   };
 
