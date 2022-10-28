@@ -58,6 +58,7 @@ export default function PartitionViewTableRow({
       <TableCell align="left">
         <DemographicView
           demographicInfo={RegionEntIdx.getDemographicInfo(row.idList)}
+          nSeats={row.nSeats}
         />
       </TableCell>
     </TableRow>
