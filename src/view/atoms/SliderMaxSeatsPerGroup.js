@@ -20,7 +20,7 @@ export default function SliderMaxSeatsPerGroup({
   });
   return (
     <Box width={200}>
-      <Typography variant="caption">Max. Seats per Group</Typography>
+      <Typography variant="caption">{`Max. Seats per Group (${maxSeatsPerGroup})`}</Typography>
       <Slider
         min={MIN}
         max={MAX}
