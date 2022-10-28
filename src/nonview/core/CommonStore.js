@@ -1,5 +1,5 @@
 import Ents from "../../nonview/base/Ents";
-
+import GIG2 from "../../nonview/base/GIG2";
 let commonStoreSingleton = undefined;
 const ETHNICITY_TABLE_NAME = 'population-ethnicity.regions.2012';
 

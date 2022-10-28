@@ -24,7 +24,7 @@ export default class GIG2 {
   }
 
   static async getTable(tableName) {
-    const url = `/sri_lanka/data/gig2/${tableName}.tsv`;
+    const url = `/redistrict/data/gig2/${tableName}.tsv`;
     const dList = await WWW.tsv(url);
     return new GIG2Table(dList);
   }
