@@ -25,40 +25,29 @@ export default class MapPageState extends Component {
       // Depends on: regionID, subRegionType
       geoJSON: null,
 
-      // Depends on: nSeats, maxSeatsPerGroup, geoJSON
+      // Depends on: maxSeatsPerGroup, nSeats, geoJSON
       groupToIDListAndNSeats: null,
       partition: null,
     };
   }
-  async setMaxSeatsPerGroup(maxSeatsPerGroup) {
-    const { nSeats, geoJSON } = this.state;
-    const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
-      nSeats,
-      maxSeatsPerGroup,
-      geoJSON
-    );
-    this.setState({
-      geoJSON,
-      partition,
-      groupToIDListAndNSeats,
-      maxSeatsPerGroup,
-    });
+
+  // Depends on: regionID, subRegionType
+
+  async loadGeoJSON(regionID, subRegionType) {
+    return await new GeoJSON(regionID, subRegionType).read();
   }
 
-  async setNSeats(nSeats) {
-    const { maxSeatsPerGroup, geoJSON } = this.state;
-    const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
-      nSeats,
-      maxSeatsPerGroup,
-      geoJSON
-    );
-    this.setState({ geoJSON, partition, groupToIDListAndNSeats, nSeats });
+  async loadPartitionItems(maxSeatsPerGroup, nSeats, geoJSON) {
+    const partition = Partition.fromGeoJSONFeatures(geoJSON.features, nSeats);
+    partition.partitionAll(maxSeatsPerGroup);
+    const groupToIDListAndNSeats = partition.groupToIDListAndNSeats;
+    return { partition, groupToIDListAndNSeats };
   }
 
   async setRegionID(regionID) {
     const { subRegionType, nSeats, maxSeatsPerGroup } = this.state;
-    const geoJSON = await new GeoJSON(regionID, subRegionType).read();
-    const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
+    const geoJSON = this.loadGeoJSON(regionID, subRegionType);
+    const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
       nSeats,
       maxSeatsPerGroup,
       geoJSON
@@ -73,8 +62,8 @@ export default class MapPageState extends Component {
 
   async setSubRegionType(subRegionType) {
     const { regionID, nSeats, maxSeatsPerGroup } = this.state;
-    const geoJSON = await new GeoJSON(regionID, subRegionType).read();
-    const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
+    const geoJSON = this.loadGeoJSON(regionID, subRegionType);
+    const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
       nSeats,
       maxSeatsPerGroup,
       geoJSON
@@ -87,23 +76,44 @@ export default class MapPageState extends Component {
     });
   }
 
-  async loadStateGeo(nSeats, maxSeatsPerGroup, geoJSON) {
-    const partition = Partition.fromGeoJSONFeatures(geoJSON.features, nSeats);
-    partition.partitionAll(maxSeatsPerGroup);
-    const groupToIDListAndNSeats = partition.groupToIDListAndNSeats;
-    return { partition, groupToIDListAndNSeats };
-  }
-  async componentDidMount() {
-    const commonStoreSingleton = await CommonStore.loadSingleton();
+  // Depends on: maxSeatsPerGroup, nSeats, geoJSON
 
-    const { nSeats, maxSeatsPerGroup, regionID, subRegionType } = this.state;
-    const geoJSON = await new GeoJSON(regionID, subRegionType).read();
-    const regionDataIndex = await Ents.getEntIndexByType(ENT_TYPES.DISTRICT);
-    const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
+  async setMaxSeatsPerGroup(maxSeatsPerGroup) {
+    const { nSeats, geoJSON } = this.state;
+    const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
       nSeats,
       maxSeatsPerGroup,
       geoJSON
     );
+    this.setState({
+      maxSeatsPerGroup,
+      partition,
+      groupToIDListAndNSeats,
+    });
+  }
+
+  async setNSeats(nSeats) {
+    const { maxSeatsPerGroup, geoJSON } = this.state;
+    const { partition, groupToIDListAndNSeats } = await this.loadGeoJSON(
+      nSeats,
+      maxSeatsPerGroup,
+      geoJSON
+    );
+    this.setState({ nSeats, partition, groupToIDListAndNSeats });
+  }
+
+  async componentDidMount() {
+    const commonStoreSingleton = await CommonStore.loadSingleton();
+
+    const { nSeats, maxSeatsPerGroup, regionID, subRegionType } = this.state;
+    const geoJSON = await this.loadGeoJSON(regionID, subRegionType);
+    const regionDataIndex = await Ents.getEntIndexByType(ENT_TYPES.DISTRICT);
+    const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
+      nSeats,
+      maxSeatsPerGroup,
+      geoJSON
+    );
+
     this.setState({
       geoJSON,
       partition,
