@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import AppColors from "./view/_constants/AppColors";
 import MapPage from "./view/pages/MapPage.js";
+import {FONT_FAMILY_LIST} from "./APP_STYLES.js";
 
 const THEME = createTheme({
   palette: {
@@ -23,7 +24,7 @@ const THEME = createTheme({
   },
   typography: {
     fontSize: 12,
-    fontFamily: ["Encode Sans", "sans-serif"].join(","),
+    fontFamily: FONT_FAMILY_LIST.join(","),
   },
 });
 

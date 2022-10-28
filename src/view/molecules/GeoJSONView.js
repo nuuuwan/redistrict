@@ -3,7 +3,7 @@ import Color from "../../nonview/base/Color";
 import LngLat from "../../nonview/base/geo/LngLat";
 
 import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
-
+import {FONT_FAMILY_LIST} from "../../APP_STYLES.js";
 const PADDING = 10;
 
 export default function GeoJSONView({ geoJSON, partition }) {
@@ -55,7 +55,7 @@ export default function GeoJSONView({ geoJSON, partition }) {
         y={y}
         fill="black"
         stroke="none"
-        fontFamily="sans-serif"
+        fontFamily={FONT_FAMILY_LIST[0]}
         fontSize={10}
         textAnchor="middle"
       >
