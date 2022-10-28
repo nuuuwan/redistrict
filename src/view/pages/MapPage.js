@@ -1,7 +1,8 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
-
+import Ents from "../../nonview/base/Ents";
+import {ENT_TYPES} from "../../nonview/base/EntTypes";
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import Partition from "../../nonview/core/Partition";
 
@@ -142,12 +143,13 @@ export default class MapPage extends AbstractInnerPage {
   async componentDidMount() {
     const { nSeats, maxSeatsPerGroup, regionID, subRegionType } = this.state;
     const geoJSON = await new GeoJSON(regionID, subRegionType).read();
+    const regionDataIndex = await Ents.getEntIndexByType(ENT_TYPES.DISTRICT)
     const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
       nSeats,
       maxSeatsPerGroup,
       geoJSON
     );
-    this.setState({ geoJSON, partition, groupToIDListAndNSeats });
+    this.setState({ geoJSON, partition, groupToIDListAndNSeats, regionDataIndex });
   }
 
   render() {
@@ -157,6 +159,7 @@ export default class MapPage extends AbstractInnerPage {
       subRegionType,
       geoJSON,
       partition,
+      regionDataIndex,
       groupToIDListAndNSeats,
       regionID,
     } = this.state;
@@ -169,6 +172,7 @@ export default class MapPage extends AbstractInnerPage {
           <SelectRegionID
             regionID={regionID}
             setRegionID={this.setRegionID.bind(this)}
+            regionDataIndex={regionDataIndex}
           />
           <SliderSubRegionType
             subRegionType={subRegionType}
