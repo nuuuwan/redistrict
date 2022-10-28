@@ -13,23 +13,22 @@ const StyledTableCell = styled(TableCell)({
 export default function PartitionViewTableTotalRow({
   totalNSeats,
   totalPop,
-  totalNSeats2,
 }) {
   return (
     <TableRow>
       <StyledTableCell align="left">{"Total"}</StyledTableCell>
       <StyledTableCell align="right">
-        {StringX.formatIntSmall(totalNSeats2)}
+        {StringX.formatIntSmall(totalNSeats)}
       </StyledTableCell>
       <StyledTableCell align="right">
-        {StringX.formatIntSmall(totalNSeats2)}
+        {StringX.formatIntSmall(totalNSeats)}
       </StyledTableCell>
       <StyledTableCell align="right">{0}</StyledTableCell>
       <StyledTableCell align="right">
         {StringX.formatInt(totalPop)}
       </StyledTableCell>
       <StyledTableCell align="right">
-        {StringX.formatInt(totalPop / totalNSeats2)}
+        {StringX.formatInt(totalPop / totalNSeats)}
       </StyledTableCell>
       <StyledTableCell />
     </TableRow>
