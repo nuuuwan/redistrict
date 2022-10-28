@@ -80,4 +80,23 @@ export default class RegionEntIdx {
     )[0][0];
     return regionIndex[mostPopDSDID].name;
   }
+
+  static getDemographicInfo(idList) {
+    const commonStore = CommonStore.getSingleton();
+    let [sinhalese, tamil, moor, others] = [0, 0, 0, 0];
+    for (let id of idList) {
+      const tableRow = commonStore.ethnicityTable.getRowByID(id);
+
+      sinhalese += tableRow.getValue("sinhalese");
+      tamil +=
+        tableRow.getValue("sri_lankan_tamil") +
+        tableRow.getValue("indian_tamil");
+      moor += tableRow.getValue("moor") + tableRow.getValue("malay");
+      others +=
+        tableRow.getValue("bharatha") +
+        tableRow.getValue("burgher") +
+        tableRow.getValue("chetty");
+    }
+    return { sinhalese, tamil, moor, others };
+  }
 }
