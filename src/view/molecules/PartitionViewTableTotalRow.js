@@ -7,6 +7,7 @@ import { styled } from "@mui/system";
 
 const StyledTableCell = styled(TableCell)({
   color: "#666",
+  background: "#eee",
 });
 
 export default function PartitionViewTableTotalRow({
