@@ -39,7 +39,7 @@ const STYLE_PAPER_RESULTS = {
   position: "fixed",
   bottom: 0,
   left: 0,
-  width: 800,
+  maxWidth: 800,
   maxHeight: 300,
   overflow: "scroll",
   m: 1,
