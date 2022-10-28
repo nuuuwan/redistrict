@@ -17,6 +17,7 @@ export default class MapPageState extends Component {
     this.state = {
       // No Dependencies
       commonStoreSingleton: null,
+      regionDataIndex: null,
       maxSeatsPerGroup: DEFAULT_MAX_SEATS_PER_GROUP,
       nSeats: DEFAULT_N_SEATS,
       regionID: DEFAULT_REGION_ID,
@@ -48,8 +49,8 @@ export default class MapPageState extends Component {
     const { subRegionType, nSeats, maxSeatsPerGroup } = this.state;
     const geoJSON = this.loadGeoJSON(regionID, subRegionType);
     const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
-      nSeats,
       maxSeatsPerGroup,
+      nSeats,
       geoJSON
     );
     this.setState({
@@ -64,8 +65,8 @@ export default class MapPageState extends Component {
     const { regionID, nSeats, maxSeatsPerGroup } = this.state;
     const geoJSON = this.loadGeoJSON(regionID, subRegionType);
     const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
-      nSeats,
       maxSeatsPerGroup,
+      nSeats,
       geoJSON
     );
     this.setState({
@@ -81,8 +82,8 @@ export default class MapPageState extends Component {
   async setMaxSeatsPerGroup(maxSeatsPerGroup) {
     const { nSeats, geoJSON } = this.state;
     const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
-      nSeats,
       maxSeatsPerGroup,
+      nSeats,
       geoJSON
     );
     this.setState({
@@ -94,14 +95,16 @@ export default class MapPageState extends Component {
 
   async setNSeats(nSeats) {
     const { maxSeatsPerGroup, geoJSON } = this.state;
-    const { partition, groupToIDListAndNSeats } = await this.loadGeoJSON(
-      nSeats,
+    const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
       maxSeatsPerGroup,
+      nSeats,
       geoJSON
     );
     this.setState({ nSeats, partition, groupToIDListAndNSeats });
   }
 
+  // componentDidMount
+  
   async componentDidMount() {
     const commonStoreSingleton = await CommonStore.loadSingleton();
 
@@ -109,8 +112,8 @@ export default class MapPageState extends Component {
     const geoJSON = await this.loadGeoJSON(regionID, subRegionType);
     const regionDataIndex = await Ents.getEntIndexByType(ENT_TYPES.DISTRICT);
     const { partition, groupToIDListAndNSeats } = await this.loadPartitionItems(
-      nSeats,
       maxSeatsPerGroup,
+      nSeats,
       geoJSON
     );
 
