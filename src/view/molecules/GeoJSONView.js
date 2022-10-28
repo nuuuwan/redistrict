@@ -4,13 +4,12 @@ import Color from "../../nonview/base/Color";
 import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
 
 const PADDING = 10;
-
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 100];
 
 export default function GeoJSONView({ geoJSON, groupToIDListAndNSeats }) {
   const [width, height] = [
     window.innerWidth - MARGIN_WIDTH,
-    (window.innerHeight - MARGIN_HEIGHT) / 2,
+    window.innerHeight - MARGIN_HEIGHT,
   ];
   const bbox = BBox.fromGeoJSON(geoJSON);
   const funcTransform = bbox.getTransform(width, height, PADDING);
