@@ -100,6 +100,12 @@ export default class RegionEntIdx {
         tableRow.getValue("burgher") +
         tableRow.getValue("chetty");
     }
-    return { sinhalese, tamil, moor, others };
+    const totalPop = sinhalese + tamil + moor + others;
+    return {
+      sinhalese: sinhalese / totalPop,
+      tamil: tamil / totalPop,
+      moor: moor / totalPop,
+      others: others / totalPop,
+    };
   }
 }
