@@ -35,6 +35,18 @@ const STYLE_BOX_GEOJSONVIEW = {
   top: 0,
 };
 
+const STYLE_PAPER_RESULTS = {
+  position: "fixed",
+  bottom: 0,
+  left: 0,
+  width: 800,
+  maxHeight: 400,
+  overflow: "scroll",
+  m: 1,
+  p: 2,
+  zIndex: 15_000,
+};
+
 export default class MapPage extends AbstractInnerPage {
   constructor(props) {
     super(props);
@@ -173,7 +185,9 @@ export default class MapPage extends AbstractInnerPage {
             groupToIDListAndNSeats={groupToIDListAndNSeats}
           />
         </Box>
-        <PartitionView partition={partition} nSeats={nSeats} />
+        <Paper sx={STYLE_PAPER_RESULTS}>
+          <PartitionView partition={partition} nSeats={nSeats} />
+        </Paper>
       </Box>
     );
   }
