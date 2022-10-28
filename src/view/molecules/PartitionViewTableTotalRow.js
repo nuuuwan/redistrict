@@ -10,10 +10,7 @@ const StyledTableCell = styled(TableCell)({
   background: "#eee",
 });
 
-export default function PartitionViewTableTotalRow({
-  totalNSeats,
-  totalPop,
-}) {
+export default function PartitionViewTableTotalRow({ totalNSeats, totalPop }) {
   return (
     <TableRow>
       <StyledTableCell align="left">{"Total"}</StyledTableCell>
