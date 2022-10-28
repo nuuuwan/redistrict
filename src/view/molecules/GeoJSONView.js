@@ -1,5 +1,6 @@
 import BBox from "../../nonview/base/geo/BBox";
 import Color from "../../nonview/base/Color";
+import LngLat from "../../nonview/base/geo/LngLat";
 
 import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
 
@@ -20,7 +21,7 @@ export default function GeoJSONView({ geoJSON, partition }) {
   const groups = Object.keys(groupToIDList).sort();
   const nGroups = groups.length;
 
-  const inner = groups.map(function (group, iGroup) {
+  const innerPolygons = groups.map(function (group, iGroup) {
     const idList = groupToIDList[group];
     const featureList = idList.map((id) => idToFeature[id]);
     const color = Color.getForIter(iGroup, nGroups);
@@ -36,9 +37,37 @@ export default function GeoJSONView({ geoJSON, partition }) {
     );
   });
 
+  const innerLabels = groups.map(function (group, iGroup) {
+    const idList = groupToIDList[group];
+    const featureList = idList.map((id) => idToFeature[id]);
+
+    const [lat, lng] = BBox.getCentroid(
+      LngLat.fromPolygonListListList(
+        featureList.map((feature) => feature.geometry.coordinates)
+      )
+    );
+    const [x, y] = funcTransform([lng, lat]);
+
+    return (
+      <text
+        key={"group-label-" + group}
+        x={x}
+        y={y}
+        fill="black"
+        stroke="none"
+        fontFamily="sans-serif"
+        fontSize={10}
+        textAnchor="middle"
+      >
+        {groupToName[group]}
+      </text>
+    );
+  });
+
   return (
     <svg width={width} height={height}>
-      {inner}
+      {innerPolygons}
+      {innerLabels}
     </svg>
   );
 }
