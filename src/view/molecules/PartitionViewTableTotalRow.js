@@ -28,6 +28,7 @@ export default function PartitionViewTableTotalRow({ totalNSeats, totalPop }) {
         {StringX.formatInt(totalPop / totalNSeats)}
       </StyledTableCell>
       <StyledTableCell />
+      <StyledTableCell />
     </TableRow>
   );
 }

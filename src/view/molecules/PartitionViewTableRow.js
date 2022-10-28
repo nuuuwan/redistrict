@@ -3,6 +3,9 @@ import TableRow from "@mui/material/TableRow";
 
 import Color from "../../nonview/base/Color";
 import StringX from "../../nonview/base/StringX";
+import RegionEntIdx from "../../nonview/core/RegionEntIdx";
+
+import DemographicView from "../../view/molecules/DemographicView";
 
 const STYLE_GROUP = {};
 const MAX_IDS_TO_DISPLAY = 20;
@@ -52,6 +55,11 @@ export default function PartitionViewTableRow({
       <TableCell align="right">{StringX.formatInt(totalGroupPop)}</TableCell>
       <TableCell align="right">{StringX.formatInt(popPerSeat)}</TableCell>
       <TableCell align="left">{regions}</TableCell>
+      <TableCell align="left">
+        <DemographicView
+          demographicInfo={RegionEntIdx.getDemographicInfo(row.idList)}
+        />
+      </TableCell>
     </TableRow>
   );
 }
