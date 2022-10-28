@@ -66,9 +66,6 @@ export default class StringX {
         FONT_SIZE.PCT_MAX,
         parseInt(logBase1000 * 60)
       ) + "%";
-    const style = {
-      fontSize,
-    };
 
     return StringX.formatSizedText(numPart + " " + multPart, fontSize);
   }
@@ -107,6 +104,13 @@ export default class StringX {
       ) + "%";
 
     return StringX.formatSizedText(numPart, fontSize);
+  }
+  static formatIntSmall(x) {
+    const CHAR = "⚬";
+    if (x <= 5) {
+      return CHAR.repeat(x) + " " + x;
+    }
+    return x;
   }
 
   static formatFloat(x) {

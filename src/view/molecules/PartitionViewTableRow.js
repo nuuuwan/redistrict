@@ -42,8 +42,8 @@ export default function PartitionViewTableRow({
       <TableCell align="left" sx={sx}>
         {row.group}
       </TableCell>
-      <TableCell align="right">{row.nSeats}</TableCell>
-      <TableCell align="right">{row.nSeats2}</TableCell>
+      <TableCell align="right">{StringX.formatIntSmall(row.nSeats)}</TableCell>
+      <TableCell align="right">{StringX.formatIntSmall(row.nSeats2)}</TableCell>
       <TableCell align="right" sx={{ background: colorFairness }}>
         {StringX.formatFloat(nSeatsFair)}
       </TableCell>
