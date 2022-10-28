@@ -14,7 +14,6 @@ export default function PartitionViewTableHeader() {
       <TableRow>
         <StyledTableCell align="left">Group</StyledTableCell>
         <StyledTableCell align="right">Seats</StyledTableCell>
-        <StyledTableCell align="right">Seats[2]</StyledTableCell>
         <StyledTableCell align="right">Seats[Fair]</StyledTableCell>
         <StyledTableCell align="right">log2</StyledTableCell>
         <StyledTableCell align="right">Pop.</StyledTableCell>

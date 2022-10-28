@@ -19,9 +19,6 @@ export default function PartitionViewTableTotalRow({
     <TableRow>
       <StyledTableCell align="left">{"Total"}</StyledTableCell>
       <StyledTableCell align="right">
-        {StringX.formatIntSmall(totalNSeats)}
-      </StyledTableCell>
-      <StyledTableCell align="right">
         {StringX.formatIntSmall(totalNSeats2)}
       </StyledTableCell>
       <StyledTableCell align="right">
