@@ -3,6 +3,7 @@ import TableRow from "@mui/material/TableRow";
 
 import Color from "../../nonview/base/Color";
 import StringX from "../../nonview/base/StringX";
+import NamedRegions from "../../nonview/core/NamedRegions";
 
 const STYLE_GROUP = {};
 const MAX_IDS_TO_DISPLAY = 20;
@@ -40,7 +41,7 @@ export default function PartitionViewTableRow({
   return (
     <TableRow>
       <TableCell align="left" sx={sx}>
-        {row.group}
+        {NamedRegions.infer(row.idList)}
       </TableCell>
       <TableCell align="right">{StringX.formatIntSmall(row.nSeats2)}</TableCell>
       <TableCell align="right" sx={{ background: colorFairness }}>
