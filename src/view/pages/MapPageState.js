@@ -1,17 +1,17 @@
+import { Component } from "react";
+
 import { ENT_TYPES } from "../../nonview/base/EntTypes";
 import Ents from "../../nonview/base/Ents";
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import CommonStore from "../../nonview/core/CommonStore";
 import Partition from "../../nonview/core/Partition";
 
-import AbstractInnerPage from "../../view/pages/AbstractInnerPage";
-
 const DEFAULT_N_SEATS = 2;
 const DEFAULT_MAX_SEATS_PER_GROUP = 1;
 const DEFAULT_SUBREGION_TYPE = "dsd";
 const DEFAULT_REGION_ID = "LK-11";
 
-export default class MapPageState extends AbstractInnerPage {
+export default class MapPageState extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -108,5 +108,4 @@ export default class MapPageState extends AbstractInnerPage {
       commonStoreSingleton,
     });
   }
-
 }

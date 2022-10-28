@@ -1,8 +1,6 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
-import AppColors from "../../view/_constants/AppColors";
 import SelectRegionID from "../../view/atoms/SelectRegionID";
 import SliderMaxSeatsPerGroup from "../../view/atoms/SliderMaxSeatsPerGroup";
 import SliderSeats from "../../view/atoms/SliderSeats";
@@ -18,22 +16,6 @@ import {
 import MapPageState from "../../view/pages/MapPageState";
 
 export default class MapPage extends MapPageState {
-  get page() {
-    return "MapPage";
-  }
-  get Icon() {
-    return PlaylistAddCheckIcon;
-  }
-
-  get label() {
-    return "Map";
-  }
-
-  get color() {
-    return AppColors.Primary;
-  }
-
-
   render() {
     const {
       nSeats,

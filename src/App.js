@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import AppColors from "./view/_constants/AppColors";
-import HomePage from "./view/pages/HomePage.js";
+import MapPage from "./view/pages/MapPage.js";
 
 const THEME = createTheme({
   palette: {
@@ -38,7 +38,7 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={THEME}>
         <Box sx={STYLE}>
-          <HomePage />
+          <MapPage />
         </Box>
       </ThemeProvider>
     );
