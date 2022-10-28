@@ -4,9 +4,22 @@ import WWW from "./WWW.js";
 const URL_BASE = "https://raw.githubusercontent.com/nuuuwan/gig2/data";
 const ID_KEY = "id";
 export default class Ents {
+  static cleanData(data) {
+    data.pop = parseInt(data.population);
+    if (data.centroid) {
+      data.centroid = JSON.parse(data.centroid);
+      const [lat, lng] = data.centroid;
+      data.lngLat = { lng, lat };
+      data.lng = lng;
+      data.lat = lat;
+    }
+    return data;
+  }
+
   static async getEntsByType(entType) {
     const url = `${URL_BASE}/${entType}.latest.basic.tsv`;
-    return await WWW.tsv(url);
+    const rawDataList = await WWW.tsv(url);
+    return rawDataList.map((data) => Ents.cleanData(data));
   }
 
   static async getEntIndexByType(entType) {
@@ -39,5 +52,18 @@ export default class Ents {
       ent["centroid"] = JSON.parse(ent["centroid"]);
     }
     return ent;
+  }
+
+  static getEntIndexForSubRegions(allEntIndex, regionID, subRegionType) {
+    const idLength = regionID.length;
+    const subRegionEntIndex = allEntIndex[subRegionType];
+    return Object.keys(subRegionEntIndex)
+      .filter(function (entID, ent) {
+        return entID.substring(0, idLength) === regionID;
+      })
+      .reduce(function (entIndex, entID) {
+        entIndex[entID] = subRegionEntIndex[entID];
+        return entIndex;
+      }, {});
   }
 }
