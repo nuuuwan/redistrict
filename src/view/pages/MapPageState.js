@@ -16,8 +16,6 @@ export default class MapPageState extends Component {
     super(props);
     this.state = {
       // No Dependencies
-      commonStoreSingleton: null,
-      regionDataIndex: null,
       maxSeatsPerGroup: null,
       nSeats: null,
       regionID: null,
@@ -29,6 +27,9 @@ export default class MapPageState extends Component {
       // Depends on: maxSeatsPerGroup, nSeats, geoJSON
       groupToIDListAndNSeats: null,
       partition: null,
+
+      // Other
+      commonStoreSingleton: null,
     };
   }
 
@@ -116,7 +117,6 @@ export default class MapPageState extends Component {
 
   async componentDidMount() {
     const commonStoreSingleton = await CommonStore.loadSingleton();
-    const regionDataIndex = await Ents.getEntIndexByType(ENT_TYPES.DISTRICT);
 
     await this.setStateWithDependencies(
       {
@@ -125,7 +125,7 @@ export default class MapPageState extends Component {
         newRegionID: DEFAULT_REGION_ID,
         newSubRegionType: DEFAULT_SUBREGION_TYPE,
       },
-      { commonStoreSingleton, regionDataIndex }
+      { commonStoreSingleton }
     );
   }
 }

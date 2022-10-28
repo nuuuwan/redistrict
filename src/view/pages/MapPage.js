@@ -27,8 +27,7 @@ export default class MapPage extends MapPageState {
       geoJSON,
       partition,
       groupToIDListAndNSeats,
-      // other - TODO! should move this to commonStore
-      regionDataIndex,
+      // other
       commonStoreSingleton,
     } = this.state;
 
@@ -42,7 +41,6 @@ export default class MapPage extends MapPageState {
           <SelectRegionID
             regionID={regionID}
             setRegionID={this.setRegionID.bind(this)}
-            regionDataIndex={regionDataIndex}
           />
           <SliderSubRegionType
             subRegionType={subRegionType}
