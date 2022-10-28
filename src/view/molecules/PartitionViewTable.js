@@ -1,6 +1,7 @@
-import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
+import { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 
 import PartitionViewTableHeader from "../../view/molecules/PartitionViewTableHeader";
@@ -8,7 +9,9 @@ import PartitionViewTableRow from "../../view/molecules/PartitionViewTableRow";
 import PartitionViewTableTotalRow from "../../view/molecules/PartitionViewTableTotalRow";
 
 const STYLE_TABLE = {
-  border: "none",
+  [`& .${tableCellClasses.root}`]: {
+    borderBottom: "none",
+  },
 };
 
 export default function PartitionViewTable({
@@ -22,7 +25,7 @@ export default function PartitionViewTable({
   const totalNSeats2 = nSeats;
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Box}>
       <Table sx={STYLE_TABLE} size="small">
         <PartitionViewTableHeader />
         <TableBody>
