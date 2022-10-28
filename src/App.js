@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import AppColors from "./view/_constants/AppColors";
 import MapPage from "./view/pages/MapPage.js";
-import {FONT_FAMILY_LIST} from "./APP_STYLES.js";
+import { FONT_FAMILY_LIST } from "./APP_STYLES.js";
 
 const THEME = createTheme({
   palette: {
