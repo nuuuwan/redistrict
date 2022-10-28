@@ -13,7 +13,7 @@ const STYLE_TABLE = {
     borderBottom: "none",
     padding: 0.5,
     paddingRight: 1,
-    width: 'fit-content',
+    width: "fit-content",
   },
 };
 

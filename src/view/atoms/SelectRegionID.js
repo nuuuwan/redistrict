@@ -6,7 +6,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-export default function SelectRegionID({ regionDataIndex, regionID, setRegionID }) {
+export default function SelectRegionID({
+  regionDataIndex,
+  regionID,
+  setRegionID,
+}) {
   const onChange = function (e) {
     setRegionID(e.target.value);
   };
