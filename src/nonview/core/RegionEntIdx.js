@@ -29,7 +29,7 @@ export default class RegionEntIdx {
   }
 
   getSortedByLat(idList) {
-    return this.getSorted(idList, (x) => x.lat);
+    return this.getSorted(idList, (x) => -x.lat);
   }
 
   getSortedByLng(idList) {

@@ -24,7 +24,7 @@ export default class Partition {
     const sortedIdList = this.regionEntIdx.getSortedByLongerSpan(idList);
 
     const [group1, group2] = isLatSpanLongerThanLngSpan
-      ? ["S", "N"]
+      ? ["N", "S"]
       : ["W", "E"];
 
     let bestDiff = undefined;
