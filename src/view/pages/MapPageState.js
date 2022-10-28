@@ -15,14 +15,19 @@ export default class MapPageState extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // No Dependencies
       commonStoreSingleton: null,
-      geoJSON: null,
-      groupToIDListAndNSeats: null,
       maxSeatsPerGroup: DEFAULT_MAX_SEATS_PER_GROUP,
       nSeats: DEFAULT_N_SEATS,
-      partition: null,
       regionID: DEFAULT_REGION_ID,
       subRegionType: DEFAULT_SUBREGION_TYPE,
+
+      // Depends on: regionID, subRegionType
+      geoJSON: null,
+
+      // Depends on: nSeats, maxSeatsPerGroup, geoJSON
+      groupToIDListAndNSeats: null,
+      partition: null,
     };
   }
   async setMaxSeatsPerGroup(maxSeatsPerGroup) {
