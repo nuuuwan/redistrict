@@ -1,4 +1,4 @@
-import { JSONWWW } from "../../../nonview/base/WWW";
+import WWW from "../../../nonview/base/WWW";
 
 const URL_BASE = "https://raw.githubusercontent.com/nuuuwan/geo-data/main/";
 
@@ -13,8 +13,7 @@ export default class GeoJSON {
   }
 
   async read() {
-    const www = new JSONWWW(this.rawDataURL);
-    let rawData = await www.read();
+    let rawData = await WWW.json(this.rawDataURL);
     rawData.features = rawData.features.filter(
       function (feature) {
         return feature.id.includes(this.regionID);
