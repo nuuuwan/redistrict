@@ -106,10 +106,6 @@ export default class StringX {
     return StringX.formatSizedText(numPart, fontSize);
   }
   static formatIntSmall(x) {
-    const CHAR = "⚬";
-    if (x <= 5) {
-      return CHAR.repeat(x) + " " + x;
-    }
     return x;
   }
 
@@ -118,6 +114,6 @@ export default class StringX {
   }
 
   static formatFloatSigned(x) {
-    return (x > 0 ? "+" : "-") + " " + Math.abs(x).toFixed(2);
+    return (x > 0 ? "+" : "-") + "" + Math.abs(x).toFixed(2);
   }
 }
