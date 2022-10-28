@@ -18,20 +18,24 @@ import MapPageState from "../../view/pages/MapPageState";
 export default class MapPage extends MapPageState {
   render() {
     const {
-      nSeats,
+      // no deps
       maxSeatsPerGroup,
+      nSeats,
+      regionID,
       subRegionType,
+      // deps
       geoJSON,
       partition,
-      regionDataIndex,
       groupToIDListAndNSeats,
-      regionID,
+      // other - TODO! should move this to commonStore
+      regionDataIndex,
       commonStoreSingleton,
     } = this.state;
 
     if (!commonStoreSingleton) {
       return "Loading...";
     }
+
     return (
       <Box>
         <Paper sx={STYLE_PAPER_OPTIONS}>
