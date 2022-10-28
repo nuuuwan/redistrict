@@ -20,11 +20,18 @@ const DEFAULT_SUBREGION_TYPE = "dsd";
 const DEFAULT_REGION_ID = "LK-11";
 
 const STYLE_PAPER_OPTIONS = {
-  m: 1,
-  p: 2,
-  width: 300,
   position: "fixed",
   right: 0,
+  top: 0,
+  width: 300,
+  m: 1,
+  p: 2,
+  zIndex: 10_000,
+};
+
+const STYLE_BOX_GEOJSONVIEW = {
+  position: "fixed",
+  left: 0,
   top: 0,
 };
 
@@ -160,10 +167,12 @@ export default class MapPage extends AbstractInnerPage {
           />
           <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
         </Paper>
-        <GeoJSONView
-          geoJSON={geoJSON}
-          groupToIDListAndNSeats={groupToIDListAndNSeats}
-        />
+        <Box sx={STYLE_BOX_GEOJSONVIEW}>
+          <GeoJSONView
+            geoJSON={geoJSON}
+            groupToIDListAndNSeats={groupToIDListAndNSeats}
+          />
+        </Box>
         <PartitionView partition={partition} nSeats={nSeats} />
       </Box>
     );
