@@ -30,6 +30,11 @@ export default class StringX {
     return str;
   }
 
+  static formatSizedText(text, fontSize) {
+    const style = { fontSize };
+    return <span style={style}>{text}</span>;
+  }
+
   static formatInt(x) {
     let logBase1000 = Math.log(x) / Math.log(1000);
 
