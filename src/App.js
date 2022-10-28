@@ -22,8 +22,8 @@ const THEME = createTheme({
     },
   },
   typography: {
-    fontSize: 10,
-    fontFamily: ["Duru Sans", "Dosis", "Darker Grotesque", "sans-serif"].join(
+    fontSize: 12,
+    fontFamily: ["Encode Sans", "sans-serif"].join(
       ","
     ),
   },
