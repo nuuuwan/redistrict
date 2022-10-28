@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import MathX from "../../nonview/base/MathX";
 
-const [MIN, MAX] = [1, 10];
+const [MIN, MAX] = [0, 25];
 
 export default function SliderMaxSeatsPerGroup({
   maxSeatsPerGroup,
@@ -15,7 +15,7 @@ export default function SliderMaxSeatsPerGroup({
   const onChange = function (_, maxSeatsPerGroup) {
     setMaxSeatsPerGroup(maxSeatsPerGroup);
   };
-  const marks = MathX.range(MIN, MAX + 1).map(function (value) {
+  const marks = MathX.range(MIN, MAX + 1, 5).map(function (value) {
     return { value, label: value };
   });
   return (

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import MathX from "../../nonview/base/MathX";
 
-const [MIN, MAX] = [1, 25];
+const [MIN, MAX] = [0, 25];
 
 export default function SliderSeats({ nSeats, setNSeats }) {
   const onChange = function (_, nSeats) {
