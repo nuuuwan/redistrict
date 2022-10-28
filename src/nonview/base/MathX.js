@@ -15,8 +15,8 @@ export default class MathX {
     return Math.max(min, Math.min(max, value));
   }
 
-  static range(min, max) {
-    const span = max - min;
-    return [...Array(span).keys()].map((x) => x + min);
+  static range(min, max, step=1) {
+    const span = parseInt((max - min) / step);
+    return [...Array(span).keys()].map((x) => x * step + min);
   }
 }
