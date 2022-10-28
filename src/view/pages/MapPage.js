@@ -144,8 +144,8 @@ export default class MapPage extends AbstractInnerPage {
     return { partition, groupToIDListAndNSeats };
   }
   async componentDidMount() {
-    const commonStoreSingleton  =await CommonStore.loadSingleton();
-    
+    const commonStoreSingleton = await CommonStore.loadSingleton();
+
     const { nSeats, maxSeatsPerGroup, regionID, subRegionType } = this.state;
     const geoJSON = await new GeoJSON(regionID, subRegionType).read();
     const regionDataIndex = await Ents.getEntIndexByType(ENT_TYPES.DISTRICT);
