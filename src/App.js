@@ -23,9 +23,7 @@ const THEME = createTheme({
   },
   typography: {
     fontSize: 12,
-    fontFamily: ["Encode Sans", "sans-serif"].join(
-      ","
-    ),
+    fontFamily: ["Encode Sans", "sans-serif"].join(","),
   },
 });
 
