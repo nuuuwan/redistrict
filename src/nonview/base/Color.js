@@ -4,6 +4,7 @@ function getRandomInt(min, max) {
 
 let keyToColor = {};
 const DEFAULT_SLA = [100, 50, 1];
+const COLOR_DEFAULTS = { h: 0, s: 100, l: 50, a: 1 };
 
 export default class Color {
   static getForKey(key) {
@@ -15,13 +16,14 @@ export default class Color {
 
   static getForIter(i, n) {
     const h = parseInt((i * 240) / n);
-    const [s, l, a] = DEFAULT_SLA;
+    const l = [40, 60, 80][i % 3];
+    const { s, a } = COLOR_DEFAULTS;
     return Color.hsla(h, s, l, a);
   }
 
   static getRandom() {
     const h = getRandomInt(0, 240);
-    const [s, l, a] = DEFAULT_SLA;
+    const { s, l, a } = COLOR_DEFAULTS;
     return Color.hsla(h, s, l, a);
   }
 
