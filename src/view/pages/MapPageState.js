@@ -15,27 +15,16 @@ export default class MapPageState extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      commonStoreSingleton: null,
       geoJSON: null,
-      partition: null,
       groupToIDListAndNSeats: null,
-      nSeats: DEFAULT_N_SEATS,
       maxSeatsPerGroup: DEFAULT_MAX_SEATS_PER_GROUP,
+      nSeats: DEFAULT_N_SEATS,
+      partition: null,
       regionID: DEFAULT_REGION_ID,
       subRegionType: DEFAULT_SUBREGION_TYPE,
-      commonStoreSingleton: null,
     };
   }
-
-  async setNSeats(nSeats) {
-    const { maxSeatsPerGroup, geoJSON } = this.state;
-    const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
-      nSeats,
-      maxSeatsPerGroup,
-      geoJSON
-    );
-    this.setState({ geoJSON, partition, groupToIDListAndNSeats, nSeats });
-  }
-
   async setMaxSeatsPerGroup(maxSeatsPerGroup) {
     const { nSeats, geoJSON } = this.state;
     const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
@@ -51,20 +40,14 @@ export default class MapPageState extends Component {
     });
   }
 
-  async setSubRegionType(subRegionType) {
-    const { regionID, nSeats, maxSeatsPerGroup } = this.state;
-    const geoJSON = await new GeoJSON(regionID, subRegionType).read();
+  async setNSeats(nSeats) {
+    const { maxSeatsPerGroup, geoJSON } = this.state;
     const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
       nSeats,
       maxSeatsPerGroup,
       geoJSON
     );
-    this.setState({
-      subRegionType,
-      geoJSON,
-      partition,
-      groupToIDListAndNSeats,
-    });
+    this.setState({ geoJSON, partition, groupToIDListAndNSeats, nSeats });
   }
 
   async setRegionID(regionID) {
@@ -77,6 +60,22 @@ export default class MapPageState extends Component {
     );
     this.setState({
       regionID,
+      geoJSON,
+      partition,
+      groupToIDListAndNSeats,
+    });
+  }
+
+  async setSubRegionType(subRegionType) {
+    const { regionID, nSeats, maxSeatsPerGroup } = this.state;
+    const geoJSON = await new GeoJSON(regionID, subRegionType).read();
+    const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
+      nSeats,
+      maxSeatsPerGroup,
+      geoJSON
+    );
+    this.setState({
+      subRegionType,
       geoJSON,
       partition,
       groupToIDListAndNSeats,
