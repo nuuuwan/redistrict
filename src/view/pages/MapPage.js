@@ -40,7 +40,7 @@ const STYLE_PAPER_RESULTS = {
   bottom: 0,
   left: 0,
   width: 800,
-  maxHeight: 400,
+  maxHeight: 300,
   overflow: "scroll",
   m: 1,
   p: 2,
