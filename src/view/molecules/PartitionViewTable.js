@@ -11,8 +11,9 @@ import PartitionViewTableTotalRow from "../../view/molecules/PartitionViewTableT
 const STYLE_TABLE = {
   [`& .${tableCellClasses.root}`]: {
     borderBottom: "none",
-    p: 0.5,
-    minWidth: 32,
+    padding: 0.5,
+    paddingRight: 1,
+    width: 'fit-content',
   },
 };
 
