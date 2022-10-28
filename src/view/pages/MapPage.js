@@ -23,7 +23,7 @@ const STYLE_PAPER_OPTIONS = {
   position: "fixed",
   right: 0,
   top: 0,
-  width: 300,
+  width: 230,
   m: 1,
   p: 2,
   zIndex: 1,
