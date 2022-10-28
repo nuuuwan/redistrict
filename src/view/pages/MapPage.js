@@ -16,40 +16,16 @@ import SliderSubRegionType from "../../view/atoms/SliderSubRegionType";
 import GeoJSONView from "../../view/molecules/GeoJSONView";
 import PartitionView from "../../view/molecules/PartitionView";
 import AbstractInnerPage from "../../view/pages/AbstractInnerPage";
+import {
+  STYLE_PAPER_OPTIONS,
+  STYLE_BOX_GEOJSONVIEW,
+  STYLE_PAPER_RESULTS,
+} from "../../view/pages/MAP_PAGE_STYLE";
 
 const DEFAULT_N_SEATS = 2;
 const DEFAULT_MAX_SEATS_PER_GROUP = 1;
 const DEFAULT_SUBREGION_TYPE = "dsd";
 const DEFAULT_REGION_ID = "LK-11";
-
-const STYLE_PAPER_OPTIONS = {
-  position: "fixed",
-  right: 0,
-  top: 0,
-  width: 230,
-  m: 1,
-  p: 2,
-  zIndex: 1,
-};
-
-const STYLE_BOX_GEOJSONVIEW = {
-  position: "fixed",
-  left: 0,
-  top: 0,
-  zIndex: 0,
-};
-
-const STYLE_PAPER_RESULTS = {
-  position: "fixed",
-  bottom: 0,
-  left: 0,
-  maxWidth: 800,
-  maxHeight: 300,
-  overflow: "scroll",
-  m: 1,
-  p: 2,
-  zIndex: 2,
-};
 
 export default class MapPage extends AbstractInnerPage {
   constructor(props) {
