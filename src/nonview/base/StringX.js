@@ -70,12 +70,7 @@ export default class StringX {
       fontSize,
     };
 
-    return (
-      <span style={style}>
-        {numPart}
-        {multPart}
-      </span>
-    );
+    return StringX.formatSizedText(numPart + " " + multPart, fontSize);
   }
 
   static formatPercent(numerator, denominator) {
@@ -111,11 +106,7 @@ export default class StringX {
         parseInt(logBase * 20)
       ) + "%";
 
-    const style = {
-      fontSize,
-    };
-
-    return <span style={style}>{numPart}</span>;
+    return StringX.formatSizedText(numPart, fontSize);
   }
 
   static formatFloat(x) {
