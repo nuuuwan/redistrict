@@ -2,8 +2,9 @@ import BBox from "../../nonview/base/geo/BBox";
 import Color from "../../nonview/base/Color";
 import LngLat from "../../nonview/base/geo/LngLat";
 
+import { FONT_FAMILY_LIST } from "../../APP_STYLES.js";
 import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
-import {FONT_FAMILY_LIST} from "../../APP_STYLES.js";
+
 const PADDING = 10;
 
 export default function GeoJSONView({ geoJSON, partition }) {
