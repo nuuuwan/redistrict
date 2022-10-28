@@ -1,5 +1,4 @@
 import MathX from "../../nonview/base/MathX";
-import NamedRegions from "../../nonview/core/NamedRegions";
 import RegionEntIdx from "../../nonview/core/RegionEntIdx";
 
 export default class Partition {
@@ -95,10 +94,11 @@ export default class Partition {
   getGroupToName() {
     let groupToName = {};
     let nameCount = {};
+
     for (let [group, { idList }] of Object.entries(
       this.groupToIDListAndNSeats
     )) {
-      const name = NamedRegions.infer(idList);
+      const name = RegionEntIdx.getMostCommonDSDName(idList);
       if (!nameCount[name]) {
         nameCount[name] = 0;
       }
@@ -106,5 +106,16 @@ export default class Partition {
       groupToName[group] = name + nameCount[name];
     }
     return groupToName;
+  }
+
+  getGroupToIDList() {
+    return Object.entries(this.groupToIDListAndNSeats).reduce(function (
+      groupToIDList,
+      [group, { idList }]
+    ) {
+      groupToIDList[group] = idList;
+      return groupToIDList;
+    },
+    {});
   }
 }

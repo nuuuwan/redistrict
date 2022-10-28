@@ -26,7 +26,6 @@ export default class MapPage extends MapPageState {
       // deps
       geoJSON,
       partition,
-      groupToIDListAndNSeats,
       // other
       commonStoreSingleton,
     } = this.state;
@@ -53,10 +52,7 @@ export default class MapPage extends MapPageState {
           <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
         </Paper>
         <Box sx={STYLE_BOX_GEOJSONVIEW}>
-          <GeoJSONView
-            geoJSON={geoJSON}
-            groupToIDListAndNSeats={groupToIDListAndNSeats}
-          />
+          <GeoJSONView geoJSON={geoJSON} partition={partition} />
         </Box>
         <Paper sx={STYLE_PAPER_RESULTS}>
           <PartitionView partition={partition} nSeats={nSeats} />

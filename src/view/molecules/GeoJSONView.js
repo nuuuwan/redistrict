@@ -5,7 +5,7 @@ import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
 
 const PADDING = 10;
 
-export default function GeoJSONView({ geoJSON, groupToIDListAndNSeats }) {
+export default function GeoJSONView({ geoJSON, partition }) {
   const [width, height] = [window.innerWidth - 100, window.innerHeight - 300];
   const bbox = BBox.fromGeoJSON(geoJSON);
   const funcTransform = bbox.getTransform(width, height, PADDING);
@@ -15,10 +15,13 @@ export default function GeoJSONView({ geoJSON, groupToIDListAndNSeats }) {
     return idToFeature;
   }, {});
 
-  const groups = Object.keys(groupToIDListAndNSeats).sort();
+  const groupToName = partition.getGroupToName();
+  const groupToIDList = partition.getGroupToIDList();
+  const groups = Object.keys(groupToIDList).sort();
   const nGroups = groups.length;
+
   const inner = groups.map(function (group, iGroup) {
-    const { idList } = groupToIDListAndNSeats[group];
+    const idList = groupToIDList[group];
     const featureList = idList.map((id) => idToFeature[id]);
     const color = Color.getForIter(iGroup, nGroups);
     return (
@@ -28,6 +31,7 @@ export default function GeoJSONView({ geoJSON, groupToIDListAndNSeats }) {
         featureList={featureList}
         color={color}
         group={group}
+        groupName={groupToName[group]}
       />
     );
   });

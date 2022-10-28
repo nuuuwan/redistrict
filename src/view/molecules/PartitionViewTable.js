@@ -23,9 +23,9 @@ export default function PartitionViewTable({
   totalPop,
   nSeats,
   nGroups,
+  groupToName,
 }) {
   const totalNSeats = nSeats;
-  const totalNSeats2 = nSeats;
 
   return (
     <TableContainer component={Box}>
@@ -34,7 +34,6 @@ export default function PartitionViewTable({
         <TableBody>
           <PartitionViewTableTotalRow
             totalNSeats={totalNSeats}
-            totalNSeats2={totalNSeats2}
             totalPop={totalPop}
           />
           {rows.map(function (row) {

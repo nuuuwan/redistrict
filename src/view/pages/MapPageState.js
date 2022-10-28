@@ -25,7 +25,6 @@ export default class MapPageState extends Component {
       geoJSON: null,
 
       // Depends on: regionID, subRegionType, maxSeatsPerGroup, nSeats, geoJSON
-      groupToIDListAndNSeats: null,
       partition: null,
 
       // Other
@@ -44,7 +43,6 @@ export default class MapPageState extends Component {
       nSeats,
       geoJSON,
       partition,
-      groupToIDListAndNSeats,
       commonStoreSingleton,
     } = this.state;
 
@@ -98,7 +96,6 @@ export default class MapPageState extends Component {
       );
       partition = new Partition(regionEntIdx, nSeats);
       partition.partitionAll(maxSeatsPerGroup);
-      groupToIDListAndNSeats = partition.groupToIDListAndNSeats;
     }
 
     this.setState({
@@ -109,7 +106,6 @@ export default class MapPageState extends Component {
         nSeats,
         geoJSON,
         partition,
-        groupToIDListAndNSeats,
       },
       ...otherState,
     });

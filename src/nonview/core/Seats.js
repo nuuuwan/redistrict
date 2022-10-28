@@ -4,10 +4,8 @@ export default class Seats {
   static divideSeats(nSeats, partition) {
     let groupToPop = {};
     let totalPop = 0;
-    /* eslint-disable no-unused-vars */
-    for (let [group, { idList, nSeats }] of Object.entries(
-      partition.groupToIDListAndNSeats
-    )) {
+    const groupToIDList = partition.getGroupToIDList();
+    for (let [group, idList] of Object.entries(groupToIDList)) {
       const pop = partition.regionEntIdx.getTotalPop(idList);
       totalPop += pop;
       groupToPop[group] = pop;

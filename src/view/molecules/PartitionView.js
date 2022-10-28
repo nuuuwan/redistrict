@@ -4,19 +4,20 @@ import PartitionViewTable from "../../view/molecules/PartitionViewTable";
 
 export default function PartitionView({ nSeats, partition }) {
   const regionEntIdx = partition.regionEntIdx;
-  const groupToSeats2 = Seats.divideSeats(nSeats, partition);
+  const groupToSeats = Seats.divideSeats(nSeats, partition);
   const totalPop = regionEntIdx.getTotalPop(regionEntIdx.idList);
-
-  const sortedGroups = Object.keys(partition.groupToIDListAndNSeats).sort();
+  const groupToIDList = partition.getGroupToIDList();
+  const sortedGroups = Object.keys(groupToIDList).sort();
   const nGroups = sortedGroups.length;
+  const groupToName = partition.getGroupToName();
   const rows = sortedGroups.map(function (group, iGroup) {
-    const { idList, nSeats } = partition.groupToIDListAndNSeats[group];
+    const idList = groupToIDList[group];
     return {
       iGroup,
       group,
+      groupName: groupToName[group],
       idList,
-      nSeats,
-      nSeats2: groupToSeats2[group],
+      nSeats: groupToSeats[group],
     };
   });
   return (
@@ -24,8 +25,8 @@ export default function PartitionView({ nSeats, partition }) {
       rows={rows}
       regionEntIdx={regionEntIdx}
       totalPop={totalPop}
-      nSeats={nSeats}
       nGroups={nGroups}
+      nSeats={nSeats}
     />
   );
 }

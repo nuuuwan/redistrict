@@ -1,5 +1,7 @@
 import BBox from "../../nonview/base/geo/BBox";
+import EntTypes, { ENT_TYPES } from "../../nonview/base/EntTypes";
 import MathX from "../../nonview/base/MathX";
+import CommonStore from "../../nonview/core/CommonStore";
 
 export default class RegionEntIdx {
   constructor(idx) {
@@ -55,5 +57,27 @@ export default class RegionEntIdx {
 
   getTotalPop(idList) {
     return MathX.sumGeneric(idList, (id) => this.get(id).pop);
+  }
+
+  static getMostCommonDSDName(regionIDList) {
+    const commonStore = CommonStore.getSingleton();
+    const subRegionType = EntTypes.getEntType(regionIDList[0]);
+    const subRegionIndex = commonStore.allEntIndex[subRegionType];
+    const regionIndex = commonStore.allEntIndex[ENT_TYPES.DSD];
+
+    const dsdIDToPop = {};
+    for (let regionID of regionIDList) {
+      const regionEnt = subRegionIndex[regionID];
+      const dsdID = regionEnt.id.substring(0, 7);
+      if (!dsdIDToPop[dsdID]) {
+        dsdIDToPop[dsdID] = 0;
+      }
+      dsdIDToPop[dsdID] += parseInt(regionEnt.population);
+    }
+
+    const mostPopDSDID = Object.entries(dsdIDToPop).sort(
+      (a, b) => b[1] - a[1]
+    )[0][0];
+    return regionIndex[mostPopDSDID].name;
   }
 }

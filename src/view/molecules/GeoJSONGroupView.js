@@ -1,6 +1,5 @@
 import BBox from "../../nonview/base/geo/BBox";
 import LngLat from "../../nonview/base/geo/LngLat";
-import NamedRegions from "../../nonview/core/NamedRegions";
 
 import GeoJSONFeatureView from "../../view/molecules/GeoJSONFeatureView";
 
@@ -9,6 +8,7 @@ export default function GeoJSONGroupView({
   featureList,
   color,
   group,
+  groupName,
 }) {
   const [lat, lng] = BBox.getCentroid(
     LngLat.fromPolygonListListList(
@@ -16,9 +16,6 @@ export default function GeoJSONGroupView({
     )
   );
   const [x, y] = funcTransform([lng, lat]);
-  const regionIDList = featureList.map((feature) => feature.id);
-  const groupName = NamedRegions.infer(regionIDList);
-
   return (
     <g>
       {featureList.map(function (feature, iFeature) {
