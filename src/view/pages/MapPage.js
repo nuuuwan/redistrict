@@ -1,9 +1,11 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
+
+import { ENT_TYPES } from "../../nonview/base/EntTypes";
 import Ents from "../../nonview/base/Ents";
-import {ENT_TYPES} from "../../nonview/base/EntTypes";
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
+import CommonStore from "../../nonview/core/CommonStore";
 import Partition from "../../nonview/core/Partition";
 
 import AppColors from "../../view/_constants/AppColors";
@@ -60,6 +62,7 @@ export default class MapPage extends AbstractInnerPage {
       maxSeatsPerGroup: DEFAULT_MAX_SEATS_PER_GROUP,
       regionID: DEFAULT_REGION_ID,
       subRegionType: DEFAULT_SUBREGION_TYPE,
+      commonStoreSingleton: null,
     };
   }
   get page() {
@@ -141,15 +144,23 @@ export default class MapPage extends AbstractInnerPage {
     return { partition, groupToIDListAndNSeats };
   }
   async componentDidMount() {
+    const commonStoreSingleton  =await CommonStore.loadSingleton();
+    
     const { nSeats, maxSeatsPerGroup, regionID, subRegionType } = this.state;
     const geoJSON = await new GeoJSON(regionID, subRegionType).read();
-    const regionDataIndex = await Ents.getEntIndexByType(ENT_TYPES.DISTRICT)
+    const regionDataIndex = await Ents.getEntIndexByType(ENT_TYPES.DISTRICT);
     const { partition, groupToIDListAndNSeats } = await this.loadStateGeo(
       nSeats,
       maxSeatsPerGroup,
       geoJSON
     );
-    this.setState({ geoJSON, partition, groupToIDListAndNSeats, regionDataIndex });
+    this.setState({
+      geoJSON,
+      partition,
+      groupToIDListAndNSeats,
+      regionDataIndex,
+      commonStoreSingleton,
+    });
   }
 
   render() {
@@ -162,8 +173,10 @@ export default class MapPage extends AbstractInnerPage {
       regionDataIndex,
       groupToIDListAndNSeats,
       regionID,
+      commonStoreSingleton,
     } = this.state;
-    if (!geoJSON) {
+
+    if (!commonStoreSingleton) {
       return "Loading...";
     }
     return (
