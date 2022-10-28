@@ -10,6 +10,7 @@ const ETHNO_RELIGION_TO_COLOR = {
   moor: COLOR_SL_FLAG.MOOR,
   sinhalese: COLOR_SL_FLAG.SINHALA,
   sri_lankan_tamil: COLOR_SL_FLAG.TAMIL,
+  tamil: COLOR_SL_FLAG.TAMIL,
   // religious_affiliation_of_population
   buddhist: COLOR_SL_FLAG.BUDDHIST,
   islam: COLOR_SL_FLAG.MOOR,
