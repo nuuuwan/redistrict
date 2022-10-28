@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import SelectRegionID from "../../view/atoms/SelectRegionID";
 import SliderMaxSeatsPerGroup from "../../view/atoms/SliderMaxSeatsPerGroup";
@@ -31,7 +32,7 @@ export default class MapPage extends MapPageState {
     } = this.state;
 
     if (!commonStoreSingleton) {
-      return "Loading...";
+      return <CircularProgress />;
     }
 
     return (
