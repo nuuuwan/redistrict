@@ -67,7 +67,7 @@ export default class StringX {
         parseInt(logBase1000 * 60)
       ) + "%";
 
-    return StringX.formatSizedText(numPart +  multPart, fontSize);
+    return StringX.formatSizedText(numPart + multPart, fontSize);
   }
 
   static formatPercent(numerator, denominator) {
