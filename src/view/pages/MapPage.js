@@ -26,13 +26,14 @@ const STYLE_PAPER_OPTIONS = {
   width: 300,
   m: 1,
   p: 2,
-  zIndex: 10_000,
+  zIndex: 1,
 };
 
 const STYLE_BOX_GEOJSONVIEW = {
   position: "fixed",
   left: 0,
   top: 0,
+  zIndex: 0,
 };
 
 const STYLE_PAPER_RESULTS = {
@@ -44,7 +45,7 @@ const STYLE_PAPER_RESULTS = {
   overflow: "scroll",
   m: 1,
   p: 2,
-  zIndex: 15_000,
+  zIndex: 2,
 };
 
 export default class MapPage extends AbstractInnerPage {
