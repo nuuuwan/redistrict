@@ -97,4 +97,20 @@ export default class Partition {
       }
     }
   }
+
+  getGroupToName() {
+    let groupToName = {};
+    let nameCount = {};
+    for (let [group, {idList}] of Object.entries(this.groupToIDListAndNSeats)) {
+      const name = NamedRegions.infer(idList);
+      if (!nameCount[name]) {
+        nameCount[name] = 0;
+      }
+      nameCount[name] += 1;
+      groupToName[group] = name + nameCount[name];
+    }
+    return groupToName;
+  }
+
+
 }
