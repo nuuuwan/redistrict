@@ -98,16 +98,4 @@ export default class Partition {
     }
   }
 
-  get idToGroup() {
-    return Object.entries(this.groupToIDListAndNSeats).reduce(function (
-      idToGroup,
-      [group, { idList, nSeats }]
-    ) {
-      for (let id of idList) {
-        idToGroup[id] = group;
-      }
-      return idToGroup;
-    },
-    {});
-  }
 }
