@@ -86,6 +86,9 @@ export default class RegionEntIdx {
     let [sinhalese, tamil, moor, others] = [0, 0, 0, 0];
     for (let id of idList) {
       const tableRow = commonStore.ethnicityTable.getRowByID(id);
+      if (!tableRow) {
+        continue;
+      }
 
       sinhalese += tableRow.getValue("sinhalese");
       tamil +=
