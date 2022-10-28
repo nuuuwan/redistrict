@@ -5,7 +5,7 @@ import PartitionViewTable from "../../view/molecules/PartitionViewTable";
 export default function PartitionView({ nSeats, partition }) {
   const groupToIDList = partition.getGroupToIDList();
   const groupToName = partition.getGroupToName();
-  const groupToSeats = Seats.divideSeats(nSeats, partition);
+  const groupToSeats = Seats.divideSeatsForPartition(nSeats, partition);
 
   const regionEntIdx = partition.regionEntIdx;
   const totalPop = regionEntIdx.getTotalPop(regionEntIdx.idList);
