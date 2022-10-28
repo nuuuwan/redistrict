@@ -10,9 +10,7 @@ export default function PartitionView({ nSeats, partition }) {
   const regionEntIdx = partition.regionEntIdx;
   const totalPop = regionEntIdx.getTotalPop(regionEntIdx.idList);
 
-  const sortedGroups = Object.keys(groupToIDList).sort(
-    (a, b) => (groupToName[a].localeCompare(groupToName[b]))
-  );
+  const sortedGroups = Object.keys(groupToIDList).sort();
   const nGroups = sortedGroups.length;
 
   const rows = sortedGroups.map(function (group, iGroup) {
