@@ -1,7 +1,6 @@
 import { Component } from "react";
 
 import { ENT_TYPES } from "../../nonview/base/EntTypes";
-import Ents from "../../nonview/base/Ents";
 import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import CommonStore from "../../nonview/core/CommonStore";
 import Partition from "../../nonview/core/Partition";
