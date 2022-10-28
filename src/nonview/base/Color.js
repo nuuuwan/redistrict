@@ -3,7 +3,6 @@ function getRandomInt(min, max) {
 }
 
 let keyToColor = {};
-const DEFAULT_SLA = [100, 50, 1];
 const COLOR_DEFAULTS = { h: 0, s: 100, l: 50, a: 1 };
 
 export default class Color {
