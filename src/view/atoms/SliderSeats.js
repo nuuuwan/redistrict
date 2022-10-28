@@ -12,11 +12,11 @@ export default function SliderSeats({ nSeats, setNSeats }) {
   const onChange = function (_, nSeats) {
     setNSeats(nSeats);
   };
-  const marks = MathX.range(MIN, MAX + 1).map(function (value) {
+  const marks = MathX.range(MIN, MAX + 1, 5).map(function (value) {
     return { value, label: value };
   });
   return (
-    <Box width={290}>
+    <Box width={200}>
       <Typography variant="caption">Total Seats</Typography>
       <Slider
         min={MIN}
