@@ -1,6 +1,7 @@
 import Ents from "../../nonview/base/Ents";
 
 let commonStoreSingleton = undefined;
+const ETHNICITY_TABLE_NAME = 'population-ethnicity.regions.2012';
 
 export default class CommonStore {
   static async loadSingleton() {
@@ -15,9 +16,11 @@ export default class CommonStore {
 
   constructor() {
     this.allEntIndex = null;
+    this.ethnicityTable = null;
   }
 
   async load() {
     this.allEntIndex = await Ents.getAllEntIndex();
+    this.ethnicityTable = await GIG2.getTable(ETHNICITY_TABLE_NAME)
   }
 }
