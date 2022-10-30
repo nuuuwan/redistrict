@@ -15,14 +15,14 @@ export default function SelectRegionID({ regionID, setRegionID }) {
   };
 
   const commonStore = CommonStore.getSingleton();
-  const districtIndex = commonStore.allEntIndex[ENT_TYPES.DISTRICT];
+  const regionIndex = commonStore.allEntIndex[ENT_TYPES.DISTRICT];
 
   return (
     <Box sx={{ width: 120 }}>
       <FormControl fullWidth>
         <InputLabel>Region ID</InputLabel>
         <Select value={regionID} label="Region ID" onChange={onChange}>
-          {Object.values(districtIndex).map(function (region) {
+          {Object.values(regionIndex).map(function (region) {
             return (
               <MenuItem key={"region-" + region.id} value={region.id}>
                 {region.name}
