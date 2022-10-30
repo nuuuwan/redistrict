@@ -61,6 +61,12 @@ export default function PartitionViewTableRow({
           nSeats={row.nSeats}
         />
       </TableCell>
+      <TableCell align="left">
+        <DemographicView
+          demographicInfo={RegionEntIdx.getReligionInfo(row.idList)}
+          nSeats={row.nSeats}
+        />
+      </TableCell>
     </TableRow>
   );
 }

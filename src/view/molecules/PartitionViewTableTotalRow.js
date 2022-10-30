@@ -29,6 +29,7 @@ export default function PartitionViewTableTotalRow({ totalNSeats, totalPop }) {
       </StyledTableCell>
       <StyledTableCell />
       <StyledTableCell />
+      <StyledTableCell />
     </TableRow>
   );
 }

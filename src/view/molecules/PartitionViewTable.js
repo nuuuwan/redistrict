@@ -14,6 +14,7 @@ const STYLE_TABLE = {
     padding: 0.5,
     paddingRight: 1,
     width: "fit-content",
+    maxWidth: 200,
   },
 };
 

@@ -17,6 +17,7 @@ const ETHNO_RELIGION_TO_COLOR = {
   hindu: COLOR_SL_FLAG.TAMIL,
   roman_catholic: "purple",
   other_christian: "blue",
+  christian: "purple",
 };
 
 export default ETHNO_RELIGION_TO_COLOR;

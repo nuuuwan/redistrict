@@ -20,6 +20,7 @@ export default function PartitionViewTableHeader() {
         <StyledTableCell align="right">Pop./Seat</StyledTableCell>
         <StyledTableCell align="left">Regions</StyledTableCell>
         <StyledTableCell align="left">Ethnicity</StyledTableCell>
+        <StyledTableCell align="left">Religion</StyledTableCell>
       </TableRow>
     </TableHead>
   );
