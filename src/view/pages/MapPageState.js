@@ -6,8 +6,8 @@ import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import CommonStore from "../../nonview/core/CommonStore";
 import Partition from "../../nonview/core/Partition";
 
-const DEFAULT_N_SEATS = 2;
-const DEFAULT_MAX_SEATS_PER_GROUP = 1;
+const DEFAULT_N_SEATS = 20;
+const DEFAULT_MAX_SEATS_PER_GROUP = 20;
 const DEFAULT_SUBREGION_TYPE = ENT_TYPES.DSD;
 const DEFAULT_REGION_ID = "LK-11";
 
