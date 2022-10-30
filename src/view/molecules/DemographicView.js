@@ -1,4 +1,9 @@
-import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 
 import GIG2TableStyle from "../../nonview/base/GIG2TableStyle";
@@ -6,34 +11,57 @@ import MathX from "../../nonview/base/MathX";
 import StringX from "../../nonview/base/StringX";
 import Seats from "../../nonview/core/Seats";
 
-const STYLE = { fontSize: "70%", p: 0, m: 0 };
+const STYLE_BOX = { width: 150 };
+const STYLE_TABLE = {
+  [`& .${tableCellClasses.root}`]: {
+    borderBottom: "none",
+    width: "fit-content",
+    maxWidth: 200,
+    verticalAlign: "top",
+    margin: 0,
+    padding: 0,
+  },
+};
 
 export default function DemographicView({ demographicInfo, nSeats }) {
   const totalPop = MathX.sumGeneric(Object.values(demographicInfo), (x) => x);
-  const ethToSeats = Seats.divideSeats(nSeats, demographicInfo);
-  return Object.entries(demographicInfo)
-    .sort((a, b) => b[1] - a[1])
-    .map(function ([k, v]) {
-      const color = GIG2TableStyle.getValueKeyColor(k);
-      const nSeatsForEth = ethToSeats[k];
-      return (
-        <Grid key={"demo-" + k} container sx={{ width: 64, color }}>
-          <Grid item xs={2}>
-            <Typography variant="caption" sx={STYLE}>
-              {nSeatsForEth ? nSeatsForEth : ""}
-            </Typography>
-          </Grid>
-          <Grid item xs={5}>
-            <Typography variant="caption" align="right" sx={STYLE}>
-              {StringX.formatPercent(v, totalPop)}
-            </Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="caption" sx={STYLE}>
-              {StringX.toTitleCase(k)}
-            </Typography>
-          </Grid>
-        </Grid>
-      );
-    });
+  const itemToSeats = Seats.divideSeats(nSeats, demographicInfo);
+
+  return (
+    <Box sx={STYLE_BOX}>
+      <TableContainer>
+        <Table sx={STYLE_TABLE}>
+          <TableBody>
+            {Object.entries(demographicInfo)
+              .sort((a, b) => b[1] - a[1])
+              .map(function ([k, v]) {
+                const color = GIG2TableStyle.getValueKeyColor(k);
+                const nSeatsForItem = itemToSeats[k];
+                const sxCell = { color };
+                return (
+                  <TableRow key={"demographics-" + k}>
+                    <TableCell>
+                      <Typography variant="caption" sx={sxCell}>
+                        {StringX.toTitleCase(k)}
+                      </Typography>
+                    </TableCell>
+
+                    <TableCell align="right">
+                      <Typography variant="caption">
+                        {StringX.formatPercent(v, totalPop)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Typography variant="caption" sx={sxCell}>
+                        {nSeatsForItem ? nSeatsForItem : ""}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
 }
