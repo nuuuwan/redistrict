@@ -1,6 +1,7 @@
 import MathX from "../../nonview/base/MathX";
 
 const MAX_SIG_DIGITS = 3;
+const MAX_SIG_DIGITS_FOR_PERCENT = 2;
 const STRING_REPLACE_LIST = [
   [" Of ", " of "],
   ["Election Presidential", "Presidential Election"],
@@ -31,7 +32,7 @@ export default class StringX {
   }
 
   static formatSizedText(text, fontSize) {
-    const style = { fontSize };
+    const style = { fontSize, align: "right" };
     return <span style={style}>{text}</span>;
   }
 
@@ -76,7 +77,7 @@ export default class StringX {
 
     let numPart = Number(p).toLocaleString(undefined, {
       style: "percent",
-      maximumSignificantDigits: MAX_SIG_DIGITS,
+      maximumSignificantDigits: MAX_SIG_DIGITS_FOR_PERCENT,
     });
 
     if (p < 0.01) {
