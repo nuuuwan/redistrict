@@ -60,7 +60,7 @@ export default function DemographicView({
                     </TableCell>
 
                     <TableCell align="right">
-                      <Typography variant="caption">
+                      <Typography variant="caption" sx={sxCell}>
                         {StringX.formatPercent(v, totalPop)}
                       </Typography>
                     </TableCell>
