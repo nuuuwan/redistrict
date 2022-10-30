@@ -12,8 +12,11 @@ export default class Partition {
     };
   }
 
-  partitionSingle(idList, nSeats) {
-    const nSeats1 = parseInt(nSeats / 2);
+  partitionSingle(idList, nSeats, maxSeatsPerGroup) {
+    const p = Math.max(2, parseInt((nSeats - 1) / maxSeatsPerGroup) + 1);
+    const q = parseInt(p / 2);
+    const nSeats1 = parseInt((nSeats * q) / p);
+
     const totalPop = MathX.sumGeneric(idList, (id) =>
       parseInt(this.regionEntIdx.get(id).population)
     );
@@ -69,7 +72,8 @@ export default class Partition {
         if (nSeats > maxSeatsPerGroup) {
           const partialGroupToIDListAndNSeats = this.partitionSingle(
             idList,
-            nSeats
+            nSeats,
+            maxSeatsPerGroup
           );
           if (partialGroupToIDListAndNSeats !== null) {
             for (let subKey in partialGroupToIDListAndNSeats) {
