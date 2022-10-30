@@ -6,7 +6,7 @@ import MathX from "../../nonview/base/MathX";
 import StringX from "../../nonview/base/StringX";
 import Seats from "../../nonview/core/Seats";
 
-const STYLE = {fontSize: "70%", p: 0, m: 0};
+const STYLE = { fontSize: "70%", p: 0, m: 0 };
 
 export default function DemographicView({ demographicInfo, nSeats }) {
   const totalPop = MathX.sumGeneric(Object.values(demographicInfo), (x) => x);

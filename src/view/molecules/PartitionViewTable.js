@@ -14,7 +14,7 @@ const STYLE_TABLE = {
     padding: 0.5,
     width: "fit-content",
     maxWidth: 200,
-    verticalAlign: 'top',
+    verticalAlign: "top",
   },
 };
 
