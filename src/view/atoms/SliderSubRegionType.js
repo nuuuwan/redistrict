@@ -4,7 +4,9 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 
-const SUB_REGION_TYPES = ["dsd", "gnd"];
+import { ENT_TYPES } from "../../nonview/base/EntTypes";
+
+const SUB_REGION_TYPES = [ENT_TYPES.DSD, ENT_TYPES.GND];
 
 export default function SliderSubRegionType({
   subRegionType,
