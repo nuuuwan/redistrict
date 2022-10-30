@@ -59,15 +59,18 @@ export default class Ents {
   }
 
   static getEntIndexForSubRegions(allEntIndex, regionID, subRegionType) {
+    const regionType = EntTypes.getEntType(regionID);
+    const regionIDField = regionType + '_id';
     const idLength = regionID.length;
     const subRegionEntIndex = allEntIndex[subRegionType];
-    return Object.keys(subRegionEntIndex)
-      .filter(function (entID, ent) {
-        return entID.substring(0, idLength) === regionID;
+    const entIndex =  Object.entries(subRegionEntIndex)
+      .filter(function ([entID, ent]) {
+        return ent[regionIDField] === regionID;
       })
-      .reduce(function (entIndex, entID) {
-        entIndex[entID] = subRegionEntIndex[entID];
+      .reduce(function (entIndex, [entID, ent]) {
+        entIndex[entID] = ent;
         return entIndex;
       }, {});
+    return entIndex;
   }
 }
