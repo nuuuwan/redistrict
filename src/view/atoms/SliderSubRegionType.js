@@ -34,8 +34,8 @@ export default function SliderSubRegionType({
   };
 
   return (
-    <Box width={100}>
-      <Typography variant="caption">Sub-Region Type</Typography>
+    <Box width={150}>
+      <Typography variant="caption">Sub-Region for Blind Splitting</Typography>
       <Slider
         value={selectedValue}
         min={0}

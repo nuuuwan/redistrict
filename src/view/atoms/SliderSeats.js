@@ -17,7 +17,7 @@ export default function SliderSeats({ nSeats, setNSeats }) {
   });
   return (
     <Box width={200}>
-      <Typography variant="caption">{`Total Seats (${nSeats})`}</Typography>
+      <Typography variant="caption">{`Total Seats for Electoral District (${nSeats})`}</Typography>
       <Slider
         min={MIN}
         max={MAX}

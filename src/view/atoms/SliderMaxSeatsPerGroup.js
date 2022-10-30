@@ -20,7 +20,7 @@ export default function SliderMaxSeatsPerGroup({
   });
   return (
     <Box width={200}>
-      <Typography variant="caption">{`Max. Seats per Group (${maxSeatsPerGroup})`}</Typography>
+      <Typography variant="caption">{`Max. Seats per New Polling Division (${maxSeatsPerGroup})`}</Typography>
       <Slider
         min={MIN}
         max={MAX}

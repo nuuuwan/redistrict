@@ -20,8 +20,8 @@ export default function SelectRegionID({ regionID, setRegionID }) {
   return (
     <Box sx={{ width: 120 }}>
       <FormControl fullWidth>
-        <InputLabel>Region ID</InputLabel>
-        <Select value={regionID} label="Region ID" onChange={onChange}>
+        <InputLabel>Electoral District</InputLabel>
+        <Select value={regionID} label="Electoral District" onChange={onChange}>
           {Object.values(regionIndex).map(function (region) {
             return (
               <MenuItem key={"region-" + region.id} value={region.id}>
