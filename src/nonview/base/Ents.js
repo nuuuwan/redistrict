@@ -1,4 +1,4 @@
-import EntTypes, {ENT_TYPES} from "../../nonview/base/EntTypes";
+import EntTypes, { ENT_TYPES } from "../../nonview/base/EntTypes";
 import WWW from "./WWW.js";
 
 const URL_BASE = "https://raw.githubusercontent.com/nuuuwan/gig2/data";
@@ -16,14 +16,16 @@ export default class Ents {
     return data;
   }
 
-  static isPostal(entType,ent) {
-    return entType === ENT_TYPES.PD && ent.id.substring(5,6) === 'P';
+  static isPostal(entType, ent) {
+    return entType === ENT_TYPES.PD && ent.id.substring(5, 6) === "P";
   }
 
   static async getEntsByType(entType) {
     const url = `${URL_BASE}/${entType}.latest.basic.tsv`;
     const rawDataList = await WWW.tsv(url);
-    return rawDataList.map((data) => Ents.cleanData(data)).filter(ent => !Ents.isPostal(entType, ent));
+    return rawDataList
+      .map((data) => Ents.cleanData(data))
+      .filter((ent) => !Ents.isPostal(entType, ent));
   }
 
   static async getEntIndexByType(entType) {
@@ -60,10 +62,9 @@ export default class Ents {
 
   static getEntIndexForSubRegions(allEntIndex, regionID, subRegionType) {
     const regionType = EntTypes.getEntType(regionID);
-    const regionIDField = regionType + '_id';
-    const idLength = regionID.length;
+    const regionIDField = EntTypes.getIDField(regionType);
     const subRegionEntIndex = allEntIndex[subRegionType];
-    const entIndex =  Object.entries(subRegionEntIndex)
+    const entIndex = Object.entries(subRegionEntIndex)
       .filter(function ([entID, ent]) {
         return ent[regionIDField] === regionID;
       })
