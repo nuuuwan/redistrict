@@ -102,7 +102,7 @@ export default class Partition {
     for (let [group, { idList }] of Object.entries(
       this.groupToIDListAndNSeats
     )) {
-      const name = RegionEntIdx.getMostCommonDSDName(idList);
+      const name = RegionEntIdx.getMostCommonRegionName(idList);
       if (!nameCount[name]) {
         nameCount[name] = 0;
         nameCountFinal[name] = 0;

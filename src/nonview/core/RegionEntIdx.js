@@ -59,23 +59,23 @@ export default class RegionEntIdx {
     return MathX.sumGeneric(idList, (id) => this.get(id).pop);
   }
 
-  static getMostCommonDSDName(regionIDList) {
+  static getMostCommonRegionName(regionIDList) {
     const commonStore = CommonStore.getSingleton();
     const subRegionType = EntTypes.getEntType(regionIDList[0]);
     const subRegionIndex = commonStore.allEntIndex[subRegionType];
     const regionIndex = commonStore.allEntIndex[ENT_TYPES.DSD];
 
-    const dsdIDToPop = {};
+    const regionIDToPop = {};
     for (let regionID of regionIDList) {
       const regionEnt = subRegionIndex[regionID];
-      const dsdID = regionEnt.id.substring(0, 7);
-      if (!dsdIDToPop[dsdID]) {
-        dsdIDToPop[dsdID] = 0;
+      const regionID = regionEnt.id.substring(0, 7);
+      if (!regionIDToPop[regionID]) {
+        regionIDToPop[regionID] = 0;
       }
-      dsdIDToPop[dsdID] += parseInt(regionEnt.population);
+      regionIDToPop[regionID] += parseInt(regionEnt.population);
     }
 
-    const mostPopDSDID = Object.entries(dsdIDToPop).sort(
+    const mostPopDSDID = Object.entries(regionIDToPop).sort(
       (a, b) => b[1] - a[1]
     )[0][0];
     return regionIndex[mostPopDSDID].name;
