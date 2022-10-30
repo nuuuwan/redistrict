@@ -29,10 +29,22 @@ export default class MapPageState extends Component {
 
       // Other
       commonStoreSingleton: null,
+
+      // House Keeping...
+      isLoaded: false,
     };
   }
 
-  async setStateWithDependencies(
+  async setStateWithDependencies(state, otherState) {
+    this.setState(
+      { isLoaded: false },
+      async function () {
+        await this.setStateWithDependenciesInner(state, otherState);
+      }.bind(this)
+    );
+  }
+
+  async setStateWithDependenciesInner(
     { newRegionID, newSubRegionType, newMaxSeatsPerGroup, newNSeats },
     otherState = {}
   ) {
@@ -106,6 +118,7 @@ export default class MapPageState extends Component {
         nSeats,
         geoJSON,
         partition,
+        isLoaded: true,
       },
       ...otherState,
     });
