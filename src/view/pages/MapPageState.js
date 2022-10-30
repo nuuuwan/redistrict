@@ -7,7 +7,7 @@ import CommonStore from "../../nonview/core/CommonStore";
 import Partition from "../../nonview/core/Partition";
 
 const DEFAULT_N_SEATS = 20;
-const DEFAULT_MAX_SEATS_PER_GROUP = 20;
+const DEFAULT_MAX_SEATS_PER_GROUP = 1;
 const DEFAULT_SUBREGION_TYPE = ENT_TYPES.PD;
 const DEFAULT_REGION_ID = "EC-01";
 
