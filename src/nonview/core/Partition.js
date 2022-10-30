@@ -12,52 +12,98 @@ export default class Partition {
     };
   }
 
-  partitionSingle(idList, nSeats, maxSeatsPerGroup) {
+  static getPartition1Seats(nSeats, maxSeatsPerGroup) {
     const p = Math.max(2, parseInt((nSeats - 1) / maxSeatsPerGroup) + 1);
     const q = parseInt(p / 2);
-    const nSeats1 = parseInt((nSeats * q) / p);
+    return parseInt((nSeats * q) / p);
+  }
+
+  partitionSingle(idList, nSeats, maxSeatsPerGroup) {
+    const nSeats1 = Partition.getPartition1Seats(nSeats, maxSeatsPerGroup);
 
     const totalPop = MathX.sumGeneric(idList, (id) =>
       parseInt(this.regionEntIdx.get(id).population)
     );
     const partitionPop = (totalPop * nSeats1) / nSeats;
-    let cumPop = 0;
-    const isLatSpanLongerThanLngSpan =
-      this.regionEntIdx.isLatSpanLongerThanLngSpan(idList);
-    const sortedIdList = this.regionEntIdx.getSortedByLongerSpan(idList);
 
-    const [group1, group2] = isLatSpanLongerThanLngSpan
-      ? ["NS0", "NS1"]
-      : ["WE0", "WE1"];
 
-    let bestDiff = undefined;
-    let bestI = undefined;
-    for (let i in sortedIdList) {
-      const id = sortedIdList[i];
-      const pop = this.regionEntIdx.get(id).pop;
-      const diff = Math.abs(cumPop - partitionPop);
-      if (bestDiff === undefined || diff < bestDiff) {
-        bestDiff = diff;
-        bestI = i;
-      }
-      cumPop += pop;
+    const {latSpan, lngSpan} = this.regionEntIdx.getLatLngSpans(idList);
+
+    let funcSortInfoList = [];
+    const K_LATLNG = 1.5;
+    if (lngSpan < latSpan * K_LATLNG) {
+        funcSortInfoList.push(
+          {
+            funcSort: this.regionEntIdx.getSortedNS.bind(this.regionEntIdx),
+            label: "NS",
+          }
+        )
+        funcSortInfoList.push(
+          {
+            funcSort: this.regionEntIdx.getSortedSN.bind(this.regionEntIdx),
+            label: "SN",
+          },
+        )
     }
-    const nPartition = bestI;
 
-    const idList1 = idList.slice(0, nPartition);
-    const idList2 = idList.slice(nPartition);
+    if (latSpan < lngSpan * K_LATLNG) {
+        funcSortInfoList.push(
+          {
+            funcSort: this.regionEntIdx.getSortedEW.bind(this.regionEntIdx),
+            label: "EW",
+          }
+        )
+        funcSortInfoList.push(
+          {
+            funcSort: this.regionEntIdx.getSortedWE.bind(this.regionEntIdx),
+            label: "WE",
+          },
+        )
+    }
 
-    if (idList1.length === 0 || idList2.length === 0) {
-      return null;
+    let bestIDList1,
+      bestIDList2,
+      bestLabel,
+      bestDiffScore = undefined;
+
+    for (let { funcSort, label } of funcSortInfoList) {
+      const sortedIdList = funcSort(idList);
+
+      let i;
+      let cumPop = 0;
+      for (i in sortedIdList) {
+        const id = sortedIdList[i];
+        const pop = this.regionEntIdx.get(id).pop;
+        cumPop += pop;
+        if (cumPop > partitionPop) {
+          break;
+        }
+      }
+
+      const nPartition = i;
+      const idList1 = idList.slice(0, nPartition);
+      const idList2 = idList.slice(nPartition);
+
+      if (idList1.length === 0 || idList2.length === 0) {
+        return null;
+      }
+
+      const diffScore = RegionEntIdx.getDiffScore(idList1, idList2);
+      if (bestDiffScore === undefined || bestDiffScore < diffScore) {
+        bestDiffScore = diffScore;
+        bestLabel = label;
+        bestIDList1 = idList1;
+        bestIDList2 = idList2;
+      }
     }
 
     return {
-      [group1]: {
-        idList: idList1,
+      [bestLabel + "0"]: {
+        idList: bestIDList1,
         nSeats: nSeats1,
       },
-      [group2]: {
-        idList: idList2,
+      [bestLabel + "1"]: {
+        idList: bestIDList2,
         nSeats: nSeats - nSeats1,
       },
     };

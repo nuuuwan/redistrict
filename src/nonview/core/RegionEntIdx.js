@@ -28,31 +28,32 @@ export default class RegionEntIdx {
     );
   }
 
-  getSortedByLat(idList) {
+  getSortedSN(idList) {
+    return this.getSorted(idList, (x) => x.lat);
+  }
+
+  getSortedNS(idList) {
     return this.getSorted(idList, (x) => -x.lat);
   }
 
-  getSortedByLng(idList) {
+  getSortedWE(idList) {
     return this.getSorted(idList, (x) => x.lng);
   }
 
-  getSortedByLongerSpan(idList) {
-    if (this.isLatSpanLongerThanLngSpan(idList)) {
-      return this.getSortedByLat(idList);
-    }
-    return this.getSortedByLng(idList);
+  getSortedEW(idList) {
+    return this.getSorted(idList, (x) => -x.lng);
   }
 
   getLatLngList(idList) {
     return idList.map((id) => this.get(id).lngLat);
   }
 
-  isLatSpanLongerThanLngSpan(idList) {
+  getLatLngSpans(idList) {
     const latLngList = this.getLatLngList(idList);
     const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(latLngList);
     const latSpan = maxLat - minLat;
     const lngSpan = maxLng - minLng;
-    return latSpan > lngSpan;
+    return {latSpan, lngSpan};
   }
 
   getTotalPop(idList) {
@@ -147,5 +148,36 @@ export default class RegionEntIdx {
       christian: christian / totalPop,
       others: others / totalPop,
     };
+  }
+
+  static getDiffScore(idList1, idList2) {
+    return (
+      RegionEntIdx.getDiffScoreHelper(
+        idList1,
+        idList2,
+        RegionEntIdx.getEthnicityInfo
+      ) +
+      RegionEntIdx.getDiffScoreHelper(
+        idList1,
+        idList2,
+        RegionEntIdx.getReligionInfo
+      )
+    );
+  }
+
+  static getDiffScoreHelper(idList1, idList2, funcDemographics) {
+    const vec1 = funcDemographics(idList1);
+    const vec2 = funcDemographics(idList2);
+
+    const diffScore = Object.entries(vec1).reduce(function (
+      diffScore,
+      [k, v1]
+    ) {
+      const v2 = vec2[k];
+      return diffScore + Math.abs(v1 - v2);
+    },
+    0);
+
+    return diffScore;
   }
 }
