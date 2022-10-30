@@ -81,7 +81,7 @@ export default class RegionEntIdx {
     return regionIndex[mostPopDSDID].name;
   }
 
-  static getDemographicInfo(idList) {
+  static getEthnicityInfo(idList) {
     const commonStore = CommonStore.getSingleton();
     let [sinhalese, tamil, moor, others] = [0, 0, 0, 0];
     for (let id of idList) {
