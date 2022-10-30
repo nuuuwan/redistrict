@@ -3,6 +3,8 @@ import EntTypes, { ENT_TYPES } from "../../nonview/base/EntTypes";
 import MathX from "../../nonview/base/MathX";
 import CommonStore from "../../nonview/core/CommonStore";
 
+const NAME_REIGON_TYPE = ENT_TYPES.PD;
+
 export default class RegionEntIdx {
   constructor(idx) {
     this.idx = idx;
@@ -63,12 +65,13 @@ export default class RegionEntIdx {
     const commonStore = CommonStore.getSingleton();
     const subRegionType = EntTypes.getEntType(regionIDList[0]);
     const subRegionIndex = commonStore.allEntIndex[subRegionType];
-    const regionIndex = commonStore.allEntIndex[ENT_TYPES.PD];
+    const regionIndex = commonStore.allEntIndex[NAME_REIGON_TYPE];
+    const regionIDField = EntTypes.getIDField(NAME_REIGON_TYPE);
 
     const regionIDToPop = {};
     for (let subRegionID of regionIDList) {
       const regionEnt = subRegionIndex[subRegionID];
-      const regionID = regionEnt.id.substring(0, 7);
+      const regionID = regionEnt[regionIDField];
       if (!regionIDToPop[regionID]) {
         regionIDToPop[regionID] = 0;
       }
