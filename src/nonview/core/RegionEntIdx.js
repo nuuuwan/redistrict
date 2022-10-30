@@ -66,8 +66,8 @@ export default class RegionEntIdx {
     const regionIndex = commonStore.allEntIndex[ENT_TYPES.DSD];
 
     const regionIDToPop = {};
-    for (let regionID of regionIDList) {
-      const regionEnt = subRegionIndex[regionID];
+    for (let subRegionID of regionIDList) {
+      const regionEnt = subRegionIndex[subRegionID];
       const regionID = regionEnt.id.substring(0, 7);
       if (!regionIDToPop[regionID]) {
         regionIDToPop[regionID] = 0;
