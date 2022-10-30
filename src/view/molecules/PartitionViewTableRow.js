@@ -47,10 +47,7 @@ export default function PartitionViewTableRow({
       </TableCell>
       <TableCell align="right">{StringX.formatIntSmall(row.nSeats)}</TableCell>
       <TableCell align="right" sx={{ background: colorFairness }}>
-        {StringX.formatFloat(nSeatsFair)}
-      </TableCell>
-      <TableCell align="right" sx={{ background: colorFairness }}>
-        {StringX.formatFloatSigned(log2NSeatsFairPerNSeats2)}
+        {"[" + StringX.formatFloat(nSeatsFair) + "]"}
       </TableCell>
       <TableCell align="right">{StringX.formatInt(totalGroupPop)}</TableCell>
       <TableCell align="right">{StringX.formatInt(popPerSeat)}</TableCell>
