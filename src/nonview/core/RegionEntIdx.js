@@ -63,7 +63,7 @@ export default class RegionEntIdx {
     const commonStore = CommonStore.getSingleton();
     const subRegionType = EntTypes.getEntType(regionIDList[0]);
     const subRegionIndex = commonStore.allEntIndex[subRegionType];
-    const regionIndex = commonStore.allEntIndex[ENT_TYPES.DSD];
+    const regionIndex = commonStore.allEntIndex[ENT_TYPES.PD];
 
     const regionIDToPop = {};
     for (let subRegionID of regionIDList) {
@@ -75,10 +75,10 @@ export default class RegionEntIdx {
       regionIDToPop[regionID] += parseInt(regionEnt.population);
     }
 
-    const mostPopDSDID = Object.entries(regionIDToPop).sort(
+    const mostPopRegionID = Object.entries(regionIDToPop).sort(
       (a, b) => b[1] - a[1]
     )[0][0];
-    return regionIndex[mostPopDSDID].name;
+    return regionIndex[mostPopRegionID].name;
   }
 
   static getEthnicityInfo(idList) {

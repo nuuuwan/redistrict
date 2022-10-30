@@ -8,8 +8,8 @@ import Partition from "../../nonview/core/Partition";
 
 const DEFAULT_N_SEATS = 20;
 const DEFAULT_MAX_SEATS_PER_GROUP = 20;
-const DEFAULT_SUBREGION_TYPE = ENT_TYPES.DSD;
-const DEFAULT_REGION_ID = "LK-11";
+const DEFAULT_SUBREGION_TYPE = ENT_TYPES.PD;
+const DEFAULT_REGION_ID = "EC-01";
 
 export default class MapPageState extends Component {
   constructor(props) {

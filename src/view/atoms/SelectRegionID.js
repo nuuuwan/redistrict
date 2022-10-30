@@ -15,7 +15,7 @@ export default function SelectRegionID({ regionID, setRegionID }) {
   };
 
   const commonStore = CommonStore.getSingleton();
-  const regionIndex = commonStore.allEntIndex[ENT_TYPES.DISTRICT];
+  const regionIndex = commonStore.allEntIndex[ENT_TYPES.ED];
 
   return (
     <Box sx={{ width: 120 }}>
