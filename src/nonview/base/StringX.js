@@ -1,6 +1,6 @@
 import MathX from "../../nonview/base/MathX";
 
-const MAX_SIG_DIGITS = 2;
+const MAX_SIG_DIGITS = 3;
 const STRING_REPLACE_LIST = [
   [" Of ", " of "],
   ["Election Presidential", "Presidential Election"],
