@@ -17,6 +17,7 @@ export default class GeoJSON {
     const regionType = EntTypes.getEntType(this.regionID);
     const regionIDField = EntTypes.getIDField(regionType);
     let rawData = await WWW.json(this.rawDataURL);
+    
     rawData.features = rawData.features.filter(
       function (feature) {
         return feature.properties[regionIDField] === this.regionID;
