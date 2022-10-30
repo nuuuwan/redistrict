@@ -10,7 +10,7 @@ import PartitionViewTableTotalRow from "../../view/molecules/PartitionViewTableT
 
 const STYLE_TABLE = {
   [`& .${tableCellClasses.root}`]: {
-    borderBottom: "none",
+    borderBottom: "1px solid #ccc",
     padding: 0.5,
     width: "fit-content",
     maxWidth: 200,
