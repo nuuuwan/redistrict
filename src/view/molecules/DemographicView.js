@@ -23,7 +23,11 @@ const STYLE_TABLE = {
   },
 };
 
-export default function DemographicView({ demographicInfo, nSeats }) {
+export default function DemographicView({
+  demographicInfo,
+  nSeats,
+  fairSeats,
+}) {
   const totalPop = MathX.sumGeneric(Object.values(demographicInfo), (x) => x);
   const itemToSeats = Seats.divideSeats(nSeats, demographicInfo);
 
@@ -38,6 +42,15 @@ export default function DemographicView({ demographicInfo, nSeats }) {
                 const color = GIG2TableStyle.getValueKeyColor(k);
                 const nSeatsForItem = itemToSeats[k];
                 const sxCell = { color };
+
+                let seatsStr = "";
+                if (fairSeats && fairSeats[k]) {
+                  seatsStr += `${fairSeats[k]}`;
+                }
+                if (nSeatsForItem) {
+                  seatsStr += ` [${nSeatsForItem}]`;
+                }
+
                 return (
                   <TableRow key={"demographics-" + k}>
                     <TableCell>
@@ -53,7 +66,7 @@ export default function DemographicView({ demographicInfo, nSeats }) {
                     </TableCell>
                     <TableCell align="right">
                       <Typography variant="caption" sx={sxCell}>
-                        {nSeatsForItem ? nSeatsForItem : ""}
+                        {seatsStr}
                       </Typography>
                     </TableCell>
                   </TableRow>
