@@ -11,10 +11,10 @@ import MathX from "../../nonview/base/MathX";
 import StringX from "../../nonview/base/StringX";
 import Seats from "../../nonview/core/Seats";
 
-const STYLE_BOX = { width: 150 };
+const STYLE_BOX = { width: 100 };
 const STYLE_TABLE = {
   [`& .${tableCellClasses.root}`]: {
-    borderBottom: "none",
+    border: "none",
     width: "fit-content",
     maxWidth: 200,
     verticalAlign: "top",
