@@ -29,6 +29,9 @@ export const ENT_TYPE_TO_SHORT_NAME = {
 };
 
 export default class EntTypes {
+  static getIDField(entType) {
+    return entType + "_id";
+  }
   static getEntTypes() {
     return Object.values(ENT_TYPES);
   }
