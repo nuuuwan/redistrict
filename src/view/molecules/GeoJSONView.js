@@ -8,7 +8,7 @@ import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
 const PADDING = 10;
 
 export default function GeoJSONView({ geoJSON, partition }) {
-  const [width, height] = [window.innerWidth - 100, window.innerHeight - 300];
+  const [width, height] = [window.innerWidth - 100, window.innerHeight - 350];
   const bbox = BBox.fromGeoJSON(geoJSON);
   const funcTransform = bbox.getTransform(width, height, PADDING);
 
