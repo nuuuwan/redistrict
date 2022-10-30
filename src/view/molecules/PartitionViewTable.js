@@ -36,6 +36,7 @@ export default function PartitionViewTable({
           <PartitionViewTableTotalRow
             totalNSeats={totalNSeats}
             totalPop={totalPop}
+            idList={regionEntIdx.idList}
           />
           {rows.map(function (row) {
             return (
