@@ -8,7 +8,7 @@ import RegionEntIdx from "../../nonview/core/RegionEntIdx";
 import DemographicView from "../../view/molecules/DemographicView";
 
 const STYLE_GROUP = {};
-const MAX_IDS_TO_DISPLAY = 20;
+const MAX_IDS_TO_DISPLAY = 5;
 
 export default function PartitionViewTableRow({
   row,

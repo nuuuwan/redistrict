@@ -6,6 +6,8 @@ import MathX from "../../nonview/base/MathX";
 import StringX from "../../nonview/base/StringX";
 import Seats from "../../nonview/core/Seats";
 
+const STYLE = {fontSize: "70%", p: 0, m: 0};
+
 export default function DemographicView({ demographicInfo, nSeats }) {
   const totalPop = MathX.sumGeneric(Object.values(demographicInfo), (x) => x);
   const ethToSeats = Seats.divideSeats(nSeats, demographicInfo);
@@ -16,18 +18,18 @@ export default function DemographicView({ demographicInfo, nSeats }) {
       const nSeatsForEth = ethToSeats[k];
       return (
         <Grid key={"demo-" + k} container sx={{ width: 64, color }}>
-          <Grid item xs={3}>
-            <Typography variant="caption" sx={{ fontSize: "80%" }}>
+          <Grid item xs={2}>
+            <Typography variant="caption" sx={STYLE}>
               {nSeatsForEth ? nSeatsForEth : ""}
             </Typography>
           </Grid>
           <Grid item xs={5}>
-            <Typography variant="caption" align="right">
+            <Typography variant="caption" align="right" sx={STYLE}>
               {StringX.formatPercent(v, totalPop)}
             </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography variant="caption" sx={{ fontSize: "80%" }}>
+            <Typography variant="caption" sx={STYLE}>
               {StringX.toTitleCase(k)}
             </Typography>
           </Grid>
