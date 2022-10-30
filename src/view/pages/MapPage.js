@@ -26,8 +26,6 @@ export default class MapPage extends MapPageState {
       // deps
       geoJSON,
       partition,
-      // other
-      commonStoreSingleton,
       // house-keeping...
       isLoaded,
     } = this.state;
