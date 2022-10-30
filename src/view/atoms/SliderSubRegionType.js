@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import { ENT_TYPES } from "../../nonview/base/EntTypes";
 
-const SUB_REGION_TYPES = [ENT_TYPES.PD];
+const SUB_REGION_TYPES = [ENT_TYPES.PD, ENT_TYPES.DSD, ENT_TYPES.GND];
 
 export default function SliderSubRegionType({
   subRegionType,
