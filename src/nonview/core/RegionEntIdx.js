@@ -111,7 +111,7 @@ export default class RegionEntIdx {
 
   static getReligionInfo(idList) {
     const commonStore = CommonStore.getSingleton();
-    let [buddhist , hindu, islam , christian, totalPop] = [0, 0, 0, 0, 0];
+    let [buddhist, hindu, islam, christian, totalPop] = [0, 0, 0, 0, 0];
     for (let id of idList) {
       const tableRow = commonStore.religionTable.getRowByID(id);
       if (!tableRow) {
@@ -121,11 +121,12 @@ export default class RegionEntIdx {
       buddhist += tableRow.getValue("buddhist");
       hindu += tableRow.getValue("hindu");
       islam += tableRow.getValue("islam");
-      christian += tableRow.getValue("roman_catholic") + tableRow.getValue("other_christian");
+      christian +=
+        tableRow.getValue("roman_catholic") +
+        tableRow.getValue("other_christian");
 
       totalPop += tableRow.sumValue;
     }
-
 
     const others = totalPop - buddhist - hindu - islam - christian;
 

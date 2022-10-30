@@ -3,7 +3,7 @@ import GIG2 from "../../nonview/base/GIG2";
 
 let commonStoreSingleton = undefined;
 const ETHNICITY_TABLE_NAME = "population-ethnicity.regions.2012";
-const RELIGION_TABLE_NAME  = "population-religion.regions.2012";
+const RELIGION_TABLE_NAME = "population-religion.regions.2012";
 
 export default class CommonStore {
   static async loadSingleton() {
