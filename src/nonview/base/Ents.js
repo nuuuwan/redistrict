@@ -1,4 +1,4 @@
-import EntTypes from "../../nonview/base/EntTypes";
+import EntTypes, {ENT_TYPES} from "../../nonview/base/EntTypes";
 import WWW from "./WWW.js";
 
 const URL_BASE = "https://raw.githubusercontent.com/nuuuwan/gig2/data";
@@ -16,10 +16,14 @@ export default class Ents {
     return data;
   }
 
+  static isPostal(entType,ent) {
+    return entType === ENT_TYPES.PD && ent.id.substring(5,6) === 'P';
+  }
+
   static async getEntsByType(entType) {
     const url = `${URL_BASE}/${entType}.latest.basic.tsv`;
     const rawDataList = await WWW.tsv(url);
-    return rawDataList.map((data) => Ents.cleanData(data));
+    return rawDataList.map((data) => Ents.cleanData(data)).filter(ent => !Ents.isPostal(entType, ent));
   }
 
   static async getEntIndexByType(entType) {
