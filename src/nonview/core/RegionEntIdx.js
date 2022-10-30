@@ -60,10 +60,10 @@ export default class RegionEntIdx {
   }
 
   static getNameRegionType(subRegionType) {
-    if (subRegionType === ENT_TYPES.GND) {
+    if (subRegionType === ENT_TYPES.DSD) {
       return ENT_TYPES.DSD;
     }
-    return subRegionType;
+    return ENT_TYPES.PD;
   }
 
   static getMostCommonRegionName(regionIDList) {
