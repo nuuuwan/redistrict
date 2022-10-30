@@ -66,7 +66,7 @@ export default class Partition {
       let nPartitioned = 0;
       for (let group in this.groupToIDListAndNSeats) {
         const { idList, nSeats } = this.groupToIDListAndNSeats[group];
-        if (nSeats >= Math.max(2, maxSeatsPerGroup)) {
+        if (nSeats > maxSeatsPerGroup) {
           const partialGroupToIDListAndNSeats = this.partitionSingle(
             idList,
             nSeats
