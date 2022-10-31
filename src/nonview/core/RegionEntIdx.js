@@ -53,7 +53,7 @@ export default class RegionEntIdx {
     const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(latLngList);
     const latSpan = maxLat - minLat;
     const lngSpan = maxLng - minLng;
-    return {latSpan, lngSpan};
+    return { latSpan, lngSpan };
   }
 
   getTotalPop(idList) {
@@ -92,62 +92,55 @@ export default class RegionEntIdx {
     return regionIndex[mostPopRegionID].name;
   }
 
-  static getEthnicityInfo(idList) {
-    const commonStore = CommonStore.getSingleton();
-    let [sinhalese, tamil, moor, others] = [0, 0, 0, 0];
+  static getGenericTableInfo(idList, table, keyGroupToKeyList) {
+    let info = Object.keys(keyGroupToKeyList).reduce(function (info, keyGroup) {
+      info[keyGroup] = 0;
+      return info;
+    }, {});
+    let totalPop = 0;
     for (let id of idList) {
-      const tableRow = commonStore.ethnicityTable.getRowByID(id);
+      const tableRow = table.getRowByID(id);
       if (!tableRow) {
         continue;
       }
 
-      sinhalese += tableRow.getValue("sinhalese");
-      tamil +=
-        tableRow.getValue("sri_lankan_tamil") +
-        tableRow.getValue("indian_tamil");
-      moor += tableRow.getValue("moor") + tableRow.getValue("malay");
-      others +=
-        tableRow.getValue("bharatha") +
-        tableRow.getValue("burgher") +
-        tableRow.getValue("chetty");
+      for (let [keyGroup, keyList] of Object.entries(keyGroupToKeyList)) {
+        for (let key of keyList) {
+          info[keyGroup] += tableRow.getValue(key);
+        }
+      }
+      totalPop += tableRow.total;
     }
-    const totalPop = sinhalese + tamil + moor + others;
-    return {
-      sinhalese: sinhalese / totalPop,
-      tamil: tamil / totalPop,
-      moor: moor / totalPop,
-      others: others / totalPop,
-    };
+
+    info["others"] = totalPop - MathX.sum(Object.values(info));
+
+    return Object.entries(info).reduce(function (infoFinal, [k, v]) {
+      infoFinal[k] = info[k] / totalPop;
+      return infoFinal;
+    }, {});
+  }
+
+  static getEthnicityInfo(idList) {
+    const commonStore = CommonStore.getSingleton();
+    return RegionEntIdx.getGenericTableInfo(
+      idList,
+      commonStore.ethnicityTable,
+      {
+        sinhalese: ["sinhalese"],
+        tamil: ["indian_tamil", "sri_lankan_tamil"],
+        moor: ["moor", "malay"],
+      }
+    );
   }
 
   static getReligionInfo(idList) {
     const commonStore = CommonStore.getSingleton();
-    let [buddhist, hindu, islam, christian, totalPop] = [0, 0, 0, 0, 0];
-    for (let id of idList) {
-      const tableRow = commonStore.religionTable.getRowByID(id);
-      if (!tableRow) {
-        continue;
-      }
-
-      buddhist += tableRow.getValue("buddhist");
-      hindu += tableRow.getValue("hindu");
-      islam += tableRow.getValue("islam");
-      christian +=
-        tableRow.getValue("roman_catholic") +
-        tableRow.getValue("other_christian");
-
-      totalPop += tableRow.sumValue;
-    }
-
-    const others = totalPop - buddhist - hindu - islam - christian;
-
-    return {
-      buddhist: buddhist / totalPop,
-      hindu: hindu / totalPop,
-      islam: islam / totalPop,
-      christian: christian / totalPop,
-      others: others / totalPop,
-    };
+    return RegionEntIdx.getGenericTableInfo(idList, commonStore.religionTable, {
+      buddhist: ["buddhist"],
+      hindu: ["hindu"],
+      islam: ["islam"],
+      christian: ["roman_catholic", "other_christian"],
+    });
   }
 
   static getDiffScore(idList1, idList2) {
