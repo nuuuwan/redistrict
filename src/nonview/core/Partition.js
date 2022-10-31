@@ -27,29 +27,42 @@ export default class Partition {
     );
     const partitionPop = (totalPop * nSeats1) / nSeats;
 
-    const { latSpan, lngSpan } = this.regionEntIdx.getLatLngSpans(idList);
-
     let bestIDList1,
       bestIDList2,
       bestLabel,
       bestSeatError = undefined;
 
-    for (let theta of MathX.range(0, 360, 45)) {
+    const {latSpan, lngSpan} = this.regionEntIdx.getLatLngSpans(idList);
+
+    let thetaList;
+    if (latSpan > 2 * lngSpan) {
+      thetaList = [90, 270];
+    } else if (lngSpan > 2 * latSpan) {
+      thetaList = [0, 180];
+    } else {
+      thetaList = MathX.range(0, 360, 90);
+    }
+
+    for (let theta of thetaList) {
       const label = "t" + theta;
       const sortedIdList = this.regionEntIdx.getSortedAtAngle(idList, theta);
 
-      let i;
+      let bestI;
+      let bestDiff = undefined;
       let cumPop = 0;
-      for (i in sortedIdList) {
+      for (let i in sortedIdList) {
         const id = sortedIdList[i];
         const pop = this.regionEntIdx.get(id).pop;
-        cumPop += pop;
-        if (cumPop > partitionPop) {
-          break;
+        const diff = Math.abs(cumPop - partitionPop);
+
+        if (bestDiff === undefined || diff < bestDiff) {
+          bestDiff = diff;
+          bestI = i;
         }
+        cumPop += pop;
       }
 
-      const nPartition = i;
+      const nPartition = bestI;
       const idList1 = idList.slice(0, nPartition);
       const idList2 = idList.slice(nPartition);
 
