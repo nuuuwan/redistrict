@@ -87,7 +87,7 @@ export default function DemographicView({
 
               <TableCell align="right">
                 <Typography variant="caption">
-                  {StringX.formatFloat(seatError)}
+                  {StringX.formatPercent(seatError, 2)}
                 </Typography>
               </TableCell>
               <TableCell />
