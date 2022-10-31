@@ -29,37 +29,14 @@ export default class Partition {
 
     const { latSpan, lngSpan } = this.regionEntIdx.getLatLngSpans(idList);
 
-    let funcSortInfoList = [];
-    const K_LATLNG = 1.5;
-    if (lngSpan < latSpan * K_LATLNG) {
-      funcSortInfoList.push({
-        funcSort: this.regionEntIdx.getSortedNS.bind(this.regionEntIdx),
-        label: "NS",
-      });
-      funcSortInfoList.push({
-        funcSort: this.regionEntIdx.getSortedSN.bind(this.regionEntIdx),
-        label: "SN",
-      });
-    }
-
-    if (latSpan < lngSpan * K_LATLNG) {
-      funcSortInfoList.push({
-        funcSort: this.regionEntIdx.getSortedEW.bind(this.regionEntIdx),
-        label: "EW",
-      });
-      funcSortInfoList.push({
-        funcSort: this.regionEntIdx.getSortedWE.bind(this.regionEntIdx),
-        label: "WE",
-      });
-    }
-
     let bestIDList1,
       bestIDList2,
       bestLabel,
       bestSeatError = undefined;
 
-    for (let { funcSort, label } of funcSortInfoList) {
-      const sortedIdList = funcSort(idList);
+    for (let theta of MathX.range(0, 360, 45)) {
+      const label = "t" + theta;
+      const sortedIdList = this.regionEntIdx.getSortedAtAngle(idList, theta);
 
       let i;
       let cumPop = 0;
