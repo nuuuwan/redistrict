@@ -6,10 +6,10 @@ import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import CommonStore from "../../nonview/core/CommonStore";
 import Partition from "../../nonview/core/Partition";
 
-const DEFAULT_N_SEATS = 8;
+const DEFAULT_N_SEATS = 3;
 const DEFAULT_MAX_SEATS_PER_GROUP = 1;
 const DEFAULT_SUBREGION_TYPE = ENT_TYPES.GND;
-const DEFAULT_REGION_ID = "EC-01";
+const DEFAULT_REGION_ID = "EC-14";
 
 export default class MapPageState extends Component {
   constructor(props) {
