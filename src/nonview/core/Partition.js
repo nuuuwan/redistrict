@@ -26,39 +26,30 @@ export default class Partition {
     );
     const partitionPop = (totalPop * nSeats1) / nSeats;
 
-
-    const {latSpan, lngSpan} = this.regionEntIdx.getLatLngSpans(idList);
+    const { latSpan, lngSpan } = this.regionEntIdx.getLatLngSpans(idList);
 
     let funcSortInfoList = [];
     const K_LATLNG = 1.5;
     if (lngSpan < latSpan * K_LATLNG) {
-        funcSortInfoList.push(
-          {
-            funcSort: this.regionEntIdx.getSortedNS.bind(this.regionEntIdx),
-            label: "NS",
-          }
-        )
-        funcSortInfoList.push(
-          {
-            funcSort: this.regionEntIdx.getSortedSN.bind(this.regionEntIdx),
-            label: "SN",
-          },
-        )
+      funcSortInfoList.push({
+        funcSort: this.regionEntIdx.getSortedNS.bind(this.regionEntIdx),
+        label: "NS",
+      });
+      funcSortInfoList.push({
+        funcSort: this.regionEntIdx.getSortedSN.bind(this.regionEntIdx),
+        label: "SN",
+      });
     }
 
     if (latSpan < lngSpan * K_LATLNG) {
-        funcSortInfoList.push(
-          {
-            funcSort: this.regionEntIdx.getSortedEW.bind(this.regionEntIdx),
-            label: "EW",
-          }
-        )
-        funcSortInfoList.push(
-          {
-            funcSort: this.regionEntIdx.getSortedWE.bind(this.regionEntIdx),
-            label: "WE",
-          },
-        )
+      funcSortInfoList.push({
+        funcSort: this.regionEntIdx.getSortedEW.bind(this.regionEntIdx),
+        label: "EW",
+      });
+      funcSortInfoList.push({
+        funcSort: this.regionEntIdx.getSortedWE.bind(this.regionEntIdx),
+        label: "WE",
+      });
     }
 
     let bestIDList1,
