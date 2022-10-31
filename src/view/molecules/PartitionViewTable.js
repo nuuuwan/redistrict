@@ -45,8 +45,22 @@ export default function PartitionViewTable({
     }, {});
   }
 
+  function getTotalWastage(funcDemographicsInfo) {
+    return (
+      rows.reduce(function (totalWastage, row) {
+        return (
+          totalWastage +
+          RegionEntIdx.getWastage(row.idList, funcDemographicsInfo)
+        );
+      }, 0) / rows.length
+    );
+  }
+
   const fairSeatsEthnicity = getFairSeats(RegionEntIdx.getEthnicityInfo);
   const fairSeatsReligion = getFairSeats(RegionEntIdx.getReligionInfo);
+
+  const totalWastageEthnicity = getTotalWastage(RegionEntIdx.getEthnicityInfo);
+  const totalWastageReligion = getTotalWastage(RegionEntIdx.getReligionInfo);
 
   return (
     <TableContainer component={Box}>
@@ -59,6 +73,8 @@ export default function PartitionViewTable({
             idList={regionEntIdx.idList}
             fairSeatsEthnicity={fairSeatsEthnicity}
             fairSeatsReligion={fairSeatsReligion}
+            totalWastageEthnicity={totalWastageEthnicity}
+            totalWastageReligion={totalWastageReligion}
           />
           {rows.map(function (row) {
             return (

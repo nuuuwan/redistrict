@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import GIG2TableStyle from "../../nonview/base/GIG2TableStyle";
 import MathX from "../../nonview/base/MathX";
 import StringX from "../../nonview/base/StringX";
+import RegionEntIdx from "../../nonview/core/RegionEntIdx";
 import Seats from "../../nonview/core/Seats";
 
 const STYLE_BOX = { width: 100 };
@@ -28,10 +29,15 @@ export default function DemographicView({
   funcDemographicsInfo,
   nSeats,
   fairSeats,
+  totalWastage,
 }) {
   const demographicInfo = funcDemographicsInfo(idList);
   const totalPop = MathX.sumGeneric(Object.values(demographicInfo), (x) => x);
   const itemToSeats = Seats.divideSeats(nSeats, demographicInfo);
+
+  const wastage = totalWastage
+    ? totalWastage
+    : RegionEntIdx.getWastage(idList, funcDemographicsInfo);
 
   return (
     <Box sx={STYLE_BOX}>
@@ -74,6 +80,18 @@ export default function DemographicView({
                   </TableRow>
                 );
               })}
+            <TableRow>
+              <TableCell>
+                <Typography variant="caption">{"Wastage"}</Typography>
+              </TableCell>
+
+              <TableCell align="right">
+                <Typography variant="caption">
+                  {StringX.formatPercent(wastage, 1)}
+                </Typography>
+              </TableCell>
+              <TableCell />
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
