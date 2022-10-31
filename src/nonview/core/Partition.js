@@ -55,7 +55,7 @@ export default class Partition {
     let bestIDList1,
       bestIDList2,
       bestLabel,
-      bestDiffScore = undefined;
+      bestWastage = undefined;
 
     for (let { funcSort, label } of funcSortInfoList) {
       const sortedIdList = funcSort(idList);
@@ -79,9 +79,9 @@ export default class Partition {
         return null;
       }
 
-      const diffScore = RegionEntIdx.getDiffScore(idList1, idList2);
-      if (bestDiffScore === undefined || bestDiffScore < diffScore) {
-        bestDiffScore = diffScore;
+      const diffScore = RegionEntIdx.getWastage(idList1, idList2);
+      if (bestWastage === undefined || bestWastage < diffScore) {
+        bestWastage = diffScore;
         bestLabel = label;
         bestIDList1 = idList1;
         bestIDList2 = idList2;

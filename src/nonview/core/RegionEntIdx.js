@@ -143,14 +143,14 @@ export default class RegionEntIdx {
     });
   }
 
-  static getDiffScore(idList1, idList2) {
+  static getWastage(idList1, idList2) {
     return (
-      RegionEntIdx.getDiffScoreHelper(
+      RegionEntIdx.getWastageHelper(
         idList1,
         idList2,
         RegionEntIdx.getEthnicityInfo
       ) +
-      RegionEntIdx.getDiffScoreHelper(
+      RegionEntIdx.getWastageHelper(
         idList1,
         idList2,
         RegionEntIdx.getReligionInfo
@@ -158,7 +158,7 @@ export default class RegionEntIdx {
     );
   }
 
-  static getDiffScoreHelper(idList1, idList2, funcDemographics) {
+  static getWastageHelper(idList1, idList2, funcDemographics) {
     const vec1 = funcDemographics(idList1);
     const vec2 = funcDemographics(idList2);
 
