@@ -1,6 +1,6 @@
-import EntTypes from "../../../nonview/base/EntTypes";
 import Cache from "../../../nonview/base/Cache";
-import WWW from "../../../nonview/base/WWW";
+import EntTypes from "../../../nonview/base/EntTypes";
+import { jsonNonCache } from "../../../nonview/base/WWW";
 
 const URL_BASE = "https://raw.githubusercontent.com/nuuuwan/geo-data/main/";
 
@@ -21,7 +21,7 @@ export default class GeoJSON {
   async readNoCache() {
     const regionType = EntTypes.getEntType(this.regionID);
     const regionIDField = EntTypes.getIDField(regionType);
-    let rawData = await WWW.jsonNonCache(this.rawDataURL);
+    let rawData = await jsonNonCache(this.rawDataURL);
 
     rawData.features = rawData.features.filter(
       function (feature) {
@@ -32,9 +32,6 @@ export default class GeoJSON {
   }
 
   async read() {
-    return await Cache.get(
-      this.cacheKey,
-      this.readNoCache.bind(this),
-    );
+    return await Cache.get(this.cacheKey, this.readNoCache.bind(this));
   }
 }

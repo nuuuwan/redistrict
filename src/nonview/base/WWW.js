@@ -14,7 +14,7 @@ const TSV_HEADERS = {
   },
 };
 
-async function jsonNonCache(url) {
+export async function jsonNonCache(url) {
   const response = await fetch(url, JSON_HEADERS);
   const dataJson = await response.json();
   return dataJson;

@@ -5,13 +5,13 @@ export default class Cache {
       return JSON.parse(hotItem);
     }
 
-    console.debug('Cache.get: ', cacheKey);
+    console.debug("Cache.get: ", cacheKey);
     const coldItem = await asyncFallback();
     try {
       localStorage.setItem(cacheKey, JSON.stringify(coldItem));
     } catch (QuotaExceededError) {
       localStorage.clear();
-      console.warn('Cache.get: localStorage.clear()');
+      console.warn("Cache.get: localStorage.clear()");
     }
     return coldItem;
   }
