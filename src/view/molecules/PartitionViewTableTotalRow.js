@@ -38,14 +38,16 @@ export default function PartitionViewTableTotalRow({
       <StyledTableCell />
       <StyledTableCell>
         <DemographicView
-          demographicInfo={RegionEntIdx.getEthnicityInfo(idList)}
+          idList={idList}
+          funcDemographicsInfo={RegionEntIdx.getEthnicityInfo}
           nSeats={totalNSeats}
           fairSeats={fairSeatsEthnicity}
         />
       </StyledTableCell>
       <StyledTableCell>
         <DemographicView
-          demographicInfo={RegionEntIdx.getReligionInfo(idList)}
+          idList={idList}
+          funcDemographicsInfo={RegionEntIdx.getReligionInfo}
           nSeats={totalNSeats}
           fairSeats={fairSeatsReligion}
         />

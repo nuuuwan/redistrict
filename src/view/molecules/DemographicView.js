@@ -24,10 +24,12 @@ const STYLE_TABLE = {
 };
 
 export default function DemographicView({
-  demographicInfo,
+  idList,
+  funcDemographicsInfo,
   nSeats,
   fairSeats,
 }) {
+  const demographicInfo = funcDemographicsInfo(idList);
   const totalPop = MathX.sumGeneric(Object.values(demographicInfo), (x) => x);
   const itemToSeats = Seats.divideSeats(nSeats, demographicInfo);
 
