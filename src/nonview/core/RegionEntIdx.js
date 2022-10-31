@@ -31,19 +31,26 @@ export default class RegionEntIdx {
   }
 
   getSortedSN(idList) {
-    return this.getSorted(idList, (x) => x.lat);
+    return this.getSortedAtAngle(idList, 90);
   }
 
   getSortedNS(idList) {
-    return this.getSorted(idList, (x) => -x.lat);
+    return this.getSortedAtAngle(idList, 270);
   }
 
   getSortedWE(idList) {
-    return this.getSorted(idList, (x) => x.lng);
+    return this.getSortedAtAngle(idList, 0);
   }
 
   getSortedEW(idList) {
-    return this.getSorted(idList, (x) => -x.lng);
+    return this.getSortedAtAngle(idList, 180);
+  }
+
+  getSortedAtAngle(idList, theta) {
+    const thetaRad = (theta * Math.PI) / 180;
+    const cosTheta = Math.cos(thetaRad);
+    const sinTheta = Math.sin(thetaRad);
+    return this.getSorted(idList, (x) => x.lng * cosTheta + x.lat * sinTheta);
   }
 
   getLatLngList(idList) {
