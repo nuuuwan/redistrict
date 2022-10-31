@@ -9,12 +9,9 @@ export default class DictUtils {
   }
 
   static mapValues(d, funcMapValue) {
-    return Object.entries(d).reduce(
-      function(d2, [k, v]) {
-        d2[k] = funcMapValue(v);
-        return d2;
-      },
-      {},
-    );
+    return Object.entries(d).reduce(function (d2, [k, v]) {
+      d2[k] = funcMapValue(v);
+      return d2;
+    }, {});
   }
 }
