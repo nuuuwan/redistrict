@@ -52,7 +52,7 @@ export default function PartitionViewTable({
           totalSeatError +
           RegionEntIdx.getSeatError(row.idList, row.nSeats, funcDemographicsInfo)
         );
-      }, 0) / rows.length
+      }, 0) 
     );
   }
 
