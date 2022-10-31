@@ -50,17 +50,25 @@ export default function PartitionViewTable({
       rows.reduce(function (totalSeatError, row) {
         return (
           totalSeatError +
-          RegionEntIdx.getSeatError(row.idList, row.nSeats, funcDemographicsInfo)
+          RegionEntIdx.getSeatError(
+            row.idList,
+            row.nSeats,
+            funcDemographicsInfo
+          )
         );
-      }, 0) 
+      }, 0) / rows.length
     );
   }
 
   const fairSeatsEthnicity = getFairSeats(RegionEntIdx.getEthnicityInfo);
   const fairSeatsReligion = getFairSeats(RegionEntIdx.getReligionInfo);
 
-  const totalSeatErrorEthnicity = getTotalSeatError(RegionEntIdx.getEthnicityInfo);
-  const totalSeatErrorReligion = getTotalSeatError(RegionEntIdx.getReligionInfo);
+  const totalSeatErrorEthnicity = getTotalSeatError(
+    RegionEntIdx.getEthnicityInfo
+  );
+  const totalSeatErrorReligion = getTotalSeatError(
+    RegionEntIdx.getReligionInfo
+  );
 
   return (
     <TableContainer component={Box}>
