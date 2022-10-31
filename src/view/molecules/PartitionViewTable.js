@@ -45,7 +45,7 @@ export default function PartitionViewTable({
     }, {});
   }
 
-  const fairSeatsEthnic = getFairSeats(RegionEntIdx.getEthnicityInfo);
+  const fairSeatsEthnicity = getFairSeats(RegionEntIdx.getEthnicityInfo);
   const fairSeatsReligion = getFairSeats(RegionEntIdx.getReligionInfo);
 
   return (
@@ -57,7 +57,7 @@ export default function PartitionViewTable({
             totalNSeats={totalNSeats}
             totalPop={totalPop}
             idList={regionEntIdx.idList}
-            fairSeatsEthnic={fairSeatsEthnic}
+            fairSeatsEthnicity={fairSeatsEthnicity}
             fairSeatsReligion={fairSeatsReligion}
           />
           {rows.map(function (row) {

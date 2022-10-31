@@ -17,7 +17,7 @@ export default function PartitionViewTableTotalRow({
   totalNSeats,
   totalPop,
   idList,
-  fairSeatsEthnic,
+  fairSeatsEthnicity,
   fairSeatsReligion,
 }) {
   return (
@@ -40,7 +40,7 @@ export default function PartitionViewTableTotalRow({
         <DemographicView
           demographicInfo={RegionEntIdx.getEthnicityInfo(idList)}
           nSeats={totalNSeats}
-          fairSeats={fairSeatsEthnic}
+          fairSeats={fairSeatsEthnicity}
         />
       </StyledTableCell>
       <StyledTableCell>
