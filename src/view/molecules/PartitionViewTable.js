@@ -45,12 +45,12 @@ export default function PartitionViewTable({
     }, {});
   }
 
-  function getTotalWastage(funcDemographicsInfo) {
+  function getTotalSeatError(funcDemographicsInfo) {
     return (
-      rows.reduce(function (totalWastage, row) {
+      rows.reduce(function (totalSeatError, row) {
         return (
-          totalWastage +
-          RegionEntIdx.getWastage(row.idList, funcDemographicsInfo)
+          totalSeatError +
+          RegionEntIdx.getSeatError(row.idList, row.nSeats, funcDemographicsInfo)
         );
       }, 0) / rows.length
     );
@@ -59,8 +59,8 @@ export default function PartitionViewTable({
   const fairSeatsEthnicity = getFairSeats(RegionEntIdx.getEthnicityInfo);
   const fairSeatsReligion = getFairSeats(RegionEntIdx.getReligionInfo);
 
-  const totalWastageEthnicity = getTotalWastage(RegionEntIdx.getEthnicityInfo);
-  const totalWastageReligion = getTotalWastage(RegionEntIdx.getReligionInfo);
+  const totalSeatErrorEthnicity = getTotalSeatError(RegionEntIdx.getEthnicityInfo);
+  const totalSeatErrorReligion = getTotalSeatError(RegionEntIdx.getReligionInfo);
 
   return (
     <TableContainer component={Box}>
@@ -73,8 +73,8 @@ export default function PartitionViewTable({
             idList={regionEntIdx.idList}
             fairSeatsEthnicity={fairSeatsEthnicity}
             fairSeatsReligion={fairSeatsReligion}
-            totalWastageEthnicity={totalWastageEthnicity}
-            totalWastageReligion={totalWastageReligion}
+            totalSeatErrorEthnicity={totalSeatErrorEthnicity}
+            totalSeatErrorReligion={totalSeatErrorReligion}
           />
           {rows.map(function (row) {
             return (

@@ -19,8 +19,8 @@ export default function PartitionViewTableTotalRow({
   idList,
   fairSeatsEthnicity,
   fairSeatsReligion,
-  totalWastageEthnicity,
-  totalWastageReligion,
+  totalSeatErrorEthnicity,
+  totalSeatErrorReligion,
 }) {
   return (
     <TableRow>
@@ -44,7 +44,7 @@ export default function PartitionViewTableTotalRow({
           funcDemographicsInfo={RegionEntIdx.getEthnicityInfo}
           nSeats={totalNSeats}
           fairSeats={fairSeatsEthnicity}
-          totalWastage={totalWastageEthnicity}
+          totalSeatError={totalSeatErrorEthnicity}
         />
       </StyledTableCell>
       <StyledTableCell>
@@ -53,7 +53,7 @@ export default function PartitionViewTableTotalRow({
           funcDemographicsInfo={RegionEntIdx.getReligionInfo}
           nSeats={totalNSeats}
           fairSeats={fairSeatsReligion}
-          totalWastage={totalWastageReligion}
+          totalSeatError={totalSeatErrorReligion}
         />
       </StyledTableCell>
       <StyledTableCell />

@@ -7,4 +7,14 @@ export default class DictUtils {
       return filteredDict;
     }, {});
   }
+
+  static mapValues(d, funcMapValue) {
+    return Object.entries(d).reduce(
+      function(d2, [k, v]) {
+        d2[k] = funcMapValue(v);
+        return d2;
+      },
+      {},
+    );
+  }
 }

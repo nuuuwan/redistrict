@@ -2,7 +2,8 @@ import BBox from "../../nonview/base/geo/BBox";
 import EntTypes, { ENT_TYPES } from "../../nonview/base/EntTypes";
 import MathX from "../../nonview/base/MathX";
 import CommonStore from "../../nonview/core/CommonStore";
-
+import Seats from "../../nonview/core/Seats";
+import DictUtils from "../../nonview/base/DictUtils";
 export default class RegionEntIdx {
   constructor(idx) {
     this.idx = idx;
@@ -147,7 +148,7 @@ export default class RegionEntIdx {
     });
   }
 
-  static getTotalWastage(idList) {
+  static getTotalSeatError(idList, nSeats) {
     const funcDemographicsList = [
       RegionEntIdx.getEthnicityInfo,
       RegionEntIdx.getReligionInfo,
@@ -155,14 +156,24 @@ export default class RegionEntIdx {
     return (
       MathX.sum(
         funcDemographicsList.map(function (funcDemographics) {
-          return RegionEntIdx.getWastage(idList, funcDemographics);
+          return RegionEntIdx.getSeatError(idList, nSeats, funcDemographics);
         })
       ) / funcDemographicsList.length
     );
   }
 
-  static getWastage(idList, funcDemographics) {
-    const d = funcDemographics(idList);
-    return 1 - Object.values(d)[0];
+  static getSeatError(idList, nSeats, funcDemographics) {
+    const demoToP = funcDemographics(idList);
+    const demoToSeats = Seats.divideSeats(nSeats, demoToP);
+    const demoToSeatsFair = DictUtils.mapValues(
+      demoToP,
+      p => p * nSeats,
+    );
+    return Object.entries(demoToSeats).reduce(
+      function(seatError, [demo, seats]) {
+        return seatError + Math.abs(demoToSeatsFair[demo] - seats);
+      },
+      0
+    )
   }
 }

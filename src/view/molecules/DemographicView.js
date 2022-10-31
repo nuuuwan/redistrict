@@ -29,15 +29,15 @@ export default function DemographicView({
   funcDemographicsInfo,
   nSeats,
   fairSeats,
-  totalWastage,
+  totalSeatError,
 }) {
   const demographicInfo = funcDemographicsInfo(idList);
   const totalPop = MathX.sumGeneric(Object.values(demographicInfo), (x) => x);
   const itemToSeats = Seats.divideSeats(nSeats, demographicInfo);
 
-  const wastage = totalWastage
-    ? totalWastage
-    : RegionEntIdx.getWastage(idList, funcDemographicsInfo);
+  const seatError = totalSeatError
+    ? totalSeatError
+    : RegionEntIdx.getSeatError(idList, nSeats, funcDemographicsInfo);
 
   return (
     <Box sx={STYLE_BOX}>
@@ -82,12 +82,12 @@ export default function DemographicView({
               })}
             <TableRow>
               <TableCell>
-                <Typography variant="caption">{"Wastage"}</Typography>
+                <Typography variant="caption">{"SeatError"}</Typography>
               </TableCell>
 
               <TableCell align="right">
                 <Typography variant="caption">
-                  {StringX.formatPercent(wastage, 1)}
+                  {StringX.formatFloat(seatError)}
                 </Typography>
               </TableCell>
               <TableCell />

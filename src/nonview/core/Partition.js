@@ -20,6 +20,7 @@ export default class Partition {
 
   partitionSingle(idList, nSeats, maxSeatsPerGroup) {
     const nSeats1 = Partition.getPartition1Seats(nSeats, maxSeatsPerGroup);
+    const nSeats2 = nSeats - nSeats1;
 
     const totalPop = MathX.sumGeneric(idList, (id) =>
       parseInt(this.regionEntIdx.get(id).population)
@@ -55,7 +56,7 @@ export default class Partition {
     let bestIDList1,
       bestIDList2,
       bestLabel,
-      bestWastage = undefined;
+      bestSeatError = undefined;
 
     for (let { funcSort, label } of funcSortInfoList) {
       const sortedIdList = funcSort(idList);
@@ -79,11 +80,11 @@ export default class Partition {
         return null;
       }
 
-      const wastage =
-        RegionEntIdx.getTotalWastage(idList1) +
-        RegionEntIdx.getTotalWastage(idList2);
-      if (bestWastage === undefined || wastage < bestWastage) {
-        bestWastage = wastage;
+      const seatError =
+        RegionEntIdx.getTotalSeatError(idList1, nSeats) +
+        RegionEntIdx.getTotalSeatError(idList2, nSeats2);
+      if (bestSeatError === undefined || seatError < bestSeatError) {
+        bestSeatError = seatError;
         bestLabel = label;
         bestIDList1 = idList1;
         bestIDList2 = idList2;
@@ -97,7 +98,7 @@ export default class Partition {
       },
       [bestLabel + "1"]: {
         idList: bestIDList2,
-        nSeats: nSeats - nSeats1,
+        nSeats: nSeats2,
       },
     };
   }
