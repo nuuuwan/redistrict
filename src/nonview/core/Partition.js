@@ -79,7 +79,9 @@ export default class Partition {
         return null;
       }
 
-      const wastage = RegionEntIdx.getWastage(idList1, idList2);
+      const wastage =
+        RegionEntIdx.getTotalWastage(idList1) +
+        RegionEntIdx.getTotalWastage(idList2);
       if (bestWastage === undefined || wastage < bestWastage) {
         bestWastage = wastage;
         bestLabel = label;

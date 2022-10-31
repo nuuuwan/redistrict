@@ -114,14 +114,14 @@ export default class RegionEntIdx {
 
     info["others"] = totalPop - MathX.sum(Object.values(info));
 
-    return Object.entries(info).sort(
-      function(a,b) {
+    return Object.entries(info)
+      .sort(function (a, b) {
         return b[1] - a[1];
-      }
-    ).reduce(function (infoFinal, [k, v]) {
-      infoFinal[k] = info[k] / totalPop;
-      return infoFinal;
-    }, {});
+      })
+      .reduce(function (infoFinal, [k, v]) {
+        infoFinal[k] = info[k] / totalPop;
+        return infoFinal;
+      }, {});
   }
 
   static getEthnicityInfo(idList) {
@@ -147,24 +147,22 @@ export default class RegionEntIdx {
     });
   }
 
-  static getWastage(idList1, idList2) {
+  static getTotalWastage(idList) {
+    const funcDemographicsList = [
+      RegionEntIdx.getEthnicityInfo,
+      RegionEntIdx.getReligionInfo,
+    ];
     return (
-      RegionEntIdx.getWastageHelper(
-        idList1,
-        idList2,
-        RegionEntIdx.getEthnicityInfo
-      ) +
-      RegionEntIdx.getWastageHelper(
-        idList1,
-        idList2,
-        RegionEntIdx.getReligionInfo
-      )
+      MathX.sum(
+        funcDemographicsList.map(function (funcDemographics) {
+          return RegionEntIdx.getWastage(idList, funcDemographics);
+        })
+      ) / funcDemographicsList.length
     );
   }
 
-  static getWastageHelper(idList1, idList2, funcDemographics) {
-    const vec1 = funcDemographics(idList1);
-    const vec2 = funcDemographics(idList2);
-    return 1 -  (Object.values(vec1)[0] + Object.values(vec2)[0]) / 2;
+  static getWastage(idList, funcDemographics) {
+    const d = funcDemographics(idList);
+    return 1 - Object.values(d)[0];
   }
 }
