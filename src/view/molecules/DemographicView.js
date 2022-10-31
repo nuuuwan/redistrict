@@ -82,7 +82,7 @@ export default function DemographicView({
               })}
             <TableRow>
               <TableCell>
-                <Typography variant="caption">{"SeatError"}</Typography>
+                <Typography variant="caption">{"Seat Error"}</Typography>
               </TableCell>
 
               <TableCell align="right">
