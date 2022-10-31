@@ -21,7 +21,7 @@ export default class GeoJSON {
   async readNoCache() {
     const regionType = EntTypes.getEntType(this.regionID);
     const regionIDField = EntTypes.getIDField(regionType);
-    let rawData = await WWW.json(this.rawDataURL);
+    let rawData = await WWW.jsonNonCache(this.rawDataURL);
 
     rawData.features = rawData.features.filter(
       function (feature) {
