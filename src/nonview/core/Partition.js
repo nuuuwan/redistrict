@@ -79,9 +79,9 @@ export default class Partition {
         return null;
       }
 
-      const diffScore = RegionEntIdx.getWastage(idList1, idList2);
-      if (bestWastage === undefined || bestWastage < diffScore) {
-        bestWastage = diffScore;
+      const wastage = RegionEntIdx.getWastage(idList1, idList2);
+      if (bestWastage === undefined || wastage < bestWastage) {
+        bestWastage = wastage;
         bestLabel = label;
         bestIDList1 = idList1;
         bestIDList2 = idList2;

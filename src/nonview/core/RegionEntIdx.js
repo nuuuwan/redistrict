@@ -114,7 +114,11 @@ export default class RegionEntIdx {
 
     info["others"] = totalPop - MathX.sum(Object.values(info));
 
-    return Object.entries(info).reduce(function (infoFinal, [k, v]) {
+    return Object.entries(info).sort(
+      function(a,b) {
+        return b[1] - a[1];
+      }
+    ).reduce(function (infoFinal, [k, v]) {
       infoFinal[k] = info[k] / totalPop;
       return infoFinal;
     }, {});
@@ -161,16 +165,6 @@ export default class RegionEntIdx {
   static getWastageHelper(idList1, idList2, funcDemographics) {
     const vec1 = funcDemographics(idList1);
     const vec2 = funcDemographics(idList2);
-
-    const diffScore = Object.entries(vec1).reduce(function (
-      diffScore,
-      [k, v1]
-    ) {
-      const v2 = vec2[k];
-      return diffScore + Math.abs(v1 - v2);
-    },
-    0);
-
-    return diffScore;
+    return 1 -  (Object.values(vec1)[0] + Object.values(vec2)[0]) / 2;
   }
 }
