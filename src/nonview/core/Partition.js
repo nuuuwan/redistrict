@@ -24,7 +24,7 @@ export default class Partition {
     const nSeats2 = nSeats - nSeats1;
 
     const totalPop = MathX.sumGeneric(idList, (id) =>
-      parseInt(this.regionEntIdx.get(id).population)
+      parseInt(this.regionEntIdx.get(id).pop)
     );
     const partitionPop = (totalPop * nSeats1) / nSeats;
 

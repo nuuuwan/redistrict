@@ -3,11 +3,15 @@ import DictUtils from "../../nonview/base/DictUtils";
 import EntTypes, { ENT_TYPES } from "../../nonview/base/EntTypes";
 import MathX from "../../nonview/base/MathX";
 import CommonStore from "../../nonview/core/CommonStore";
+import Region from "../../nonview/core/Region";
 import Seats from "../../nonview/core/Seats";
 
 export default class RegionEntIdx {
   constructor(idx) {
-    this.idx = idx;
+    this.idx = Object.entries(idx).reduce(function (idx, [id, ent]) {
+      idx[id] = Region.fromEnt(ent);
+      return idx;
+    }, {});
   }
 
   get(id) {
@@ -87,16 +91,15 @@ export default class RegionEntIdx {
 
     const nameRegionType = RegionEntIdx.getNameRegionType(subRegionType);
     const regionIndex = commonStore.allEntIndex[nameRegionType];
-    const regionIDField = EntTypes.getIDField(nameRegionType);
 
     const regionIDToPop = {};
     for (let subRegionID of regionIDList) {
-      const regionEnt = subRegionIndex[subRegionID];
-      const regionID = regionEnt[regionIDField];
+      const regionEnt = Region.fromEnt(subRegionIndex[subRegionID]);
+      const regionID = regionEnt.getParentID(nameRegionType);
       if (!regionIDToPop[regionID]) {
         regionIDToPop[regionID] = 0;
       }
-      regionIDToPop[regionID] += parseInt(regionEnt.population);
+      regionIDToPop[regionID] += parseInt(regionEnt.pop);
     }
 
     const mostPopRegionID = Object.entries(regionIDToPop).sort(
