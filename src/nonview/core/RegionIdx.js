@@ -8,8 +8,16 @@ import Seats from "../../nonview/core/Seats";
 
 export default class RegionIdx {
   constructor(idx) {
-    this.idx = Object.entries(idx).reduce(function (idx, [id, ent]) {
-      idx[id] = Region.fromEnt(ent);
+    this.idx = Object.entries(idx).map(
+      function([id, ent]) {
+        return [id, Region.fromEnt(ent)];
+      }
+    ).filter(
+      function([id, region]) {
+        return !region.isPostal;
+      }
+    ).reduce(function (idx, [id, region]) {
+      idx[id] = region;
       return idx;
     }, {});
   }
