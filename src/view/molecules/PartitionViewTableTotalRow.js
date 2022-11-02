@@ -2,7 +2,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 
 import StringX from "../../nonview/base/StringX";
-import RegionEntIdx from "../../nonview/core/RegionEntIdx";
+import RegionIdx from "../../nonview/core/RegionIdx";
 
 import DemographicView from "../../view/molecules/DemographicView";
 import { styled } from "@mui/system";
@@ -47,7 +47,7 @@ export default function PartitionViewTableTotalRow({
       <StyledTableCell>
         <DemographicView
           idList={idList}
-          funcDemographicsInfo={RegionEntIdx.getEthnicityInfo}
+          funcDemographicsInfo={RegionIdx.getEthnicityInfo}
           nSeats={totalNSeats}
           fairSeats={fairSeatsEthnicity}
           totalUnfairness={totalUnfairnessEthnicity}
@@ -56,7 +56,7 @@ export default function PartitionViewTableTotalRow({
       <StyledTableCell>
         <DemographicView
           idList={idList}
-          funcDemographicsInfo={RegionEntIdx.getReligionInfo}
+          funcDemographicsInfo={RegionIdx.getReligionInfo}
           nSeats={totalNSeats}
           fairSeats={fairSeatsReligion}
           totalUnfairness={totalUnfairnessReligion}

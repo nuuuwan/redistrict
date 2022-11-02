@@ -7,8 +7,8 @@ export default function PartitionView({ nSeats, partition, subRegionType }) {
   const groupToName = partition.getGroupToName();
   const groupToSeats = Seats.divideSeatsForPartition(nSeats, partition);
 
-  const regionEntIdx = partition.regionEntIdx;
-  const totalPop = regionEntIdx.getTotalPop(regionEntIdx.idList);
+  const regionIdx = partition.regionIdx;
+  const totalPop = regionIdx.getTotalPop(regionIdx.idList);
 
   const sortedGroups = Object.keys(groupToIDList).sort();
   const nGroups = sortedGroups.length;
@@ -27,7 +27,7 @@ export default function PartitionView({ nSeats, partition, subRegionType }) {
     <PartitionViewTable
       rows={rows}
       subRegionType={subRegionType}
-      regionEntIdx={regionEntIdx}
+      regionIdx={regionIdx}
       totalPop={totalPop}
       nGroups={nGroups}
       nSeats={nSeats}

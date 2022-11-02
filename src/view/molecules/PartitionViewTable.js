@@ -4,7 +4,7 @@ import TableBody from "@mui/material/TableBody";
 import { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 
-import RegionEntIdx from "../../nonview/core/RegionEntIdx";
+import RegionIdx from "../../nonview/core/RegionIdx";
 import Seats from "../../nonview/core/Seats";
 
 import PartitionViewTableHeader from "../../view/molecules/PartitionViewTableHeader";
@@ -23,7 +23,7 @@ const STYLE_TABLE = {
 
 export default function PartitionViewTable({
   rows,
-  regionEntIdx,
+  regionIdx,
   subRegionType,
   totalPop,
   nSeats,
@@ -51,7 +51,7 @@ export default function PartitionViewTable({
       rows.reduce(function (totalUnfairness, row) {
         return (
           totalUnfairness +
-          RegionEntIdx.getUnfairness(
+          RegionIdx.getUnfairness(
             row.idList,
             row.nSeats,
             funcDemographicsInfo
@@ -61,14 +61,14 @@ export default function PartitionViewTable({
     );
   }
 
-  const fairSeatsEthnicity = getFairSeats(RegionEntIdx.getEthnicityInfo);
-  const fairSeatsReligion = getFairSeats(RegionEntIdx.getReligionInfo);
+  const fairSeatsEthnicity = getFairSeats(RegionIdx.getEthnicityInfo);
+  const fairSeatsReligion = getFairSeats(RegionIdx.getReligionInfo);
 
   const totalUnfairnessEthnicity = getTotalUnfairness(
-    RegionEntIdx.getEthnicityInfo
+    RegionIdx.getEthnicityInfo
   );
   const totalUnfairnessReligion = getTotalUnfairness(
-    RegionEntIdx.getReligionInfo
+    RegionIdx.getReligionInfo
   );
 
   return (
@@ -79,7 +79,7 @@ export default function PartitionViewTable({
           <PartitionViewTableTotalRow
             totalNSeats={totalNSeats}
             totalPop={totalPop}
-            idList={regionEntIdx.idList}
+            idList={regionIdx.idList}
             fairSeatsEthnicity={fairSeatsEthnicity}
             fairSeatsReligion={fairSeatsReligion}
             totalUnfairnessEthnicity={totalUnfairnessEthnicity}
@@ -90,7 +90,7 @@ export default function PartitionViewTable({
               <PartitionViewTableRow
                 key={row.group}
                 row={row}
-                regionEntIdx={regionEntIdx}
+                regionIdx={regionIdx}
                 totalPop={totalPop}
                 nSeats={nSeats}
                 nGroups={nGroups}

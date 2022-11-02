@@ -30,15 +30,15 @@ export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
   const groups = Object.keys(groupToIDList).sort();
   const nGroups = groups.length;
 
-  const regionEntIdx = partition.regionEntIdx;
+  const regionIdx = partition.regionIdx;
   const groupToSeats = Seats.divideSeatsForPartition(nSeats, partition);
-  const totalPop = regionEntIdx.totalPop;
+  const totalPop = regionIdx.totalPop;
 
   const innerPolygons = groups.map(function (group, iGroup) {
     const idList = groupToIDList[group];
     const featureList = idList.map((id) => idToFeature[id]);
 
-    const totalGroupPop = regionEntIdx.getTotalPop(idList);
+    const totalGroupPop = regionIdx.getTotalPop(idList);
     const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
     const nSeatsFairPerNSeats2 = nSeatsFair / groupToSeats[group];
 

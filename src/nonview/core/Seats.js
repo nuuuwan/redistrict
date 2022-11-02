@@ -27,7 +27,7 @@ export default class Seats {
     let totalPop = 0;
     const groupToIDList = partition.getGroupToIDList();
     for (let [group, idList] of Object.entries(groupToIDList)) {
-      const pop = partition.regionEntIdx.getTotalPop(idList);
+      const pop = partition.regionIdx.getTotalPop(idList);
       totalPop += pop;
       groupToPop[group] = pop;
     }

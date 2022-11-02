@@ -6,7 +6,7 @@ import CommonStore from "../../nonview/core/CommonStore";
 import Region from "../../nonview/core/Region";
 import Seats from "../../nonview/core/Seats";
 
-export default class RegionEntIdx {
+export default class RegionIdx {
   constructor(idx) {
     this.idx = Object.entries(idx).reduce(function (idx, [id, ent]) {
       idx[id] = Region.fromEnt(ent);
@@ -89,7 +89,7 @@ export default class RegionEntIdx {
     const subRegionType = EntTypes.getEntType(regionIDList[0]);
     const subRegionIndex = commonStore.allEntIndex[subRegionType];
 
-    const nameRegionType = RegionEntIdx.getNameRegionType(subRegionType);
+    const nameRegionType = RegionIdx.getNameRegionType(subRegionType);
     const regionIndex = commonStore.allEntIndex[nameRegionType];
 
     const regionIDToPop = {};
@@ -142,7 +142,7 @@ export default class RegionEntIdx {
 
   static getEthnicityInfo(idList) {
     const commonStore = CommonStore.getSingleton();
-    return RegionEntIdx.getGenericTableInfo(
+    return RegionIdx.getGenericTableInfo(
       idList,
       commonStore.ethnicityTable,
       {
@@ -155,7 +155,7 @@ export default class RegionEntIdx {
 
   static getReligionInfo(idList) {
     const commonStore = CommonStore.getSingleton();
-    return RegionEntIdx.getGenericTableInfo(idList, commonStore.religionTable, {
+    return RegionIdx.getGenericTableInfo(idList, commonStore.religionTable, {
       buddhist: ["buddhist"],
       hindu: ["hindu"],
       islam: ["islam"],
@@ -165,13 +165,13 @@ export default class RegionEntIdx {
 
   static getTotalUnfairness(idList, nSeats) {
     const funcDemographicsList = [
-      RegionEntIdx.getEthnicityInfo,
-      RegionEntIdx.getReligionInfo,
+      RegionIdx.getEthnicityInfo,
+      RegionIdx.getReligionInfo,
     ];
     return (
       MathX.sum(
         funcDemographicsList.map(function (funcDemographics) {
-          return RegionEntIdx.getUnfairness(idList, nSeats, funcDemographics);
+          return RegionIdx.getUnfairness(idList, nSeats, funcDemographics);
         })
       ) / funcDemographicsList.length
     );

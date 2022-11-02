@@ -4,7 +4,7 @@ import TableRow from "@mui/material/TableRow";
 import Color from "../../nonview/base/Color";
 import StringX from "../../nonview/base/StringX";
 import Partition from "../../nonview/core/Partition";
-import RegionEntIdx from "../../nonview/core/RegionEntIdx";
+import RegionIdx from "../../nonview/core/RegionIdx";
 
 import DemographicView from "../../view/molecules/DemographicView";
 
@@ -13,20 +13,20 @@ const MAX_IDS_TO_DISPLAY = 5;
 
 export default function PartitionViewTableRow({
   row,
-  regionEntIdx,
+  regionIdx,
   nSeats,
   totalPop,
   nGroups,
 }) {
   let regions = row.idList
     .slice(0, MAX_IDS_TO_DISPLAY)
-    .map((id) => regionEntIdx.get(id).name)
+    .map((id) => regionIdx.get(id).name)
     .join(", ");
   if (row.idList.length > MAX_IDS_TO_DISPLAY) {
     regions += `...(${row.idList.length})`;
   }
 
-  const totalGroupPop = regionEntIdx.getTotalPop(row.idList);
+  const totalGroupPop = regionIdx.getTotalPop(row.idList);
   const sx = {
     ...{ background: Color.getForIter(row.iGroup, nGroups) },
     ...STYLE_GROUP,
@@ -61,14 +61,14 @@ export default function PartitionViewTableRow({
       <TableCell align="left">
         <DemographicView
           idList={row.idList}
-          funcDemographicsInfo={RegionEntIdx.getEthnicityInfo}
+          funcDemographicsInfo={RegionIdx.getEthnicityInfo}
           nSeats={row.nSeats}
         />
       </TableCell>
       <TableCell align="left">
         <DemographicView
           idList={row.idList}
-          funcDemographicsInfo={RegionEntIdx.getReligionInfo}
+          funcDemographicsInfo={RegionIdx.getReligionInfo}
           nSeats={row.nSeats}
         />
       </TableCell>

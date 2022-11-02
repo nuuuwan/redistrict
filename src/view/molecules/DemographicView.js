@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import GIG2TableStyle from "../../nonview/base/GIG2TableStyle";
 import MathX from "../../nonview/base/MathX";
 import StringX from "../../nonview/base/StringX";
-import RegionEntIdx from "../../nonview/core/RegionEntIdx";
+import RegionIdx from "../../nonview/core/RegionIdx";
 import Seats from "../../nonview/core/Seats";
 
 const STYLE_BOX = { width: 100 };
@@ -37,7 +37,7 @@ export default function DemographicView({
 
   const unfairness = totalUnfairness
     ? totalUnfairness
-    : RegionEntIdx.getUnfairness(idList, nSeats, funcDemographicsInfo);
+    : RegionIdx.getUnfairness(idList, nSeats, funcDemographicsInfo);
 
   return (
     <Box sx={STYLE_BOX}>

@@ -1,13 +1,13 @@
 import Color from "../../nonview/base/Color";
 import MathX from "../../nonview/base/MathX";
-import RegionEntIdx from "../../nonview/core/RegionEntIdx";
+import RegionIdx from "../../nonview/core/RegionIdx";
 
 export default class Partition {
-  constructor(regionEntIdx, nSeats) {
-    this.regionEntIdx = new RegionEntIdx(regionEntIdx);
+  constructor(regionIdx, nSeats) {
+    this.regionIdx = new RegionIdx(regionIdx);
     this.groupToIDListAndNSeats = {
       "-": {
-        idList: this.regionEntIdx.idList,
+        idList: this.regionIdx.idList,
         nSeats,
       },
     };
@@ -24,7 +24,7 @@ export default class Partition {
     const nSeats2 = nSeats - nSeats1;
 
     const totalPop = MathX.sumGeneric(idList, (id) =>
-      parseInt(this.regionEntIdx.get(id).pop)
+      parseInt(this.regionIdx.get(id).pop)
     );
     const partitionPop = (totalPop * nSeats1) / nSeats;
 
@@ -33,7 +33,7 @@ export default class Partition {
       bestLabel,
       bestUnfairness = undefined;
 
-    const { latSpan, lngSpan } = this.regionEntIdx.getLatLngSpans(idList);
+    const { latSpan, lngSpan } = this.regionIdx.getLatLngSpans(idList);
 
     let thetaList;
     const K = 1.05;
@@ -47,14 +47,14 @@ export default class Partition {
 
     for (let theta of thetaList) {
       const label = "t" + theta;
-      const sortedIdList = this.regionEntIdx.getSortedAtAngle(idList, theta);
+      const sortedIdList = this.regionIdx.getSortedAtAngle(idList, theta);
 
       let bestI;
       let bestDiff = undefined;
       let cumPop = 0;
       for (let i in sortedIdList) {
         const id = sortedIdList[i];
-        const pop = this.regionEntIdx.get(id).pop;
+        const pop = this.regionIdx.get(id).pop;
         const diff = Math.abs(cumPop - partitionPop);
 
         if (bestDiff === undefined || diff < bestDiff) {
@@ -73,8 +73,8 @@ export default class Partition {
       }
 
       const unfairness =
-        RegionEntIdx.getTotalUnfairness(idList1, nSeats) +
-        RegionEntIdx.getTotalUnfairness(idList2, nSeats2);
+        RegionIdx.getTotalUnfairness(idList1, nSeats) +
+        RegionIdx.getTotalUnfairness(idList2, nSeats2);
       if (bestUnfairness === undefined || unfairness < bestUnfairness) {
         bestUnfairness = unfairness;
         bestLabel = label;
@@ -134,7 +134,7 @@ export default class Partition {
     for (let [group, { idList }] of Object.entries(
       this.groupToIDListAndNSeats
     )) {
-      const name = RegionEntIdx.getMostCommonRegionName(idList);
+      const name = RegionIdx.getMostCommonRegionName(idList);
       if (!nameCount[name]) {
         nameCount[name] = 0;
         nameCountFinal[name] = 0;

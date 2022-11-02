@@ -115,12 +115,12 @@ export default class MapPageState extends Component {
       isChangedNSeats ||
       isChangedGeoJSON
     ) {
-      const regionEntIdx = Ents.getEntIndexForSubRegions(
+      const regionIdx = Ents.getEntIndexForSubRegions(
         commonStoreSingleton.allEntIndex,
         regionID,
         subRegionType
       );
-      partition = new Partition(regionEntIdx, nSeats);
+      partition = new Partition(regionIdx, nSeats);
       partition.partitionAll(maxSeatsPerGroup);
     }
 
