@@ -12,9 +12,9 @@ export default function PartitionViewTableHeader() {
   return (
     <TableHead>
       <TableRow>
-        <StyledTableCell align="left">Group</StyledTableCell>
+        <StyledTableCell align="left">New Polling Division</StyledTableCell>
         <StyledTableCell align="right">Seats</StyledTableCell>
-        <StyledTableCell align="right">Seats [Fair]</StyledTableCell>
+        <StyledTableCell align="right">E(Seats)</StyledTableCell>
         <StyledTableCell align="right">Pop.</StyledTableCell>
         <StyledTableCell align="right">Pop./Seat</StyledTableCell>
         <StyledTableCell align="left">Regions</StyledTableCell>

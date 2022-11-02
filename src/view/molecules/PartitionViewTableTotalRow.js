@@ -29,7 +29,7 @@ export default function PartitionViewTableTotalRow({
         {StringX.formatIntSmall(totalNSeats)}
       </StyledTableCell>
       <StyledTableCell align="right">
-        {"[" + StringX.formatIntSmall(totalNSeats) + "]"}
+        {StringX.formatIntSmall(totalNSeats)}
       </StyledTableCell>
       <StyledTableCell align="right">
         {StringX.formatInt(totalPop)}
@@ -37,7 +37,7 @@ export default function PartitionViewTableTotalRow({
       <StyledTableCell align="right">
         {StringX.formatInt(totalPop / totalNSeats)}
       </StyledTableCell>
-      <StyledTableCell />
+      <StyledTableCell>(all)</StyledTableCell>
       <StyledTableCell>
         <DemographicView
           idList={idList}
