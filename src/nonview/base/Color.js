@@ -27,7 +27,7 @@ export default class Color {
   }
 
   static rgba(r, g, b, a) {
-    return `rgba(${r},${g}%,${b}%,${a})`;
+    return `rgba(${r},${g},${b},${a})`;
   }
 
   static hsla(h, s, l, a) {
