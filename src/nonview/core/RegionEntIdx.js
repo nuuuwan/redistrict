@@ -14,6 +14,10 @@ export default class RegionEntIdx {
     return this.idx[id];
   }
 
+  get totalPop() {
+    return this.getTotalPop(this.idList);
+  }
+
   get idList() {
     return Object.keys(this.idx);
   }

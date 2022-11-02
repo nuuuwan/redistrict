@@ -66,7 +66,11 @@ export default class MapPage extends MapPageState {
           <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
         </Paper>
         <Box sx={STYLE_BOX_GEOJSONVIEW}>
-          <GeoJSONView geoJSON={geoJSON} partition={partition} />
+          <GeoJSONView
+            nSeats={nSeats}
+            geoJSON={geoJSON}
+            partition={partition}
+          />
         </Box>
         <Paper sx={STYLE_PAPER_RESULTS}>
           <PartitionView

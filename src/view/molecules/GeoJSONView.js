@@ -1,13 +1,16 @@
 import BBox from "../../nonview/base/geo/BBox";
 import Color from "../../nonview/base/Color";
 import LngLat from "../../nonview/base/geo/LngLat";
+import StringX from "../../nonview/base/StringX";
+import Partition from "../../nonview/core/Partition";
+import Seats from "../../nonview/core/Seats";
 
 import { FONT_FAMILY_LIST } from "../../APP_STYLES.js";
 import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
 
 const PADDING = 10;
 
-export default function GeoJSONView({ geoJSON, partition }) {
+export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
   const [width, height] = [window.innerWidth - 100, window.innerHeight - 350];
   const bbox = BBox.fromGeoJSON(geoJSON);
   const funcTransform = bbox.getTransform(width, height, PADDING);
@@ -19,13 +22,27 @@ export default function GeoJSONView({ geoJSON, partition }) {
 
   const groupToName = partition.getGroupToName();
   const groupToIDList = partition.getGroupToIDList();
+
   const groups = Object.keys(groupToIDList).sort();
   const nGroups = groups.length;
+
+  const regionEntIdx = partition.regionEntIdx;
+  const groupToSeats = Seats.divideSeatsForPartition(nSeats, partition);
+  const totalPop = regionEntIdx.totalPop;
 
   const innerPolygons = groups.map(function (group, iGroup) {
     const idList = groupToIDList[group];
     const featureList = idList.map((id) => idToFeature[id]);
-    const color = Color.getForIter(iGroup, nGroups);
+
+    const totalGroupPop = regionEntIdx.getTotalPop(idList);
+    const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
+    const nSeatsFairPerNSeats2 = nSeatsFair / groupToSeats[group];
+
+    let color = Color.getForIter(iGroup, nGroups);
+    if (colorMode === "fairness") {
+      color = Partition.getColorFairness(nSeatsFairPerNSeats2);
+    }
+
     return (
       <GeoJSONGroupView
         key={"group-" + group}
@@ -60,7 +77,7 @@ export default function GeoJSONView({ geoJSON, partition }) {
         fontSize={10}
         textAnchor="middle"
       >
-        {groupToName[group]}
+        {StringX.shortenName(groupToName[group])}
       </text>
     );
   });

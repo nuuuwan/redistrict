@@ -149,4 +149,23 @@ export default class StringX {
   static formatFloatSigned(x) {
     return (x > 0 ? "+" : "-") + "" + Math.abs(x).toFixed(2);
   }
+
+  static shortenName(name) {
+    const MAX_LEN = 5;
+    if (name.length <= MAX_LEN) {
+      return name;
+    }
+    return name
+      .split(" ")
+      .map((word) => StringX.shortenWord(word))
+      .join(" ");
+  }
+
+  static shortenWord(word) {
+    const MAX_LEN = 3;
+    if (word.length <= MAX_LEN) {
+      return word;
+    }
+    return word.substring(0, MAX_LEN) + ".";
+  }
 }

@@ -146,7 +146,7 @@ export default class Partition {
     let groupToNameFinal = {};
     for (let [group, name] of Object.entries(groupToName)) {
       nameCountFinal[name] += 1;
-      const prefix = nameCount[name] > 1 ? `-${nameCountFinal[name]}` : "";
+      const prefix = nameCount[name] > 1 ? ` ${nameCountFinal[name]}` : "";
       groupToNameFinal[group] = groupToName[group] + prefix;
     }
     return groupToNameFinal;
@@ -166,9 +166,23 @@ export default class Partition {
   static getColorFairness(nSeatsFairPerNSeats2) {
     const log2NSeatsFairPerNSeats2 =
       Math.log(nSeatsFairPerNSeats2) / Math.log(2);
-    const h = nSeatsFairPerNSeats2 < 1 ? 240 : 0;
-    const p = Math.pow(Math.abs(log2NSeatsFairPerNSeats2), 2);
-    const l = 100 - (40 * Math.min(1, p)) / 2;
+
+    const p = Math.abs(log2NSeatsFairPerNSeats2);
+    let l = 100 - (40 * Math.min(1, p)) / 2;
+
+    const LIMIT_PCT = 0.1;
+    const LIMIT = Math.log(1 + LIMIT_PCT) / Math.log(2);
+
+    let h;
+    if (log2NSeatsFairPerNSeats2 > LIMIT) {
+      h = 0;
+    } else if (log2NSeatsFairPerNSeats2 < -LIMIT) {
+      h = 210;
+    } else {
+      h = 120;
+      l = 90;
+    }
+
     return Color.hsla(h, 100, l, 1);
   }
 }
