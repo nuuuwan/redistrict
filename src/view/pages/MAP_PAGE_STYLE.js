@@ -26,3 +26,5 @@ export const STYLE_PAPER_RESULTS = {
   p: 2,
   zIndex: 2,
 };
+
+export const MIN_SCREEN_WIDTH = 800;
