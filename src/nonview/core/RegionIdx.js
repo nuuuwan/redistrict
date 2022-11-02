@@ -26,9 +26,6 @@ export default class RegionIdx {
     return Object.keys(this.idx);
   }
 
-  get partitionRegionList() {
-    return Object.keys(this.idx);
-  }
 
   getSorted(idList, funcKey) {
     return idList.sort(
