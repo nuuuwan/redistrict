@@ -39,7 +39,7 @@ export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
     const nSeatsFairPerNSeats2 = nSeatsFair / groupToSeats[group];
 
     let color = Color.getForIter(iGroup, nGroups);
-    if (colorMode === "fairness") {
+    if (colorMode === "Fairness") {
       color = Partition.getColorFairness(nSeatsFairPerNSeats2);
     }
 

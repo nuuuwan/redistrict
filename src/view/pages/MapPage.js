@@ -3,10 +3,12 @@ import Paper from "@mui/material/Paper";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import SelectRegionID from "../../view/atoms/SelectRegionID";
+import SelectColorMode from "../../view/atoms/SelectColorMode";
+import GeoJSONView from "../../view/molecules/GeoJSONView";
 import SliderMaxSeatsPerGroup from "../../view/atoms/SliderMaxSeatsPerGroup";
 import SliderSeats from "../../view/atoms/SliderSeats";
 import SliderSubRegionType from "../../view/atoms/SliderSubRegionType";
-import GeoJSONView from "../../view/molecules/GeoJSONView";
+
 import PartitionView from "../../view/molecules/PartitionView";
 
 import {
@@ -37,6 +39,7 @@ export default class MapPage extends MapPageState {
       nSeats,
       regionID,
       subRegionType,
+      colorMode,
       // deps
       geoJSON,
       partition,
@@ -64,12 +67,17 @@ export default class MapPage extends MapPageState {
             setMaxSeatsPerGroup={this.setMaxSeatsPerGroup.bind(this)}
           />
           <SliderSeats nSeats={nSeats} setNSeats={this.setNSeats.bind(this)} />
+          <SelectColorMode
+            colorMode={colorMode}
+            setColorMode={this.setColorMode.bind(this)}
+          />
         </Paper>
         <Box sx={STYLE_BOX_GEOJSONVIEW}>
           <GeoJSONView
             nSeats={nSeats}
             geoJSON={geoJSON}
             partition={partition}
+            colorMode={colorMode}
           />
         </Box>
         <Paper sx={STYLE_PAPER_RESULTS}>

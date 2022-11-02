@@ -9,7 +9,8 @@ import Partition from "../../nonview/core/Partition";
 const DEFAULT_N_SEATS = 20;
 const DEFAULT_MAX_SEATS_PER_GROUP = 1;
 const DEFAULT_SUBREGION_TYPE = ENT_TYPES.DSD;
-const DEFAULT_REGION_ID = "LK-11";
+const DEFAULT_REGION_ID = "EC-01";
+const DEFAULT_COLOR_MODE = "Polling Divisions";
 
 export default class MapPageState extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class MapPageState extends Component {
       nSeats: null,
       regionID: null,
       subRegionType: null,
+      colorMode: DEFAULT_COLOR_MODE,
 
       // Depends on: regionID, subRegionType
       geoJSON: null,
@@ -45,7 +47,13 @@ export default class MapPageState extends Component {
   }
 
   async setStateWithDependenciesInner(
-    { newRegionID, newSubRegionType, newMaxSeatsPerGroup, newNSeats },
+    {
+      newRegionID,
+      newSubRegionType,
+      newMaxSeatsPerGroup,
+      newNSeats,
+      newColorMode,
+    },
     otherState = {}
   ) {
     let {
@@ -53,6 +61,7 @@ export default class MapPageState extends Component {
       subRegionType,
       maxSeatsPerGroup,
       nSeats,
+      colorMode,
       geoJSON,
       partition,
       commonStoreSingleton,
@@ -69,6 +78,11 @@ export default class MapPageState extends Component {
     const isChangedRegionID = isChanged(newRegionID, regionID);
     if (isChangedRegionID) {
       regionID = newRegionID;
+    }
+
+    const isChangedColorMode = isChanged(newColorMode, colorMode);
+    if (isChangedColorMode) {
+      colorMode = newColorMode;
     }
 
     const isChangedSubRegionType = isChanged(newSubRegionType, subRegionType);
@@ -116,6 +130,7 @@ export default class MapPageState extends Component {
         subRegionType,
         maxSeatsPerGroup,
         nSeats,
+        colorMode,
         geoJSON,
         partition,
         isLoaded: true,
@@ -140,6 +155,10 @@ export default class MapPageState extends Component {
     await this.setStateWithDependencies({ newNSeats });
   }
 
+  async setColorMode(newColorMode) {
+    await this.setStateWithDependencies({ newColorMode });
+  }
+
   async componentDidMount() {
     const commonStoreSingleton = await CommonStore.loadSingleton();
 
@@ -149,6 +168,7 @@ export default class MapPageState extends Component {
         newNSeats: DEFAULT_N_SEATS,
         newRegionID: DEFAULT_REGION_ID,
         newSubRegionType: DEFAULT_SUBREGION_TYPE,
+        newColorMode: DEFAULT_COLOR_MODE,
       },
       { commonStoreSingleton }
     );
