@@ -9,7 +9,7 @@ import { FONT_FAMILY_LIST } from "../../APP_STYLES.js";
 import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
 
 const PADDING = 10;
-const [MARGIN_WIDTH, MARGIN_HEIGHT] = [0, 0];
+const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 300];
 
 export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
   const [width, height] = [window.innerWidth - MARGIN_WIDTH, window.innerHeight - MARGIN_HEIGHT];
