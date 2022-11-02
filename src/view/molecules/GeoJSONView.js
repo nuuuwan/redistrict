@@ -65,6 +65,11 @@ export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
       )
     );
     const [x, y] = funcTransform([lng, lat]);
+    const nSeats = groupToSeats[group];
+    let seatsStr = "";
+    if (nSeats !== 1) {
+      seatsStr = `(${nSeats})`;
+    }
 
     return (
       <text
@@ -77,7 +82,7 @@ export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
         fontSize={10}
         textAnchor="middle"
       >
-        {StringX.shortenName(groupToName[group])}
+        {StringX.shortenName(groupToName[group]) + seatsStr}
       </text>
     );
   });
