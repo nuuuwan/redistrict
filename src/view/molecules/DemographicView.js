@@ -29,15 +29,15 @@ export default function DemographicView({
   funcDemographicsInfo,
   nSeats,
   fairSeats,
-  totalSeatError,
+  totalUnfairness,
 }) {
   const demographicInfo = funcDemographicsInfo(idList);
   const totalPop = MathX.sumGeneric(Object.values(demographicInfo), (x) => x);
   const itemToSeats = Seats.divideSeats(nSeats, demographicInfo);
 
-  const seatError = totalSeatError
-    ? totalSeatError
-    : RegionEntIdx.getSeatError(idList, nSeats, funcDemographicsInfo);
+  const unfairness = totalUnfairness
+    ? totalUnfairness
+    : RegionEntIdx.getUnfairness(idList, nSeats, funcDemographicsInfo);
 
   return (
     <Box sx={STYLE_BOX}>
@@ -82,12 +82,12 @@ export default function DemographicView({
               })}
             <TableRow>
               <TableCell>
-                <Typography variant="caption">{"Seat Error"}</Typography>
+                <Typography variant="caption">{"Unfairness"}</Typography>
               </TableCell>
 
               <TableCell align="right">
                 <Typography variant="caption">
-                  {StringX.formatPercent(seatError, 2)}
+                  {StringX.formatPercent(unfairness, 2)}
                 </Typography>
               </TableCell>
               <TableCell />

@@ -30,7 +30,7 @@ export default class Partition {
     let bestIDList1,
       bestIDList2,
       bestLabel,
-      bestSeatError = undefined;
+      bestUnfairness = undefined;
 
     const { latSpan, lngSpan } = this.regionEntIdx.getLatLngSpans(idList);
 
@@ -71,11 +71,11 @@ export default class Partition {
         return null;
       }
 
-      const seatError =
-        RegionEntIdx.getTotalSeatError(idList1, nSeats) +
-        RegionEntIdx.getTotalSeatError(idList2, nSeats2);
-      if (bestSeatError === undefined || seatError < bestSeatError) {
-        bestSeatError = seatError;
+      const unfairness =
+        RegionEntIdx.getTotalUnfairness(idList1, nSeats) +
+        RegionEntIdx.getTotalUnfairness(idList2, nSeats2);
+      if (bestUnfairness === undefined || unfairness < bestUnfairness) {
+        bestUnfairness = unfairness;
         bestLabel = label;
         bestIDList1 = idList1;
         bestIDList2 = idList2;

@@ -156,7 +156,7 @@ export default class RegionEntIdx {
     });
   }
 
-  static getTotalSeatError(idList, nSeats) {
+  static getTotalUnfairness(idList, nSeats) {
     const funcDemographicsList = [
       RegionEntIdx.getEthnicityInfo,
       RegionEntIdx.getReligionInfo,
@@ -164,21 +164,21 @@ export default class RegionEntIdx {
     return (
       MathX.sum(
         funcDemographicsList.map(function (funcDemographics) {
-          return RegionEntIdx.getSeatError(idList, nSeats, funcDemographics);
+          return RegionEntIdx.getUnfairness(idList, nSeats, funcDemographics);
         })
       ) / funcDemographicsList.length
     );
   }
 
-  static getSeatError(idList, nSeats, funcDemographics) {
+  static getUnfairness(idList, nSeats, funcDemographics) {
     const demoToP = funcDemographics(idList);
     const demoToSeats = Seats.divideSeats(nSeats, demoToP);
     const demoToSeatsFair = DictUtils.mapValues(demoToP, (p) => p * nSeats);
     return Object.entries(demoToSeats).reduce(function (
-      seatError,
+      unfairness,
       [demo, seats]
     ) {
-      return seatError + Math.abs(demoToSeatsFair[demo] - seats);
+      return unfairness + Math.abs(demoToSeatsFair[demo] - seats);
     },
     0);
   }

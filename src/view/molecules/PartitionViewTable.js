@@ -45,12 +45,12 @@ export default function PartitionViewTable({
     }, {});
   }
 
-  function getTotalSeatError(funcDemographicsInfo) {
+  function getTotalUnfairness(funcDemographicsInfo) {
     return (
-      rows.reduce(function (totalSeatError, row) {
+      rows.reduce(function (totalUnfairness, row) {
         return (
-          totalSeatError +
-          RegionEntIdx.getSeatError(
+          totalUnfairness +
+          RegionEntIdx.getUnfairness(
             row.idList,
             row.nSeats,
             funcDemographicsInfo
@@ -63,10 +63,10 @@ export default function PartitionViewTable({
   const fairSeatsEthnicity = getFairSeats(RegionEntIdx.getEthnicityInfo);
   const fairSeatsReligion = getFairSeats(RegionEntIdx.getReligionInfo);
 
-  const totalSeatErrorEthnicity = getTotalSeatError(
+  const totalUnfairnessEthnicity = getTotalUnfairness(
     RegionEntIdx.getEthnicityInfo
   );
-  const totalSeatErrorReligion = getTotalSeatError(
+  const totalUnfairnessReligion = getTotalUnfairness(
     RegionEntIdx.getReligionInfo
   );
 
@@ -81,8 +81,8 @@ export default function PartitionViewTable({
             idList={regionEntIdx.idList}
             fairSeatsEthnicity={fairSeatsEthnicity}
             fairSeatsReligion={fairSeatsReligion}
-            totalSeatErrorEthnicity={totalSeatErrorEthnicity}
-            totalSeatErrorReligion={totalSeatErrorReligion}
+            totalUnfairnessEthnicity={totalUnfairnessEthnicity}
+            totalUnfairnessReligion={totalUnfairnessReligion}
           />
           {rows.map(function (row) {
             return (
