@@ -32,6 +32,9 @@ export default function PartitionViewTableTotalRow({
         {StringX.formatIntSmall(totalNSeats)}
       </StyledTableCell>
       <StyledTableCell align="right">
+        {StringX.formatPercentSigned(0)}
+      </StyledTableCell>
+      <StyledTableCell align="right">
         {StringX.formatInt(totalPop)}
       </StyledTableCell>
       <StyledTableCell align="right">

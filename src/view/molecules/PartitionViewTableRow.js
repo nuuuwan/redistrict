@@ -40,6 +40,9 @@ export default function PartitionViewTableRow({
   const colorFairness = Color.hsla(h, 100, l, 1);
   const popPerSeat = totalGroupPop / row.nSeats;
 
+  const balance = nSeatsFairPerNSeats2 - 1;
+  console.debug(balance);
+
   return (
     <TableRow>
       <TableCell align="left" sx={sx}>
@@ -49,8 +52,12 @@ export default function PartitionViewTableRow({
       <TableCell align="right" sx={{ background: colorFairness }}>
         {StringX.formatFloat(nSeatsFair)}
       </TableCell>
+      <TableCell align="right" sx={{ background: colorFairness }}>
+        {StringX.formatPercentSigned(balance)}
+      </TableCell>
       <TableCell align="right">{StringX.formatInt(totalGroupPop)}</TableCell>
-      <TableCell align="right">{StringX.formatInt(popPerSeat)}</TableCell>
+      <TableCell align="right" sx={{ background: colorFairness }}>
+        {StringX.formatInt(popPerSeat)}</TableCell>
       <TableCell align="left">{regions}</TableCell>
       <TableCell align="left">
         <DemographicView

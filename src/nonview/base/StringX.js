@@ -8,7 +8,7 @@ const STRING_REPLACE_LIST = [
 ];
 
 const FONT_SIZE = {
-  PCT_MIN: 60,
+  PCT_MIN: 80,
   PCT_MAX: 100,
 };
 
@@ -71,7 +71,7 @@ export default class StringX {
     return StringX.formatSizedText(numPart + multPart, fontSize);
   }
 
-  static formatPercent(numerator, denominator) {
+  static formatPercent(numerator, denominator = 1) {
     const p = numerator / denominator;
     let logBase = Math.log(p * 100) / Math.log(2);
 
@@ -106,6 +106,38 @@ export default class StringX {
 
     return StringX.formatSizedText(numPart, fontSize);
   }
+
+  static formatPercentSigned(numerator, denominator = 1) {
+    const p = numerator / denominator;
+    const absP = Math.abs(p);
+    let sign = "";
+    if (p > 0) {
+      sign = "+";
+    } else if (p < 0) {
+      sign = "-";
+    }
+    let logBase = Math.log(absP * 100) / Math.log(2);
+
+    let numPart = Number(absP).toLocaleString(undefined, {
+      style: "percent",
+      maximumSignificantDigits: MAX_SIG_DIGITS_FOR_PERCENT,
+    });
+
+    if (absP < 0.01) {
+      numPart = "0%";
+      sign = "";
+    }
+
+    const fontSize =
+      MathX.forceRange(
+        FONT_SIZE.PCT_MIN,
+        FONT_SIZE.PCT_MAX,
+        parseInt(logBase * 20)
+      ) + "%";
+
+    return StringX.formatSizedText(sign + numPart, fontSize);
+  }
+
   static formatIntSmall(x) {
     return x;
   }
