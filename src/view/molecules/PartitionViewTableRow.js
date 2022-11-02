@@ -3,6 +3,7 @@ import TableRow from "@mui/material/TableRow";
 
 import Color from "../../nonview/base/Color";
 import StringX from "../../nonview/base/StringX";
+import Partition from "../../nonview/core/Partition";
 import RegionEntIdx from "../../nonview/core/RegionEntIdx";
 
 import DemographicView from "../../view/molecules/DemographicView";
@@ -33,14 +34,9 @@ export default function PartitionViewTableRow({
   const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
   const nSeatsFairPerNSeats2 = nSeatsFair / row.nSeats;
 
-  const log2NSeatsFairPerNSeats2 = Math.log(nSeatsFairPerNSeats2) / Math.log(2);
-  const h = nSeatsFairPerNSeats2 < 1 ? 240 : 0;
-  const p = Math.pow(Math.abs(log2NSeatsFairPerNSeats2), 2);
-  const l = 100 - (40 * Math.min(1, p)) / 2;
-  const colorFairness = Color.hsla(h, 100, l, 1);
   const popPerSeat = totalGroupPop / row.nSeats;
-
   const balance = nSeatsFairPerNSeats2 - 1;
+  const colorFairness = Partition.getColorFairness(nSeatsFairPerNSeats2);
 
   return (
     <TableRow>

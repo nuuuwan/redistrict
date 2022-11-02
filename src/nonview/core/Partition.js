@@ -1,3 +1,4 @@
+import Color from "../../nonview/base/Color";
 import MathX from "../../nonview/base/MathX";
 import RegionEntIdx from "../../nonview/core/RegionEntIdx";
 
@@ -160,5 +161,14 @@ export default class Partition {
       return groupToIDList;
     },
     {});
+  }
+
+  static getColorFairness(nSeatsFairPerNSeats2) {
+    const log2NSeatsFairPerNSeats2 =
+      Math.log(nSeatsFairPerNSeats2) / Math.log(2);
+    const h = nSeatsFairPerNSeats2 < 1 ? 240 : 0;
+    const p = Math.pow(Math.abs(log2NSeatsFairPerNSeats2), 2);
+    const l = 100 - (40 * Math.min(1, p)) / 2;
+    return Color.hsla(h, 100, l, 1);
   }
 }
