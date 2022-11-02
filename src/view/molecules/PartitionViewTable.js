@@ -51,11 +51,7 @@ export default function PartitionViewTable({
       rows.reduce(function (totalUnfairness, row) {
         return (
           totalUnfairness +
-          RegionIdx.getUnfairness(
-            row.idList,
-            row.nSeats,
-            funcDemographicsInfo
-          )
+          RegionIdx.getUnfairness(row.idList, row.nSeats, funcDemographicsInfo)
         );
       }, 0) / rows.length
     );
@@ -67,9 +63,7 @@ export default function PartitionViewTable({
   const totalUnfairnessEthnicity = getTotalUnfairness(
     RegionIdx.getEthnicityInfo
   );
-  const totalUnfairnessReligion = getTotalUnfairness(
-    RegionIdx.getReligionInfo
-  );
+  const totalUnfairnessReligion = getTotalUnfairness(RegionIdx.getReligionInfo);
 
   return (
     <TableContainer component={Box}>

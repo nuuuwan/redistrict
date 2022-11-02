@@ -142,15 +142,11 @@ export default class RegionIdx {
 
   static getEthnicityInfo(idList) {
     const commonStore = CommonStore.getSingleton();
-    return RegionIdx.getGenericTableInfo(
-      idList,
-      commonStore.ethnicityTable,
-      {
-        sinhalese: ["sinhalese"],
-        tamil: ["indian_tamil", "sri_lankan_tamil"],
-        moor: ["moor", "malay"],
-      }
-    );
+    return RegionIdx.getGenericTableInfo(idList, commonStore.ethnicityTable, {
+      sinhalese: ["sinhalese"],
+      tamil: ["indian_tamil", "sri_lankan_tamil"],
+      moor: ["moor", "malay"],
+    });
   }
 
   static getReligionInfo(idList) {
