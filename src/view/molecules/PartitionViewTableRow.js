@@ -41,24 +41,27 @@ export default function PartitionViewTableRow({
   const popPerSeat = totalGroupPop / row.nSeats;
 
   const balance = nSeatsFairPerNSeats2 - 1;
-  console.debug(balance);
 
   return (
     <TableRow>
       <TableCell align="left" sx={sx}>
         {row.groupName}
       </TableCell>
+      <TableCell align="left">{regions}</TableCell>
+
+      <TableCell align="right">{StringX.formatInt(totalGroupPop)}</TableCell>
       <TableCell align="right">{StringX.formatIntSmall(row.nSeats)}</TableCell>
+      <TableCell align="right" sx={{ background: colorFairness }}>
+        {StringX.formatInt(popPerSeat)}
+      </TableCell>
+
       <TableCell align="right" sx={{ background: colorFairness }}>
         {StringX.formatFloat(nSeatsFair)}
       </TableCell>
       <TableCell align="right" sx={{ background: colorFairness }}>
         {StringX.formatPercentSigned(balance)}
       </TableCell>
-      <TableCell align="right">{StringX.formatInt(totalGroupPop)}</TableCell>
-      <TableCell align="right" sx={{ background: colorFairness }}>
-        {StringX.formatInt(popPerSeat)}</TableCell>
-      <TableCell align="left">{regions}</TableCell>
+
       <TableCell align="left">
         <DemographicView
           idList={row.idList}

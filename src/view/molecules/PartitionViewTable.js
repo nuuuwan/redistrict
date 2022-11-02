@@ -24,6 +24,7 @@ const STYLE_TABLE = {
 export default function PartitionViewTable({
   rows,
   regionEntIdx,
+  subRegionType,
   totalPop,
   nSeats,
   nGroups,
@@ -73,7 +74,7 @@ export default function PartitionViewTable({
   return (
     <TableContainer component={Box}>
       <Table sx={STYLE_TABLE} size="small">
-        <PartitionViewTableHeader />
+        <PartitionViewTableHeader subRegionType={subRegionType} />
         <TableBody>
           <PartitionViewTableTotalRow
             totalNSeats={totalNSeats}

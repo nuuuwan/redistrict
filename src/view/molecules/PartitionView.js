@@ -2,7 +2,7 @@ import Seats from "../../nonview/core/Seats";
 
 import PartitionViewTable from "../../view/molecules/PartitionViewTable";
 
-export default function PartitionView({ nSeats, partition }) {
+export default function PartitionView({ nSeats, partition, subRegionType }) {
   const groupToIDList = partition.getGroupToIDList();
   const groupToName = partition.getGroupToName();
   const groupToSeats = Seats.divideSeatsForPartition(nSeats, partition);
@@ -26,6 +26,7 @@ export default function PartitionView({ nSeats, partition }) {
   return (
     <PartitionViewTable
       rows={rows}
+      subRegionType={subRegionType}
       regionEntIdx={regionEntIdx}
       totalPop={totalPop}
       nGroups={nGroups}

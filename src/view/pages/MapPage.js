@@ -69,7 +69,11 @@ export default class MapPage extends MapPageState {
           <GeoJSONView geoJSON={geoJSON} partition={partition} />
         </Box>
         <Paper sx={STYLE_PAPER_RESULTS}>
-          <PartitionView partition={partition} nSeats={nSeats} />
+          <PartitionView
+            partition={partition}
+            nSeats={nSeats}
+            subRegionType={subRegionType}
+          />
         </Paper>
       </Box>
     );

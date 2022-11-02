@@ -8,17 +8,22 @@ const StyledTableCell = styled(TableCell)({
   color: "#ccc",
 });
 
-export default function PartitionViewTableHeader() {
+export default function PartitionViewTableHeader({ subRegionType }) {
   return (
     <TableHead>
       <TableRow>
         <StyledTableCell align="left">New Polling Division</StyledTableCell>
+        <StyledTableCell align="left">
+          Component {subRegionType.toUpperCase()}s
+        </StyledTableCell>
+
+        <StyledTableCell align="right">Pop.</StyledTableCell>
         <StyledTableCell align="right">Seats</StyledTableCell>
+        <StyledTableCell align="right">Pop./Seat</StyledTableCell>
+
         <StyledTableCell align="right">E(Seats)</StyledTableCell>
         <StyledTableCell align="right">Imbalance</StyledTableCell>
-        <StyledTableCell align="right">Pop.</StyledTableCell>
-        <StyledTableCell align="right">Pop./Seat</StyledTableCell>
-        <StyledTableCell align="left">Regions</StyledTableCell>
+
         <StyledTableCell align="left">Ethnicity</StyledTableCell>
         <StyledTableCell align="left">Religion</StyledTableCell>
       </TableRow>

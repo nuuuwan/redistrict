@@ -25,22 +25,25 @@ export default function PartitionViewTableTotalRow({
   return (
     <TableRow>
       <StyledTableCell align="left">{"Total"}</StyledTableCell>
+      <StyledTableCell>(all)</StyledTableCell>
+
+      <StyledTableCell align="right">
+        {StringX.formatInt(totalPop)}
+      </StyledTableCell>
       <StyledTableCell align="right">
         {StringX.formatIntSmall(totalNSeats)}
       </StyledTableCell>
+      <StyledTableCell align="right">
+        {StringX.formatInt(totalPop / totalNSeats)}
+      </StyledTableCell>
+
       <StyledTableCell align="right">
         {StringX.formatIntSmall(totalNSeats)}
       </StyledTableCell>
       <StyledTableCell align="right">
         {StringX.formatPercentSigned(0)}
       </StyledTableCell>
-      <StyledTableCell align="right">
-        {StringX.formatInt(totalPop)}
-      </StyledTableCell>
-      <StyledTableCell align="right">
-        {StringX.formatInt(totalPop / totalNSeats)}
-      </StyledTableCell>
-      <StyledTableCell>(all)</StyledTableCell>
+
       <StyledTableCell>
         <DemographicView
           idList={idList}
