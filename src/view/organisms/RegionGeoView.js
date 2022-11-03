@@ -2,7 +2,7 @@ import { Component } from "react";
 
 import Geo from "../../nonview/base/geo/Geo";
 
-import GeoJSONPolygonView from "../../view/molecules/GeoJSONPolygonView";
+import PolygonView from "../../view/molecules/PolygonView";
 
 export default class RegionGeoView extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export default class RegionGeoView extends Component {
     const { funcTransform, color, regionID } = this.props;
     return polygonList.map(function (polygon, iPolygon) {
       return (
-        <GeoJSONPolygonView
+        <PolygonView
           key={`region-geo-${regionID}-${iPolygon}`}
           funcTransform={funcTransform}
           polygon={polygon}

@@ -1,4 +1,4 @@
-import GeoJSONPolygonView from "../../view/molecules/GeoJSONPolygonView";
+import PolygonView from "../../view/molecules/PolygonView";
 
 export default function GeoJSONFeatureView({ funcTransform, feature, color }) {
   return feature.geometry.coordinates.map(function (polygonList, iPolygonList) {
@@ -6,7 +6,7 @@ export default function GeoJSONFeatureView({ funcTransform, feature, color }) {
       const key = "polygon-" + iPolygonList + "-" + iPolygon;
       return (
         <g key={key}>
-          <GeoJSONPolygonView
+          <PolygonView
             funcTransform={funcTransform}
             polygon={polygon}
             color={color}
