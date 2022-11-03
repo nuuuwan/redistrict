@@ -1,6 +1,6 @@
 import Cache from "./Cache.js";
 
-const CACHE_VERSION = "v20210823";
+const CACHE_VERSION = "v202211";
 
 const JSON_HEADERS = {
   headers: {
