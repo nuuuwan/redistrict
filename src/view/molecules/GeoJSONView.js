@@ -6,7 +6,7 @@ import Partition from "../../nonview/core/Partition";
 import Seats from "../../nonview/core/Seats";
 
 import { FONT_FAMILY_LIST } from "../../APP_STYLES.js";
-import GeoJSONGroupView from "../../view/molecules/GeoJSONGroupView";
+import RegionGeoView from "../../view/organisms/RegionGeoView";
 
 const PADDING = 10;
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 300];
@@ -36,8 +36,6 @@ export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
 
   const innerPolygons = groups.map(function (group, iGroup) {
     const idList = groupToIDList[group];
-    const featureList = idList.map((id) => idToFeature[id]);
-
     const totalGroupPop = regionIdx.getTotalPop(idList);
     const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
     const nSeatsFairPerNSeats2 = nSeatsFair / groupToSeats[group];
@@ -47,16 +45,16 @@ export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
       color = Partition.getColorFairness(nSeatsFairPerNSeats2);
     }
 
-    return (
-      <GeoJSONGroupView
-        key={"group-" + group}
-        funcTransform={funcTransform}
-        featureList={featureList}
-        color={color}
-        group={group}
-        groupName={groupToName[group]}
-      />
-    );
+    return idList.map(function (regionID) {
+      return (
+        <RegionGeoView
+          key={"region-" + regionID}
+          funcTransform={funcTransform}
+          regionID={regionID}
+          color={color}
+        />
+      );
+    });
   });
 
   const innerLabels = groups.map(function (group, iGroup) {
