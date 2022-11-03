@@ -4,7 +4,7 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import SelectRegionID from "../../view/atoms/SelectRegionID";
 import SelectColorMode from "../../view/atoms/SelectColorMode";
-import GeoJSONView from "../../view/molecules/GeoJSONView";
+import GeoView from "../../view/molecules/GeoView";
 import SliderMaxSeatsPerGroup from "../../view/atoms/SliderMaxSeatsPerGroup";
 import SliderSeats from "../../view/atoms/SliderSeats";
 import SliderSubRegionType from "../../view/atoms/SliderSubRegionType";
@@ -73,7 +73,7 @@ export default class MapPage extends MapPageState {
           />
         </Paper>
         <Box sx={STYLE_BOX_GEOJSONVIEW}>
-          <GeoJSONView
+          <GeoView
             nSeats={nSeats}
             geoJSON={geoJSON}
             partition={partition}

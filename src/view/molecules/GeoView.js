@@ -11,7 +11,7 @@ import RegionGeoView from "../../view/organisms/RegionGeoView";
 const PADDING = 10;
 const [MARGIN_WIDTH, MARGIN_HEIGHT] = [100, 300];
 
-export default function GeoJSONView({ nSeats, geoJSON, partition, colorMode }) {
+export default function GeoView({ nSeats, geoJSON, partition, colorMode }) {
   const [width, height] = [
     window.innerWidth - MARGIN_WIDTH,
     window.innerHeight - MARGIN_HEIGHT,
