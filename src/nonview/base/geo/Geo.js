@@ -4,7 +4,6 @@ import WWW from "../../../nonview/base/WWW";
 const URL_BASE =
   "https://raw.githubusercontent.com/nuuuwan/gig-data/master/geo";
 
-
 export default class Geo {
   static getURLForRegionID(regionID) {
     const regionType = EntTypes.getEntType(regionID);
