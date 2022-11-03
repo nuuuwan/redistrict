@@ -33,7 +33,7 @@ export default class Partition {
       bestLabel,
       bestUnfairness = undefined;
 
-    const { latSpan, lngSpan } = this.regionIdx.getLatLngSpans(idList);
+    const { latSpan, lngSpan } = this.regionIdx.getLngLatSpans(idList);
 
     let thetaList;
     const K = 1.05;
