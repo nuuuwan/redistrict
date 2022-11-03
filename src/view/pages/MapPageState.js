@@ -2,7 +2,6 @@ import { Component } from "react";
 
 import { ENT_TYPES } from "../../nonview/base/EntTypes";
 import Ents from "../../nonview/base/Ents";
-import GeoJSON from "../../nonview/base/geo/GeoJSON";
 import CommonStore from "../../nonview/core/CommonStore";
 import Partition from "../../nonview/core/Partition";
 
@@ -23,10 +22,7 @@ export default class MapPageState extends Component {
       subRegionType: null,
       colorMode: DEFAULT_COLOR_MODE,
 
-      // Depends on: regionID, subRegionType
-      geoJSON: null,
-
-      // Depends on: regionID, subRegionType, maxSeatsPerGroup, nSeats, geoJSON
+      // Depends on: regionID, subRegionType, maxSeatsPerGroup, nSeats
       partition: null,
 
       // Other
@@ -62,7 +58,6 @@ export default class MapPageState extends Component {
       maxSeatsPerGroup,
       nSeats,
       colorMode,
-      geoJSON,
       partition,
       commonStoreSingleton,
     } = this.state;
@@ -103,17 +98,11 @@ export default class MapPageState extends Component {
       nSeats = newNSeats;
     }
 
-    const isChangedGeoJSON = isChangedRegionID || isChangedSubRegionType;
-    if (isChangedGeoJSON) {
-      geoJSON = await new GeoJSON(regionID, subRegionType).read();
-    }
-
     if (
       isChangedRegionID ||
       isChangedSubRegionType ||
       isChangedMaxSeatsPerGroup ||
-      isChangedNSeats ||
-      isChangedGeoJSON
+      isChangedNSeats
     ) {
       const regionIdx = Ents.getEntIndexForSubRegions(
         commonStoreSingleton.allEntIndex,
@@ -131,7 +120,6 @@ export default class MapPageState extends Component {
         maxSeatsPerGroup,
         nSeats,
         colorMode,
-        geoJSON,
         partition,
         isLoaded: true,
       },
