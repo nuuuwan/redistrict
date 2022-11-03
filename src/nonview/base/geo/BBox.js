@@ -6,8 +6,8 @@ export default class BBox {
     this.maxLngLat = maxLngLat;
   }
 
-  static fromLatLngList(lngLatList) {
-    return lngLatList.reduce(
+  static fromLngLatList(lngLatList) {
+    const [minLng, minLat, maxLng, maxLat] = lngLatList.reduce(
       function ([minLng, minLat, maxLng, maxLat], lngLat) {
         return [
           Math.min(minLng, lngLat.lng),
@@ -18,12 +18,6 @@ export default class BBox {
       },
       [180, 180, -180, -180]
     );
-  }
-
-  static fromGeoJSON(geoJSON) {
-    const lngLatList = LngLat.fromGeoJSON(geoJSON);
-    const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(lngLatList);
-
     return new BBox(new LngLat(minLng, minLat), new LngLat(maxLng, maxLat));
   }
 
@@ -63,7 +57,10 @@ export default class BBox {
   }
 
   static getCentroid(lngLatList) {
-    const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(lngLatList);
-    return [(minLat + maxLat) / 2, (minLng + maxLng) / 2];
+    const bbox = BBox.fromLngLatList(lngLatList);
+    return [
+      (bbox.minLngLat.lat + bbox.maxLngLat.lat) / 2,
+      (bbox.minLngLat.lng + bbox.maxLngLat.lng) / 2,
+    ];
   }
 }
