@@ -4,7 +4,10 @@ import WWW from "./WWW.js";
 import GIG2_TABLE_NAMES from "../constants/GIG2_TABLE_NAMES.js";
 
 export const DEFAULT_LAYER_TABLE_NAME =
-  "government-elections-presidential.regions-ec.2019";
+  "government-elections-parliamentary.regions-ec.2020";
+
+const URL_BASE =
+  "https://raw.githubusercontent.com/nuuuwan/gig-data/master/gig2";
 
 export default class GIG2 {
   static getGroupFromTableName(tableName) {
@@ -24,7 +27,7 @@ export default class GIG2 {
   }
 
   static async getTable(tableName) {
-    const url = `/redistrict/data/gig2/${tableName}.tsv`;
+    const url = `${URL_BASE}/${tableName}.tsv`;
     const dList = await WWW.tsv(url);
     return new GIG2Table(dList);
   }
