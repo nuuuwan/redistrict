@@ -64,15 +64,15 @@ export default class RegionIdx {
     return this.getSorted(idList, (x) => x.lng * cosTheta + x.lat * sinTheta);
   }
 
-  getLatLngList(idList) {
+  getLngLatList(idList) {
     return idList.map((id) => this.get(id).lngLat);
   }
 
-  getLatLngSpans(idList) {
-    const latLngList = this.getLatLngList(idList);
-    const [minLng, minLat, maxLng, maxLat] = BBox.fromLatLngList(latLngList);
-    const latSpan = maxLat - minLat;
-    const lngSpan = maxLng - minLng;
+  getLngLatSpans(idList) {
+    const latLngList = this.getLngLatList(idList);
+    const bbox = BBox.fromLngLatList(latLngList);
+    const latSpan = bbox.maxLngLat.lat - bbox.minLngLat.lat;
+    const lngSpan = bbox.maxLngLat.lng - bbox.minLngLat.lng;
     return { latSpan, lngSpan };
   }
 
