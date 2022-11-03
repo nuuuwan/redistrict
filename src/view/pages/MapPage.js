@@ -4,7 +4,7 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import SelectRegionID from "../../view/atoms/SelectRegionID";
 import SelectColorMode from "../../view/atoms/SelectColorMode";
-import GeoView from "../../view/molecules/GeoView";
+import GeoView from "../../view/organisms/GeoView";
 import SliderMaxSeatsPerGroup from "../../view/atoms/SliderMaxSeatsPerGroup";
 import SliderSeats from "../../view/atoms/SliderSeats";
 import SliderSubRegionType from "../../view/atoms/SliderSubRegionType";
