@@ -2,14 +2,15 @@ import Ent from "../../nonview/base/Ent";
 import EntTypes from "../../nonview/base/EntTypes";
 import WWW from "./WWW.js";
 
-const URL_BASE = "https://raw.githubusercontent.com/nuuuwan/gig2/data";
+const URL_BASE =
+  "https://raw.githubusercontent.com/nuuuwan/gig-data/master/ents";
+
 export default class Ents {
   static getURLForEntTypeData(entType) {
-    return `${URL_BASE}/${entType}.latest.basic.tsv`;
+    return `${URL_BASE}/${entType}.tsv`;
   }
   static async getEntsByType(entType) {
     const url = Ents.getURLForEntTypeData(entType);
-
     const rawDataList = await WWW.tsv(url);
     return rawDataList.map((d) => new Ent(d));
   }
