@@ -6,7 +6,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-const COLOR_MODE_LIST = ["Polling Divisions", "Fairness"];
+const COLOR_MODE_LIST = [
+  "Polling Divisions",
+  "Fairness",
+  "Religion",
+  "Ethnicity",
+];
 
 export default function SelectColorMode({ colorMode, setColorMode }) {
   const onChange = function (e) {
