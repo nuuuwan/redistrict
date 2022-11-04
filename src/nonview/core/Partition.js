@@ -36,7 +36,7 @@ export default class Partition {
     const { latSpan, lngSpan } = this.regionIdx.getLngLatSpans(idList);
 
     let thetaList;
-    const K = 1.05;
+    const K = 1.5;
     if (latSpan > K * lngSpan) {
       thetaList = [90, 270];
     } else if (lngSpan > K * latSpan) {
