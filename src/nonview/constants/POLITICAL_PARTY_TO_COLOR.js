@@ -3,10 +3,10 @@ const COLOR_TO_POLITICAL_PARTIES = {
   green: ["Green+", "UNP", "NDF"],
   lightgreen: ["SJB"],
   maroon: ["SLPP"],
-  orange: ["ACTC"],
+  orange: ["Tamil+","ACTC"],
   pink: ["NPP"],
   red: ["Red+", "JVP", "LSSP", "EPDP", "NMPP", "JJB", "TMVP", "TULF", "DPLF"],
-  yellow: ["Tamil+", "ITAK", "AITC"],
+  yellow: ["ITAK", "AITC"],
   darkgreen: ["Muslim+", "MNA", "SLMC"],
 };
 
