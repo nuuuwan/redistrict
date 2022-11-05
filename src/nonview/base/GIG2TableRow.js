@@ -18,6 +18,9 @@ export default class GIG2TableRow {
       function ([d, sumValue], [k, v]) {
         if (GIG2TableRow.isValueKey(k)) {
           v = parseFloat(v);
+          if (!v) {
+            v = 0;
+          }
           d[k] = v;
           sumValue += v;
         }
