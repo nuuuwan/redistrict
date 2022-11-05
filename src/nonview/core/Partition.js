@@ -163,7 +163,7 @@ export default class Partition {
     {});
   }
 
-  static getColorFairness(nSeatsFairPerNSeats2) {
+  static getColorBalance(nSeatsFairPerNSeats2) {
     const log2NSeatsFairPerNSeats2 =
       Math.log(nSeatsFairPerNSeats2) / Math.log(2);
 

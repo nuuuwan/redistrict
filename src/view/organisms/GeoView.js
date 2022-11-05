@@ -64,8 +64,8 @@ export default class GeoView extends Component {
 
       let color;
       switch (colorMode) {
-        case "Fairness":
-          color = Partition.getColorFairness(nSeatsFairPerNSeats2);
+        case "Balance":
+          color = Partition.getColorBalance(nSeatsFairPerNSeats2);
           break;
         case "Religion":
           const religionInfo = RegionIdx.getReligionInfo(idList);

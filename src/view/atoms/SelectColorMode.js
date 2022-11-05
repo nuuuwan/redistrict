@@ -8,7 +8,7 @@ import Select from "@mui/material/Select";
 
 const COLOR_MODE_LIST = [
   "Polling Divisions",
-  "Fairness",
+  "Balance",
   "Religion",
   "Ethnicity",
 ];

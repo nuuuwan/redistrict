@@ -47,23 +47,19 @@ export default function PartitionViewTable({
   }
 
   function getTotalUnfairness(funcDemographicsInfo) {
-    const [rawUnfairnessSum, seatSum] = rows.reduce(
-      function ([rawUnfairnessSum, seatSum], row) {
-        return [
-          rawUnfairnessSum +
-            RegionIdx.getUnfairness(
-              row.idList,
-              row.nSeats,
-              funcDemographicsInfo
-            ) *
-              2 *
-              row.nSeats,
-          seatSum + row.nSeats,
-        ];
+    const [weightedUnfairnessSum, popSum] = rows.reduce(
+      function ([weightedUnfairnessSum, popSum], row) {
+        const pop = regionIdx.getTotalPop(row.idList);
+        const unfairness = RegionIdx.getUnfairness(
+          row.idList,
+          row.nSeats,
+          funcDemographicsInfo
+        );
+        return [weightedUnfairnessSum + unfairness * pop, popSum + pop]
       },
       [0, 0]
     );
-    return rawUnfairnessSum / (2 * seatSum);
+    return weightedUnfairnessSum / popSum;
   }
 
   const fairSeatsEthnicity = getFairSeats(RegionIdx.getEthnicityInfo);
