@@ -73,7 +73,7 @@ export default function DemographicView({
               {isTotalRow ? (
                 <>
                   <StyledHeaderTableCell align="right">
-                    Fair
+                    PR
                   </StyledHeaderTableCell>
                   <StyledHeaderTableCell align="right">
                     PR+Bonus
@@ -113,19 +113,19 @@ export default function DemographicView({
                     </TableCell>
                     <TableCell align="right">
                       <Typography variant="caption" sx={sxCell}>
-                        {actualSeatsForItem}
+                        {StringX.formatIntWithoutZero(actualSeatsForItem)}
                       </Typography>
                     </TableCell>
                     {isTotalRow ? (
                       <>
                         <TableCell align="right">
                           <Typography variant="caption" sx={sxCell}>
-                            {fairSeatsForItem}
+                            {StringX.formatIntWithoutZero(fairSeatsForItem)}
                           </Typography>
                         </TableCell>
                         <TableCell align="right">
                           <Typography variant="caption" sx={sxCell}>
-                            {itemToSeatsPRWithBonus[k]}
+                            {StringX.formatIntWithoutZero(itemToSeatsPRWithBonus[k])}
                           </Typography>
                         </TableCell>
                       </>
