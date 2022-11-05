@@ -35,7 +35,7 @@ export default class GIG2TableRow {
   }
 
   getValue(k) {
-    return this.d[k];
+    return this.d[k] ? this.d[k] : 0;
   }
 
   getMaxValueKeyAndValue() {
