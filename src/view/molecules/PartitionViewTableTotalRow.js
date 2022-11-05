@@ -1,6 +1,6 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-
+import Typography from "@mui/material/Typography";
 import StringX from "../../nonview/base/StringX";
 import RegionIdx from "../../nonview/core/RegionIdx";
 
@@ -21,6 +21,7 @@ export default function PartitionViewTableTotalRow({
   fairSeatsReligion,
   totalUnfairnessEthnicity,
   totalUnfairnessReligion,
+  totalAbsBalance,
 }) {
   return (
     <TableRow>
@@ -41,7 +42,10 @@ export default function PartitionViewTableTotalRow({
         {StringX.formatIntSmall(totalNSeats)}
       </StyledTableCell>
       <StyledTableCell align="right">
-        {StringX.formatPercentSigned(0)}
+        {StringX.formatPercent(totalAbsBalance)}
+        <Typography variant="body1" sx={{fontSize: "75%"}}>
+          (weighted abs sum)
+        </Typography>
       </StyledTableCell>
 
       <StyledTableCell>

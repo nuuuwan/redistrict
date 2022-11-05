@@ -69,6 +69,21 @@ export default function PartitionViewTable({
   );
   const totalUnfairnessReligion = getTotalUnfairness(RegionIdx.getReligionInfo);
 
+
+
+  const [weightedBalanceSum, popSum] = rows.reduce(
+    function ([weightedBalanceSum, popSum], row) {
+      const totalGroupPop = regionIdx.getTotalPop(row.idList);
+      const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
+      const nSeatsFairPerNSeats2 = nSeatsFair / row.nSeats;
+      const balance = nSeatsFairPerNSeats2 - 1;
+      return [weightedBalanceSum + Math.abs(balance) * totalGroupPop, popSum + totalGroupPop];
+    },
+    [0, 0],
+  );
+  const totalAbsBalance = weightedBalanceSum / popSum;
+
+
   return (
     <TableContainer component={Box}>
       <Table sx={STYLE_TABLE} size="small">
@@ -82,6 +97,7 @@ export default function PartitionViewTable({
             fairSeatsReligion={fairSeatsReligion}
             totalUnfairnessEthnicity={totalUnfairnessEthnicity}
             totalUnfairnessReligion={totalUnfairnessReligion}
+            totalAbsBalance={totalAbsBalance}
           />
           {rows.map(function (row) {
             return (
