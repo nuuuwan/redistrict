@@ -77,7 +77,7 @@ export default function DemographicView({
                     PR
                   </StyledHeaderTableCell>
                   <StyledHeaderTableCell align="right">
-                    PR+Bonus+5%
+                    PR+Bon+5%
                   </StyledHeaderTableCell>
                 </>
               ) : null}
