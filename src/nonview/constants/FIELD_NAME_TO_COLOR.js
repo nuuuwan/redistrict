@@ -2,9 +2,9 @@ import ETHNO_RELIGION_TO_COLOR from "../../nonview/constants/ETHNO_RELIGION_TO_C
 import POLITICAL_PARTY_TO_COLOR from "../../nonview/constants/POLITICAL_PARTY_TO_COLOR";
 
 const FIELD_NAME_TO_COLOR_INNER = {
-  Others: "ghostwhite",
-  other: "ghostwhite",
-  others: "ghostwhite",
+  Others: "lightgray",
+  other: "lightgray",
+  others: "lightgray",
 
   // gender_of_population
   female: "pink",
