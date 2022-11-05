@@ -69,7 +69,7 @@ export default function DemographicView({
                 %
               </StyledHeaderTableCell>
               <StyledHeaderTableCell align="right">
-                Actual
+                Tool
               </StyledHeaderTableCell>
               {isTotalRow ? (
                 <>
@@ -77,7 +77,7 @@ export default function DemographicView({
                     PR
                   </StyledHeaderTableCell>
                   <StyledHeaderTableCell align="right">
-                    PR+Bonus
+                    PR+Bonus+5%
                   </StyledHeaderTableCell>
                 </>
               ) : null}

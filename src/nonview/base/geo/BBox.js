@@ -30,27 +30,27 @@ export default class BBox {
     ];
     const [lngSpan, latSpan] = [maxLng - minLng, maxLat - minLat];
     const r = (lngSpan * height) / latSpan / width;
-    let [widthActual, heightActual] = [
+    let [widthTool, heightTool] = [
       width - padding * 2,
       height - padding * 2,
     ];
     if (r > 1) {
-      heightActual /= r;
+      heightTool /= r;
     } else {
-      widthActual *= r;
+      widthTool *= r;
     }
 
     let [widthPadding, heightPadding] = [
-      (width - widthActual) / 2,
-      (height - heightActual) / 2,
+      (width - widthTool) / 2,
+      (height - heightTool) / 2,
     ];
 
     const funcTransform = function ([lng, lat]) {
       const px = (lng - minLng) / lngSpan;
       const py = (lat - minLat) / latSpan;
       return [
-        px * widthActual + widthPadding,
-        (1 - py) * heightActual + heightPadding,
+        px * widthTool + widthPadding,
+        (1 - py) * heightTool + heightPadding,
       ];
     };
     return funcTransform;
