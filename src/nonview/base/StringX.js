@@ -142,6 +142,14 @@ export default class StringX {
     return x;
   }
 
+  static formatIntWithoutZero(x) {
+    if (!x) {
+      return "";
+    }
+    return x;
+  }
+
+
   static formatFloat(x) {
     return Math.abs(x).toFixed(2);
   }
