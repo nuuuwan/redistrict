@@ -64,10 +64,13 @@ export default function PartitionViewTable({
 
   const fairSeatsEthnicity = getFairSeats(RegionIdx.getEthnicityInfo);
   const fairSeatsReligion = getFairSeats(RegionIdx.getReligionInfo);
+  const fairSeatsElection2020 = getFairSeats(RegionIdx.getElection2020Info);
+
   const totalUnfairnessEthnicity = getTotalUnfairness(
     RegionIdx.getEthnicityInfo
   );
   const totalUnfairnessReligion = getTotalUnfairness(RegionIdx.getReligionInfo);
+  const totalUnfairnessElection2020 = getTotalUnfairness(RegionIdx.getElection2020Info);
 
   const [weightedBalanceSum, popSum] = rows.reduce(
     function ([weightedBalanceSum, popSum], row) {
@@ -95,8 +98,12 @@ export default function PartitionViewTable({
             idList={regionIdx.idList}
             fairSeatsEthnicity={fairSeatsEthnicity}
             fairSeatsReligion={fairSeatsReligion}
+            fairSeatsElection2020={fairSeatsElection2020}
+
             totalUnfairnessEthnicity={totalUnfairnessEthnicity}
             totalUnfairnessReligion={totalUnfairnessReligion}
+            totalUnfairnessElection2020={totalUnfairnessElection2020}
+
             totalAbsBalance={totalAbsBalance}
           />
           {rows.map(function (row) {
