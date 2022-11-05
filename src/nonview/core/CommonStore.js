@@ -19,6 +19,7 @@ export default class CommonStore {
   }
 
   constructor() {
+    this.isLoaded = false;
     this.allEntIndex = null;
     this.ethnicityTable = null;
     this.religionTable = null;
@@ -32,5 +33,6 @@ export default class CommonStore {
     this.election2020Table = await GIG2.getTable(
       PARLIAMENTARY_2020_ELECTION_TABLE_NAME
     );
+    this.isLoaded = true;
   }
 }

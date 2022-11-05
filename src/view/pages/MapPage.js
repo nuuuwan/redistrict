@@ -45,9 +45,10 @@ export default class MapPage extends MapPageState {
       partition,
       // house-keeping...
       isLoaded,
+      commonStoreSingleton,
     } = this.state;
 
-    if (!isLoaded) {
+    if (!isLoaded || !commonStoreSingleton.isLoaded) {
       return <CircularProgress />;
     }
 
