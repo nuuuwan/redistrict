@@ -47,7 +47,7 @@ export default function DemographicView({
 }) {
   const demographicInfo = funcDemographicsInfo(idList);
   const totalPop = MathX.sum(Object.values(demographicInfo));
-  
+
   const itemToSeatsFair = Seats.divideSeats(nSeats, demographicInfo);
   const itemToSeatsPRWithBonus = Seats.divideSeats(
     nSeats,

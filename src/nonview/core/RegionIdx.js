@@ -164,13 +164,17 @@ export default class RegionIdx {
 
   static getElection2020Info(idList) {
     const commonStore = CommonStore.getSingleton();
-    return RegionIdx.getGenericTableInfo(idList, commonStore.election2020Table, {
-      "Blue+": ["SLPP"],
-      "Green+": ["SJB", "UNP"],
-      "Red+": ["JJB", "MNA", "SLMC"],
-      "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF"],
-      "Muslim+": ["MNP", "SLMC"],
-    });
+    return RegionIdx.getGenericTableInfo(
+      idList,
+      commonStore.election2020Table,
+      {
+        "Blue+": ["SLPP"],
+        "Green+": ["SJB", "UNP"],
+        "Red+": ["JJB", "MNA", "SLMC"],
+        "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF"],
+        "Muslim+": ["MNP", "SLMC"],
+      }
+    );
   }
 
   static getTotalUnfairness(idList, nSeats) {
