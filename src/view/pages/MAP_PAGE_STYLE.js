@@ -19,7 +19,7 @@ export const STYLE_PAPER_RESULTS = {
   position: "fixed",
   bottom: 0,
   left: 0,
-  maxWidth: 800,
+  maxWidth: 900,
   maxHeight: 300,
   overflow: "scroll",
   m: 1,
