@@ -35,7 +35,7 @@ export default function PartitionViewTable({
   function getFairSeats(funcDemographicInfo) {
     return rows.reduce(function (fairSeats, row) {
       const demographicInfo = funcDemographicInfo(row.idList);
-      const itemToSeats = Seats.divideSeats(row.nSeats, demographicInfo);
+      const itemToSeats = Seats.divideSeats(row.nSeats, demographicInfo, 0, 0);
       for (let [item, seats] of Object.entries(itemToSeats)) {
         if (!fairSeats[item]) {
           fairSeats[item] = 0;
@@ -47,27 +47,27 @@ export default function PartitionViewTable({
   }
 
   function getTotalUnfairness(funcDemographicsInfo) {
-    const [unfairnessSum, seatSum] =
-      rows.reduce(
-        function ([unfairnessSum, seatSum], row) {
-          return [
-            unfairnessSum +
-              RegionIdx.getUnfairness(
-                row.idList,
-                row.nSeats,
-                funcDemographicsInfo
-              ),
-            seatSum + row.nSeats,
-          ];
-        },
-        [0, 0]
-      );
-    return unfairnessSum / seatSum;
+    const [rawUnfairnessSum, seatSum] = rows.reduce(
+      function ([rawUnfairnessSum, seatSum], row) {
+        return [
+          rawUnfairnessSum +
+            RegionIdx.getUnfairness(
+              row.idList,
+              row.nSeats,
+              funcDemographicsInfo
+            ) *
+              2 *
+              row.nSeats,
+          seatSum + row.nSeats,
+        ];
+      },
+      [0, 0]
+    );
+    return rawUnfairnessSum / (2 * seatSum);
   }
 
   const fairSeatsEthnicity = getFairSeats(RegionIdx.getEthnicityInfo);
   const fairSeatsReligion = getFairSeats(RegionIdx.getReligionInfo);
-
   const totalUnfairnessEthnicity = getTotalUnfairness(
     RegionIdx.getEthnicityInfo
   );

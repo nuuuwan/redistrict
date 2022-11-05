@@ -6,7 +6,7 @@ import StringX from "../../nonview/base/StringX";
 import Partition from "../../nonview/core/Partition";
 import RegionIdx from "../../nonview/core/RegionIdx";
 
-import DemographicView from "../../view/molecules/DemographicView";
+import DemographicRowView from "../../view/molecules/DemographicRowView";
 
 const STYLE_GROUP = {};
 const MAX_IDS_TO_DISPLAY = 5;
@@ -59,14 +59,14 @@ export default function PartitionViewTableRow({
       </TableCell>
 
       <TableCell align="left">
-        <DemographicView
+        <DemographicRowView
           idList={row.idList}
           funcDemographicsInfo={RegionIdx.getEthnicityInfo}
           nSeats={row.nSeats}
         />
       </TableCell>
       <TableCell align="left">
-        <DemographicView
+        <DemographicRowView
           idList={row.idList}
           funcDemographicsInfo={RegionIdx.getReligionInfo}
           nSeats={row.nSeats}

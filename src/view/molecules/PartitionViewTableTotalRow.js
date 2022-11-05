@@ -4,7 +4,7 @@ import TableRow from "@mui/material/TableRow";
 import StringX from "../../nonview/base/StringX";
 import RegionIdx from "../../nonview/core/RegionIdx";
 
-import DemographicView from "../../view/molecules/DemographicView";
+import DemographicTotalRowView from "../../view/molecules/DemographicTotalRowView";
 import { styled } from "@mui/system";
 
 const StyledTableCell = styled(TableCell)({
@@ -45,7 +45,7 @@ export default function PartitionViewTableTotalRow({
       </StyledTableCell>
 
       <StyledTableCell>
-        <DemographicView
+        <DemographicTotalRowView
           idList={idList}
           funcDemographicsInfo={RegionIdx.getEthnicityInfo}
           nSeats={totalNSeats}
@@ -54,7 +54,7 @@ export default function PartitionViewTableTotalRow({
         />
       </StyledTableCell>
       <StyledTableCell>
-        <DemographicView
+        <DemographicTotalRowView
           idList={idList}
           funcDemographicsInfo={RegionIdx.getReligionInfo}
           nSeats={totalNSeats}
