@@ -47,14 +47,22 @@ export default function PartitionViewTable({
   }
 
   function getTotalUnfairness(funcDemographicsInfo) {
-    return (
-      rows.reduce(function (totalUnfairness, row) {
-        return (
-          totalUnfairness +
-          RegionIdx.getUnfairness(row.idList, row.nSeats, funcDemographicsInfo)
-        );
-      }, 0) / rows.length
-    );
+    const [unfairnessSum, seatSum] =
+      rows.reduce(
+        function ([unfairnessSum, seatSum], row) {
+          return [
+            unfairnessSum +
+              RegionIdx.getUnfairness(
+                row.idList,
+                row.nSeats,
+                funcDemographicsInfo
+              ),
+            seatSum + row.nSeats,
+          ];
+        },
+        [0, 0]
+      );
+    return unfairnessSum / seatSum;
   }
 
   const fairSeatsEthnicity = getFairSeats(RegionIdx.getEthnicityInfo);
