@@ -190,7 +190,10 @@ export default class RegionIdx {
       return unfairness + Math.abs(seats - seatsFair);
     },
     0);
-    const normalizedUnfairness = rawUnfairness / (2 * nSeats);
+    let normalizedUnfairness = rawUnfairness / (2 * nSeats);
+    if (!normalizedUnfairness) {
+      normalizedUnfairness = 1;
+    }
     return normalizedUnfairness;
   }
 }
