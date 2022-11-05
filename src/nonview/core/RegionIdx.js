@@ -180,12 +180,15 @@ export default class RegionIdx {
     const demoToP = funcDemographics(idList);
     const demoToSeats = Seats.divideSeats(nSeats, demoToP);
     const demoToSeatsFair = DictUtils.mapValues(demoToP, (p) => p * nSeats);
-    return Object.entries(demoToSeats).reduce(function (
+
+    const rawUnfairness = Object.entries(demoToSeats).reduce(function (
       unfairness,
       [demo, seats]
     ) {
       return unfairness + Math.abs(demoToSeatsFair[demo] - seats);
     },
     0);
+    const normalizedUnfairness = rawUnfairness / (2 * nSeats);
+    return normalizedUnfairness;
   }
 }
