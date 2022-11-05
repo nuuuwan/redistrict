@@ -165,10 +165,10 @@ export default class RegionIdx {
   static getElection2020Info(idList) {
     const commonStore = CommonStore.getSingleton();
     return RegionIdx.getGenericTableInfo(idList, commonStore.election2020Table, {
-      SLPP: ["SLPP"],
-      SJB: ["SJB"],
-      JJB: ["JJB"],
-      ITAK: ["ITAK"],
+      "Blue+": ["SLPP"],
+      "Green+": ["SJB", "UNP"],
+      "Red+": ["JJB"],
+      "Tamil+": ["ITAK"],
     });
   }
 
