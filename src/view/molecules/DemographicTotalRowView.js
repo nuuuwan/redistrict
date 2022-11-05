@@ -39,7 +39,7 @@ export default function DemographicTotalRowView({
         <TableCell>
           <Typography variant="caption">{"Unfairness"}</Typography>
         </TableCell>
-        <TableCell/>
+        <TableCell />
         <TableCell align="right">
           <Typography variant="caption">
             {StringX.formatPercent(totalUnfairness)}

@@ -125,7 +125,9 @@ export default function DemographicView({
                         </TableCell>
                         <TableCell align="right">
                           <Typography variant="caption" sx={sxCell}>
-                            {StringX.formatIntWithoutZero(itemToSeatsPRWithBonus[k])}
+                            {StringX.formatIntWithoutZero(
+                              itemToSeatsPRWithBonus[k]
+                            )}
                           </Typography>
                         </TableCell>
                       </>

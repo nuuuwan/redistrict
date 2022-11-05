@@ -149,7 +149,6 @@ export default class StringX {
     return x;
   }
 
-
   static formatFloat(x) {
     return Math.abs(x).toFixed(2);
   }
