@@ -167,8 +167,9 @@ export default class RegionIdx {
     return RegionIdx.getGenericTableInfo(idList, commonStore.election2020Table, {
       "Blue+": ["SLPP"],
       "Green+": ["SJB", "UNP"],
-      "Red+": ["JJB"],
-      "Tamil+": ["ITAK"],
+      "Red+": ["JJB", "MNA", "SLMC"],
+      "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF"],
+      "Muslim+": ["MNP", "SLMC"],
     });
   }
 
