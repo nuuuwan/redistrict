@@ -39,25 +39,16 @@ export default function DemographicTotalRowView({
         <TableCell>
           <Typography variant="caption">{"Unfairness"}</Typography>
         </TableCell>
+        <TableCell/>
         <TableCell align="right">
           <Typography variant="caption">
             {StringX.formatPercent(totalUnfairness)}
           </Typography>
         </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
-          <Typography variant="caption">{"Minimum"}</Typography>
-        </TableCell>
         <TableCell align="right">
           <Typography variant="caption">
             {StringX.formatPercent(unfairness)}
           </Typography>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
-          <Typography variant="caption">{"PR with Bonus"}</Typography>
         </TableCell>
         <TableCell align="right">
           <Typography variant="caption">
