@@ -66,7 +66,7 @@ export default function DemographicView({
             <TableRow>
               <StyledHeaderTableCell>Group</StyledHeaderTableCell>
               <StyledHeaderTableCell align="right">
-                p(Pop.)
+                %
               </StyledHeaderTableCell>
               <StyledHeaderTableCell align="right">
                 Actual
