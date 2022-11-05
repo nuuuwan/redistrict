@@ -26,6 +26,7 @@ export default function PartitionViewTableHeader({ subRegionType }) {
 
         <StyledTableCell align="left">Ethnicity</StyledTableCell>
         <StyledTableCell align="left">Religion</StyledTableCell>
+        <StyledTableCell align="left">2020 Parliamentary</StyledTableCell>
       </TableRow>
     </TableHead>
   );

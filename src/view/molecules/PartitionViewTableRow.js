@@ -72,6 +72,13 @@ export default function PartitionViewTableRow({
           nSeats={row.nSeats}
         />
       </TableCell>
+      <TableCell align="left">
+        <DemographicRowView
+          idList={row.idList}
+          funcDemographicsInfo={RegionIdx.getElection2020Info}
+          nSeats={row.nSeats}
+        />
+      </TableCell>
     </TableRow>
   );
 }
