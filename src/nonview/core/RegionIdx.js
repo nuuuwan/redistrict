@@ -182,11 +182,12 @@ export default class RegionIdx {
 
     const demoToSeatsFair = DictUtils.mapValues(demoToP, (p) => p * nSeats);
 
-    const rawUnfairness = Object.entries(demoToSeats).reduce(function (
+    const rawUnfairness = Object.entries(demoToSeatsFair).reduce(function (
       unfairness,
-      [demo, seats]
+      [demo, seatsFair]
     ) {
-      return unfairness + Math.abs(demoToSeatsFair[demo] - seats);
+      const seats = demoToSeats[demo] ? demoToSeats[demo] : 0;
+      return unfairness + Math.abs(seats - seatsFair);
     },
     0);
     const normalizedUnfairness = rawUnfairness / (2 * nSeats);
