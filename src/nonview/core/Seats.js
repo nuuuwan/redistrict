@@ -1,11 +1,25 @@
 import MathX from "../../nonview/base/MathX";
 
 export default class Seats {
-  static divideSeats(nSeats, groupToP) {
+  static divideSeats(nSeatsOriginal, groupToPOriginal, bonus = 0, limit = 0) {
+    const nSeats = nSeatsOriginal - bonus;
     let groupToSeats = {};
     let remSeats = nSeats;
     let groupAndRem = [];
-    for (let [group, p] of Object.entries(groupToP)) {
+
+    const groupAndPLimited = Object.entries(groupToPOriginal).filter(function ([
+      group,
+      p,
+    ]) {
+      return p > limit;
+    });
+
+    const newTotalP = MathX.sum(groupAndPLimited.map((x) => x[1]));
+    const groupAndP = groupAndPLimited.map(function ([group, p]) {
+      return [group, p / newTotalP];
+    });
+
+    for (let [group, p] of groupAndP) {
       const seatsFloat = nSeats * p;
       const seatsInt = parseInt(seatsFloat);
       groupToSeats[group] = seatsInt;
@@ -14,11 +28,17 @@ export default class Seats {
       groupAndRem.push([group, rem]);
     }
 
+    const topGroup = groupAndP.sort(function (a, b) {
+      return b[1] - a[1];
+    })[0][0];
+    groupToSeats[topGroup] += bonus;
+
     const sortedGroupAndRem = groupAndRem.sort((a, b) => b[1] - a[1]);
     for (let i of MathX.range(0, remSeats)) {
       const group = sortedGroupAndRem[i][0];
       groupToSeats[group] += 1;
     }
+
     return groupToSeats;
   }
 

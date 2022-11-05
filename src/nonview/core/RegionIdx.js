@@ -176,9 +176,10 @@ export default class RegionIdx {
     );
   }
 
-  static getUnfairness(idList, nSeats, funcDemographics) {
+  static getUnfairness(idList, nSeats, funcDemographics, bonus = 0, limit = 0) {
     const demoToP = funcDemographics(idList);
-    const demoToSeats = Seats.divideSeats(nSeats, demoToP);
+    const demoToSeats = Seats.divideSeats(nSeats, demoToP, bonus, limit);
+
     const demoToSeatsFair = DictUtils.mapValues(demoToP, (p) => p * nSeats);
 
     const rawUnfairness = Object.entries(demoToSeats).reduce(function (
