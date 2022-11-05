@@ -16,6 +16,9 @@ export default class MathX {
   }
 
   static range(min, max, step = 1) {
+    if (max <= min) {
+      return [];
+    }
     const span = parseInt((max - min) / step);
     return [...Array(span).keys()].map((x) => x * step + min);
   }
