@@ -180,7 +180,7 @@ export default class RegionIdx {
     return RegionIdx.getGenericTableInfo(idList, table, {
       "Blue+": ["SLPP"],
       "Green+": ["SJB", "UNP"],
-      "Red+": ["JJB", "MNA", "SLMC"],
+      "Red+": ["JJB", "JVP"],
       "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF"],
       "Muslim+": ["MNP", "SLMC"],
     });
