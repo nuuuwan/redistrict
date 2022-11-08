@@ -178,11 +178,11 @@ export default class RegionIdx {
 
   static getGenericElectionInfo(idList, table) {
     return RegionIdx.getGenericTableInfo(idList, table, {
-      "Blue+": ["SLPP"],
+      "Blue+": ["SLPP", "PA", "UPFA", 'SLFP'],
       "Green+": ["SJB", "UNP"],
       "Red+": ["JJB", "JVP"],
-      "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF"],
-      "Muslim+": ["MNP", "SLMC"],
+      "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF", "AITM"],
+      "Muslim+": ["MNP", "SLMC", "ACMC", "NC"],
     });
   }
 
@@ -222,9 +222,9 @@ export default class RegionIdx {
   }
 }
 
-export const FUNC_DEMOGRAPHICS_INFO_LIST = [
-  RegionIdx.getEthnicityInfo,
-  RegionIdx.getReligionInfo,
-  RegionIdx.getElection2020Info,
-  RegionIdx.getElection2015Info,
-];
+export const FUNC_DEMOGRAPHICS_INFO_IDX = {
+  Ethnicity: RegionIdx.getEthnicityInfo,
+  Religion: RegionIdx.getReligionInfo,
+  Election2020: RegionIdx.getElection2020Info,
+  Election2015: RegionIdx.getElection2015Info,
+};
