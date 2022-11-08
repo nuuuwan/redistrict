@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 
 import StringX from "../../nonview/base/StringX";
 import RegionIdx from "../../nonview/core/RegionIdx";
+import Seats from "../../nonview/core/Seats";
 
 import DemographicInnerView from "../../view/molecules/DemographicInnerView";
 
@@ -11,8 +12,8 @@ export default function DemographicTotalRowView({
   idList,
   funcDemographicsInfo,
   nSeats,
-  fairSeats,
-  totalUnfairness,
+  rows,
+  regionIdx,
 }) {
   const unfairness = RegionIdx.getUnfairness(
     idList,
@@ -27,6 +28,39 @@ export default function DemographicTotalRowView({
     1,
     0.05
   );
+
+  function getFairSeats(funcDemographicsInfo) {
+    return rows.reduce(function (fairSeats, row) {
+      const demographicInfo = funcDemographicsInfo(row.idList);
+      const itemToSeats = Seats.divideSeats(row.nSeats, demographicInfo, 0, 0);
+      for (let [item, seats] of Object.entries(itemToSeats)) {
+        if (!fairSeats[item]) {
+          fairSeats[item] = 0;
+        }
+        fairSeats[item] += seats;
+      }
+      return fairSeats;
+    }, {});
+  }
+
+  function getTotalUnfairness(funcDemographicsInfo) {
+    const [weightedUnfairnessSum, popSum] = rows.reduce(
+      function ([weightedUnfairnessSum, popSum], row) {
+        const pop = regionIdx.getTotalPop(row.idList);
+        const unfairness = RegionIdx.getUnfairness(
+          row.idList,
+          row.nSeats,
+          funcDemographicsInfo
+        );
+        return [weightedUnfairnessSum + unfairness * pop, popSum + pop];
+      },
+      [0, 0]
+    );
+    return weightedUnfairnessSum / popSum;
+  }
+
+  const fairSeats = getFairSeats(funcDemographicsInfo);
+  const totalUnfairness = getTotalUnfairness(funcDemographicsInfo);
 
   return (
     <DemographicInnerView

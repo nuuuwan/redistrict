@@ -4,9 +4,6 @@ import TableBody from "@mui/material/TableBody";
 import { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 
-import RegionIdx from "../../nonview/core/RegionIdx";
-import Seats from "../../nonview/core/Seats";
-
 import PartitionViewTableHeader from "../../view/molecules/PartitionViewTableHeader";
 import PartitionViewTableRow from "../../view/molecules/PartitionViewTableRow";
 import PartitionViewTableTotalRow from "../../view/molecules/PartitionViewTableTotalRow";
@@ -14,7 +11,7 @@ import PartitionViewTableTotalRow from "../../view/molecules/PartitionViewTableT
 const STYLE_TABLE = {
   [`& .${tableCellClasses.root}`]: {
     borderBottom: "1px solid #ccc",
-    padding: 0.5,
+    padding: 0.2,
     width: "fit-content",
     maxWidth: 200,
     verticalAlign: "top",
@@ -31,48 +28,6 @@ export default function PartitionViewTable({
   groupToName,
 }) {
   const totalNSeats = nSeats;
-
-  function getFairSeats(funcDemographicInfo) {
-    return rows.reduce(function (fairSeats, row) {
-      const demographicInfo = funcDemographicInfo(row.idList);
-      const itemToSeats = Seats.divideSeats(row.nSeats, demographicInfo, 0, 0);
-      for (let [item, seats] of Object.entries(itemToSeats)) {
-        if (!fairSeats[item]) {
-          fairSeats[item] = 0;
-        }
-        fairSeats[item] += seats;
-      }
-      return fairSeats;
-    }, {});
-  }
-
-  function getTotalUnfairness(funcDemographicsInfo) {
-    const [weightedUnfairnessSum, popSum] = rows.reduce(
-      function ([weightedUnfairnessSum, popSum], row) {
-        const pop = regionIdx.getTotalPop(row.idList);
-        const unfairness = RegionIdx.getUnfairness(
-          row.idList,
-          row.nSeats,
-          funcDemographicsInfo
-        );
-        return [weightedUnfairnessSum + unfairness * pop, popSum + pop];
-      },
-      [0, 0]
-    );
-    return weightedUnfairnessSum / popSum;
-  }
-
-  const fairSeatsEthnicity = getFairSeats(RegionIdx.getEthnicityInfo);
-  const fairSeatsReligion = getFairSeats(RegionIdx.getReligionInfo);
-  const fairSeatsElection2020 = getFairSeats(RegionIdx.getElection2020Info);
-
-  const totalUnfairnessEthnicity = getTotalUnfairness(
-    RegionIdx.getEthnicityInfo
-  );
-  const totalUnfairnessReligion = getTotalUnfairness(RegionIdx.getReligionInfo);
-  const totalUnfairnessElection2020 = getTotalUnfairness(
-    RegionIdx.getElection2020Info
-  );
 
   const [weightedBalanceSum, popSum] = rows.reduce(
     function ([weightedBalanceSum, popSum], row) {
@@ -98,13 +53,9 @@ export default function PartitionViewTable({
             totalNSeats={totalNSeats}
             totalPop={totalPop}
             idList={regionIdx.idList}
-            fairSeatsEthnicity={fairSeatsEthnicity}
-            fairSeatsReligion={fairSeatsReligion}
-            fairSeatsElection2020={fairSeatsElection2020}
-            totalUnfairnessEthnicity={totalUnfairnessEthnicity}
-            totalUnfairnessReligion={totalUnfairnessReligion}
-            totalUnfairnessElection2020={totalUnfairnessElection2020}
             totalAbsBalance={totalAbsBalance}
+            rows={rows}
+            regionIdx={regionIdx}
           />
           {rows.map(function (row) {
             return (

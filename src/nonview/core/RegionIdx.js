@@ -162,19 +162,28 @@ export default class RegionIdx {
     });
   }
 
-  static getElection2020Info(idList) {
-    const commonStore = CommonStore.getSingleton();
-    return RegionIdx.getGenericTableInfo(
+  static getElection2015Info(idList) {
+    return RegionIdx.getGenericElectionInfo(
       idList,
-      commonStore.election2020Table,
-      {
-        "Blue+": ["SLPP"],
-        "Green+": ["SJB", "UNP"],
-        "Red+": ["JJB", "MNA", "SLMC"],
-        "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF"],
-        "Muslim+": ["MNP", "SLMC"],
-      }
+      CommonStore.getSingleton().election2015Table
     );
+  }
+
+  static getElection2020Info(idList) {
+    return RegionIdx.getGenericElectionInfo(
+      idList,
+      CommonStore.getSingleton().election2020Table
+    );
+  }
+
+  static getGenericElectionInfo(idList, table) {
+    return RegionIdx.getGenericTableInfo(idList, table, {
+      "Blue+": ["SLPP"],
+      "Green+": ["SJB", "UNP"],
+      "Red+": ["JJB", "MNA", "SLMC"],
+      "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF"],
+      "Muslim+": ["MNP", "SLMC"],
+    });
   }
 
   static getTotalUnfairness(idList, nSeats) {
@@ -212,3 +221,10 @@ export default class RegionIdx {
     return normalizedUnfairness;
   }
 }
+
+export const FUNC_DEMOGRAPHICS_INFO_LIST = [
+  RegionIdx.getEthnicityInfo,
+  RegionIdx.getReligionInfo,
+  RegionIdx.getElection2020Info,
+  RegionIdx.getElection2015Info,
+];

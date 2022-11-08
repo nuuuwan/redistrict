@@ -4,7 +4,7 @@ import TableRow from "@mui/material/TableRow";
 import Color from "../../nonview/base/Color";
 import StringX from "../../nonview/base/StringX";
 import Partition from "../../nonview/core/Partition";
-import RegionIdx from "../../nonview/core/RegionIdx";
+import { FUNC_DEMOGRAPHICS_INFO_LIST } from "../../nonview/core/RegionIdx";
 
 import DemographicRowView from "../../view/molecules/DemographicRowView";
 
@@ -58,27 +58,17 @@ export default function PartitionViewTableRow({
         {StringX.formatPercentSigned(balance)}
       </TableCell>
 
-      <TableCell align="left">
-        <DemographicRowView
-          idList={row.idList}
-          funcDemographicsInfo={RegionIdx.getEthnicityInfo}
-          nSeats={row.nSeats}
-        />
-      </TableCell>
-      <TableCell align="left">
-        <DemographicRowView
-          idList={row.idList}
-          funcDemographicsInfo={RegionIdx.getReligionInfo}
-          nSeats={row.nSeats}
-        />
-      </TableCell>
-      <TableCell align="left">
-        <DemographicRowView
-          idList={row.idList}
-          funcDemographicsInfo={RegionIdx.getElection2020Info}
-          nSeats={row.nSeats}
-        />
-      </TableCell>
+      {FUNC_DEMOGRAPHICS_INFO_LIST.map(function (funcDemographicsInfo, i) {
+        return (
+          <TableCell align="left" key={"table-cell-demographics-" + i}>
+            <DemographicRowView
+              idList={row.idList}
+              funcDemographicsInfo={funcDemographicsInfo}
+              nSeats={row.nSeats}
+            />
+          </TableCell>
+        );
+      })}
     </TableRow>
   );
 }

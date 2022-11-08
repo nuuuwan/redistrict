@@ -3,7 +3,9 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 
 import StringX from "../../nonview/base/StringX";
-import RegionIdx from "../../nonview/core/RegionIdx";
+import RegionIdx, {
+  FUNC_DEMOGRAPHICS_INFO_LIST,
+} from "../../nonview/core/RegionIdx";
 
 import DemographicTotalRowView from "../../view/molecules/DemographicTotalRowView";
 import { styled } from "@mui/system";
@@ -18,13 +20,9 @@ export default function PartitionViewTableTotalRow({
   totalNSeats,
   totalPop,
   idList,
-  fairSeatsEthnicity,
-  fairSeatsReligion,
-  fairSeatsElection2020,
-  totalUnfairnessEthnicity,
-  totalUnfairnessReligion,
-  totalUnfairnessElection2020,
   totalAbsBalance,
+  rows,
+  regionIdx,
 }) {
   return (
     <TableRow>
@@ -51,33 +49,19 @@ export default function PartitionViewTableTotalRow({
         </Typography>
       </StyledTableCell>
 
-      <StyledTableCell>
-        <DemographicTotalRowView
-          idList={idList}
-          funcDemographicsInfo={RegionIdx.getEthnicityInfo}
-          nSeats={totalNSeats}
-          fairSeats={fairSeatsEthnicity}
-          totalUnfairness={totalUnfairnessEthnicity}
-        />
-      </StyledTableCell>
-      <StyledTableCell>
-        <DemographicTotalRowView
-          idList={idList}
-          funcDemographicsInfo={RegionIdx.getReligionInfo}
-          nSeats={totalNSeats}
-          fairSeats={fairSeatsReligion}
-          totalUnfairness={totalUnfairnessReligion}
-        />
-      </StyledTableCell>
-      <StyledTableCell>
-        <DemographicTotalRowView
-          idList={idList}
-          funcDemographicsInfo={RegionIdx.getElection2020Info}
-          nSeats={totalNSeats}
-          fairSeats={fairSeatsElection2020}
-          totalUnfairness={totalUnfairnessElection2020}
-        />
-      </StyledTableCell>
+      {FUNC_DEMOGRAPHICS_INFO_LIST.map(function (funcDemographicInfo, i) {
+        return (
+          <StyledTableCell key={"demographic-" + i}>
+            <DemographicTotalRowView
+              idList={idList}
+              funcDemographicsInfo={funcDemographicInfo}
+              nSeats={totalNSeats}
+              rows={rows}
+              regionIdx={regionIdx}
+            />
+          </StyledTableCell>
+        );
+      })}
       <StyledTableCell />
     </TableRow>
   );
