@@ -3,7 +3,7 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 
 import StringX from "../../nonview/base/StringX";
-import RegionIdx, {
+import {
   FUNC_DEMOGRAPHICS_INFO_LIST,
 } from "../../nonview/core/RegionIdx";
 
