@@ -178,7 +178,7 @@ export default class RegionIdx {
 
   static getGenericElectionInfo(idList, table) {
     return RegionIdx.getGenericTableInfo(idList, table, {
-      "Blue+": ["SLPP", "PA", "UPFA", 'SLFP'],
+      "Blue+": ["SLPP", "PA", "UPFA", "SLFP"],
       "Green+": ["SJB", "UNP"],
       "Red+": ["JJB", "JVP"],
       "Tamil+": ["ITAK", "AITC", "EPDP", "TMVP", "TULF", "AITM"],
