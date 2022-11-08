@@ -6,12 +6,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-const COLOR_MODE_LIST = [
-  "Polling Divisions",
-  "Balance",
-  "Religion",
-  "Ethnicity",
-];
+import { FUNC_DEMOGRAPHICS_INFO_IDX } from "../../nonview/core/RegionIdx";
+
+const COLOR_MODE_LIST = [].concat(
+  ["Polling Divisions", "Balance"],
+  Object.keys(FUNC_DEMOGRAPHICS_INFO_IDX)
+);
 
 export default function SelectColorMode({ colorMode, setColorMode }) {
   const onChange = function (e) {
@@ -19,7 +19,7 @@ export default function SelectColorMode({ colorMode, setColorMode }) {
   };
 
   return (
-    <Box sx={{ width: 120 }}>
+    <Box sx={{ width: 160 }}>
       <FormControl fullWidth>
         <InputLabel>Color Mode</InputLabel>
         <Select value={colorMode} label="Color Mode" onChange={onChange}>

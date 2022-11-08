@@ -5,9 +5,9 @@ import Color from "../../nonview/base/Color";
 import Geo from "../../nonview/base/geo/Geo";
 import LngLat from "../../nonview/base/geo/LngLat";
 import StringX from "../../nonview/base/StringX";
-import ETHNO_RELIGION_TO_COLOR from "../../nonview/constants/ETHNO_RELIGION_TO_COLOR";
+import FIELD_NAME_TO_COLOR from "../../nonview/constants/FIELD_NAME_TO_COLOR";
 import Partition from "../../nonview/core/Partition";
-import RegionIdx from "../../nonview/core/RegionIdx";
+import { FUNC_DEMOGRAPHICS_INFO_IDX } from "../../nonview/core/RegionIdx";
 import Seats from "../../nonview/core/Seats";
 
 import { FONT_FAMILY_LIST } from "../../APP_STYLES.js";
@@ -62,21 +62,23 @@ export default class GeoView extends Component {
       const nSeatsFair = (totalGroupPop * nSeats) / totalPop;
       const nSeatsFairPerNSeats2 = nSeatsFair / groupToSeats[group];
 
-      let color;
-      switch (colorMode) {
-        case "Balance":
+      let color = undefined;
+      console.debug(colorMode);
+      for (let [kDemographic, funcDemographicsInfo] of Object.entries(
+        FUNC_DEMOGRAPHICS_INFO_IDX
+      )) {
+        if (kDemographic === colorMode) {
+          const demographicInfo = funcDemographicsInfo(idList);
+          color = FIELD_NAME_TO_COLOR[Object.keys(demographicInfo)[0]];
+        }
+      }
+      if (color === undefined) {
+        if (colorMode === "Balance") {
           color = Partition.getColorBalance(nSeatsFairPerNSeats2);
-          break;
-        case "Religion":
-          const religionInfo = RegionIdx.getReligionInfo(idList);
-          color = ETHNO_RELIGION_TO_COLOR[Object.keys(religionInfo)[0]];
-          break;
-        case "Ethnicity":
-          const ethnicityInfo = RegionIdx.getEthnicityInfo(idList);
-          color = ETHNO_RELIGION_TO_COLOR[Object.keys(ethnicityInfo)[0]];
-          break;
-        default:
+        } else {
+          // default: Polling Divisions
           color = Color.getForIter(iGroup, nGroups);
+        }
       }
 
       return idList.map(function (regionID) {

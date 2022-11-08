@@ -4,7 +4,7 @@ import TableRow from "@mui/material/TableRow";
 import Color from "../../nonview/base/Color";
 import StringX from "../../nonview/base/StringX";
 import Partition from "../../nonview/core/Partition";
-import { FUNC_DEMOGRAPHICS_INFO_LIST } from "../../nonview/core/RegionIdx";
+import { FUNC_DEMOGRAPHICS_INFO_IDX } from "../../nonview/core/RegionIdx";
 
 import DemographicRowView from "../../view/molecules/DemographicRowView";
 
@@ -58,9 +58,15 @@ export default function PartitionViewTableRow({
         {StringX.formatPercentSigned(balance)}
       </TableCell>
 
-      {FUNC_DEMOGRAPHICS_INFO_LIST.map(function (funcDemographicsInfo, i) {
+      {Object.entries(FUNC_DEMOGRAPHICS_INFO_IDX).map(function (
+        [kDemographics, funcDemographicsInfo],
+        i
+      ) {
         return (
-          <TableCell align="left" key={"table-cell-demographics-" + i}>
+          <TableCell
+            align="left"
+            key={"table-cell-demographics-" + kDemographics}
+          >
             <DemographicRowView
               idList={row.idList}
               funcDemographicsInfo={funcDemographicsInfo}

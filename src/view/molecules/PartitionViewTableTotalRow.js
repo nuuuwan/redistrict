@@ -3,7 +3,7 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 
 import StringX from "../../nonview/base/StringX";
-import { FUNC_DEMOGRAPHICS_INFO_LIST } from "../../nonview/core/RegionIdx";
+import { FUNC_DEMOGRAPHICS_INFO_IDX } from "../../nonview/core/RegionIdx";
 
 import DemographicTotalRowView from "../../view/molecules/DemographicTotalRowView";
 import { styled } from "@mui/system";
@@ -47,9 +47,12 @@ export default function PartitionViewTableTotalRow({
         </Typography>
       </StyledTableCell>
 
-      {FUNC_DEMOGRAPHICS_INFO_LIST.map(function (funcDemographicInfo, i) {
+      {Object.entries(FUNC_DEMOGRAPHICS_INFO_IDX).map(function (
+        [kDemographics, funcDemographicInfo],
+        i
+      ) {
         return (
-          <StyledTableCell key={"demographic-" + i}>
+          <StyledTableCell key={"demographic-" + kDemographics}>
             <DemographicTotalRowView
               idList={idList}
               funcDemographicsInfo={funcDemographicInfo}
