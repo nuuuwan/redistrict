@@ -65,12 +65,8 @@ export default function DemographicView({
           <TableHead>
             <TableRow>
               <StyledHeaderTableCell>Group</StyledHeaderTableCell>
-              <StyledHeaderTableCell align="right">
-                %
-              </StyledHeaderTableCell>
-              <StyledHeaderTableCell align="right">
-                Tool
-              </StyledHeaderTableCell>
+              <StyledHeaderTableCell align="right">%</StyledHeaderTableCell>
+              <StyledHeaderTableCell align="right">Tool</StyledHeaderTableCell>
               {isTotalRow ? (
                 <>
                   <StyledHeaderTableCell align="right">

@@ -30,10 +30,7 @@ export default class BBox {
     ];
     const [lngSpan, latSpan] = [maxLng - minLng, maxLat - minLat];
     const r = (lngSpan * height) / latSpan / width;
-    let [widthTool, heightTool] = [
-      width - padding * 2,
-      height - padding * 2,
-    ];
+    let [widthTool, heightTool] = [width - padding * 2, height - padding * 2];
     if (r > 1) {
       heightTool /= r;
     } else {
