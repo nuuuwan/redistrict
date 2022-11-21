@@ -3,7 +3,6 @@ import Vector from "./Vector";
 
 const MAX_EPOCHS = 20;
 const EXTRA_FACTOR = 1.2;
-    
 
 export default class KMeansClustering {
   constructor(k, n, funcIToVector, funcIToSize) {
@@ -78,30 +77,27 @@ export default class KMeansClustering {
             iVector,
             iCluster,
             distance,
-          })
+          });
         }
       }
 
-      const sortedRunList = runList.sort(
-        function(a, b) {
-          return a.distance - b.distance;
-        }
-      );
+      const sortedRunList = runList.sort(function (a, b) {
+        return a.distance - b.distance;
+      });
 
       let vectorToCluster = {};
-      for (let {iVector, iCluster, distance} of sortedRunList) {          
+      for (let { iVector, iCluster, distance } of sortedRunList) {
         const size = this.funcIToSize(iVector);
         if (vectorToCluster[iVector] !== undefined) {
           continue;
         }
-        if (clusterToSize[iCluster]+ size > maxSizePerCluster) {
+        if (clusterToSize[iCluster] + size > maxSizePerCluster) {
           continue;
-        } 
+        }
         clusterToI[iCluster].push(iVector);
         vectorToCluster[iVector] = iCluster;
         clusterToSize[iCluster] += size;
-      } 
-
+      }
     }
     //
     return clusterToI;
