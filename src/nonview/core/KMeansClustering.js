@@ -2,7 +2,7 @@ import MathX from "../../nonview/base/MathX";
 import Vector from "./Vector";
 
 const MAX_EPOCHS = 20;
-const EXTRA_FACTOR = 1.2;
+const EXTRA_FACTOR = 1.05;
 
 export default class KMeansClustering {
   constructor(k, n, funcIToVector, funcIToSize) {
@@ -86,14 +86,18 @@ export default class KMeansClustering {
       });
 
       let vectorToCluster = {};
+      const isLastEpoch = epoch === MAX_EPOCHS - 1;
       for (let { iVector, iCluster, distance } of sortedRunList) {
         const size = this.funcIToSize(iVector);
         if (vectorToCluster[iVector] !== undefined) {
           continue;
         }
-        if (clusterToSize[iCluster] + size > maxSizePerCluster) {
-          continue;
+        if (!isLastEpoch) {
+          if (clusterToSize[iCluster] + size > maxSizePerCluster) {
+            continue;
+          }
         }
+        
         clusterToI[iCluster].push(iVector);
         vectorToCluster[iVector] = iCluster;
         clusterToSize[iCluster] += size;
