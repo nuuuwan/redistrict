@@ -3,11 +3,11 @@ import { Component } from "react";
 import { ENT_TYPES } from "../../nonview/base/EntTypes";
 import Ents from "../../nonview/base/Ents";
 import CommonStore from "../../nonview/core/CommonStore";
-import Partition from "../../nonview/core/Partition";
+import PartitionByClustering from "../../nonview/core/PartitionByClustering";
 
 const DEFAULT_N_SEATS = 20;
 const DEFAULT_MAX_SEATS_PER_GROUP = 1;
-const DEFAULT_SUBREGION_TYPE = ENT_TYPES.DSD;
+const DEFAULT_SUBREGION_TYPE = ENT_TYPES.GND;
 const DEFAULT_REGION_ID = "EC-01";
 const DEFAULT_COLOR_MODE = "Polling Divisions";
 
@@ -109,7 +109,7 @@ export default class MapPageState extends Component {
         regionID,
         subRegionType
       );
-      partition = new Partition(regionIdx, nSeats);
+      partition = new PartitionByClustering(regionIdx, nSeats);
       partition.partitionAll(maxSeatsPerGroup);
     }
 
