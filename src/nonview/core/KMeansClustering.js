@@ -2,6 +2,8 @@ import MathX from "../../nonview/base/MathX";
 import Vector from "./Vector";
 
 const MAX_EPOCHS = 20;
+const EXTRA_FACTOR = 1.2;
+    
 
 export default class KMeansClustering {
   constructor(k, n, funcIToVector, funcIToSize) {
@@ -24,7 +26,6 @@ export default class KMeansClustering {
       0
     );
     const meanSizePerCluster = totalSize / this.k;
-    const EXTRA_FACTOR = 1.05;
     const maxSizePerCluster = meanSizePerCluster * EXTRA_FACTOR;
 
     // Initial Assignment of Vectors to Clusters
@@ -67,27 +68,41 @@ export default class KMeansClustering {
         clusterToSize[iCluster] = 0;
       }
 
+      let runList = [];
       for (let iVector = 0; iVector < this.n; iVector++) {
         const vector = vectors[iVector];
-        const size = this.funcIToSize(iVector);
-        let minDistance = undefined;
-        let minICluster = undefined;
         for (let iCluster = 0; iCluster < this.k; iCluster++) {
-          if (clusterToSize[iCluster] + size > maxSizePerCluster) {
-            continue;
-          }
           const clusterMeanVector = clusterMeanVectors[iCluster];
           const distance = vector.getDistanceSquare(clusterMeanVector);
-          if (minDistance === undefined || distance < minDistance) {
-            minDistance = distance;
-            minICluster = iCluster;
-          }
+          runList.push({
+            iVector,
+            iCluster,
+            distance,
+          })
         }
-        clusterToI[minICluster].push(iVector);
-        clusterToSize[minICluster] += size;
       }
-    }
 
+      const sortedRunList = runList.sort(
+        function(a, b) {
+          return a.distance - b.distance;
+        }
+      );
+
+      let vectorToCluster = {};
+      for (let {iVector, iCluster, distance} of sortedRunList) {          
+        const size = this.funcIToSize(iVector);
+        if (vectorToCluster[iVector] !== undefined) {
+          continue;
+        }
+        if (clusterToSize[iCluster]+ size > maxSizePerCluster) {
+          continue;
+        } 
+        clusterToI[iCluster].push(iVector);
+        vectorToCluster[iVector] = iCluster;
+        clusterToSize[iCluster] += size;
+      } 
+
+    }
     //
     return clusterToI;
   }
