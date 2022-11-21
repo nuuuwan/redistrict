@@ -1,6 +1,9 @@
 import KMeansClustering from "./KMeansClustering";
 import Partition from "../../nonview/core/Partition";
+import RegionIdx from "./RegionIdx";
 import Vector from "./Vector";
+
+const K_SPACE = 10;
 
 export default class PartitionByClustering extends Partition {
   partitionAll(maxSeatsPerGroup) {
@@ -9,7 +12,14 @@ export default class PartitionByClustering extends Partition {
     const dataList = Object.values(this.regionIdx.idx);
     const n = dataList.length;
     const funcIToVector = function (i) {
-      return new Vector(dataList[i].centroid);
+      const data = dataList[i];
+      const { buddhist, christian, islam, hindu } = RegionIdx.getReligionInfo([
+        data.id,
+      ]);
+      const [lat, lng] = data.centroid;
+      const values = [islam, lat * K_SPACE, lng * K_SPACE];
+
+      return new Vector(values);
     };
     const funcIToSize = function (i) {
       return dataList[i].pop;
