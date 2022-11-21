@@ -22,4 +22,9 @@ export default class MathX {
     const span = parseInt((max - min) / step);
     return [...Array(span).keys()].map((x) => x * step + min);
   }
+
+  static randInt(min, max) {
+    const span = max - min;
+    return min + parseInt(Math.random() * span);
+  }
 }
