@@ -63,7 +63,6 @@ export default class GeoView extends Component {
       const nSeatsFairPerNSeats2 = nSeatsFair / groupToSeats[group];
 
       let color = undefined;
-      console.debug(colorMode);
       for (let [kDemographic, funcDemographicsInfo] of Object.entries(
         FUNC_DEMOGRAPHICS_INFO_IDX
       )) {
