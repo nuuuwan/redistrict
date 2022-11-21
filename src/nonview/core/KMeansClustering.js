@@ -97,7 +97,7 @@ export default class KMeansClustering {
             continue;
           }
         }
-        
+
         clusterToI[iCluster].push(iVector);
         vectorToCluster[iVector] = iCluster;
         clusterToSize[iCluster] += size;
