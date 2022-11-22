@@ -35,7 +35,10 @@ export default class GIG2TableRow {
   }
 
   getValue(k) {
-    return this.d[k] ? this.d[k] : 0;
+    if (!this.d[k] || Number.isNaN(this.d[k])) {
+      return 0;
+    }
+    return this.d[k];
   }
 
   getMaxValueKeyAndValue() {
