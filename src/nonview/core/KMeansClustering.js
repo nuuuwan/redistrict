@@ -81,14 +81,16 @@ export default class KMeansClustering {
       });
 
       let vectorToCluster = {};
-      // const isLastEpoch = epoch === MAX_EPOCHS - 1;
+      const isLastEpoch = epoch === MAX_EPOCHS - 1;
       for (let { iVector, iCluster } of sortedRunList) {
         const size = this.funcIToSize(iVector);
         if (vectorToCluster[iVector] !== undefined) {
           continue;
         }
-        if (clusterToSize[iCluster] + size > maxSizePerCluster) {
-          continue;
+        if (!isLastEpoch) {
+          if (clusterToSize[iCluster] + size > maxSizePerCluster) {
+            continue;
+          }
         }
 
         clusterToI[iCluster].push(iVector);
