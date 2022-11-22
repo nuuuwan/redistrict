@@ -132,7 +132,13 @@ export default class RegionIdx {
     }
 
     info["others"] = totalPop - MathX.sum(Object.values(info));
+    if (Number.isNaN(info.sinhalese)) {
+      console.debug(info, totalPop);
+    }
 
+    if (totalPop === 0) {
+      totalPop = 1;
+    }
     return Object.entries(info)
       .sort(function (a, b) {
         return b[1] - a[1];
