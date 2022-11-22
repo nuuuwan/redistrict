@@ -5,7 +5,6 @@ export default class Cache {
       return JSON.parse(hotItem);
     }
 
-    console.debug("Cache.get: ", cacheKey);
     const coldItem = await asyncFallback();
     try {
       localStorage.setItem(cacheKey, JSON.stringify(coldItem));
