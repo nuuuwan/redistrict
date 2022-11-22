@@ -36,32 +36,27 @@ export default class KMeansClustering {
     }
 
     for (let iVector = 0; iVector < this.n; iVector++) {
-      const size = this.funcIToSize(iVector);
-      while (true) {
-        const iCluster = MathX.randInt(0, this.k);
-        if (clusterToSize[iCluster] + size < maxSizePerCluster) {
-          clusterToI[iCluster].push(iVector);
-          clusterToSize[iCluster] += size;
-          break;
-        }
-      }
+      const iCluster = iVector % this.k;
+      clusterToI[iCluster].push(iVector);
     }
 
     // Iterate for Epochs
+    let clusterMeanVectors;
+    let prevClusterMeanVectors;
     for (let epoch = 0; epoch < MAX_EPOCHS; epoch++) {
-      let clusterMeanVectors = [];
+      prevClusterMeanVectors = clusterMeanVectors;
+      clusterMeanVectors = [];
+
       for (let iCluster = 0; iCluster < this.k; iCluster++) {
         const clusterVectors = clusterToI[iCluster].map(
           (iVector) => vectors[iVector]
         );
-
-        if (clusterVectors.length === 0) {
-          for (let iVector = 0; iVector < this.n; iVector++) {
-            clusterToI[iCluster].push(iVector);
-          }
+        let clusterMeanVector;
+        if (clusterVectors.length > 0) {
+          clusterMeanVector = Vector.mean(clusterVectors);
+        } else {
+          clusterMeanVector = prevClusterMeanVectors[iCluster];
         }
-
-        const clusterMeanVector = Vector.mean(clusterVectors);
         clusterMeanVectors.push(clusterMeanVector);
         clusterToI[iCluster] = [];
         clusterToSize[iCluster] = 0;
@@ -87,7 +82,7 @@ export default class KMeansClustering {
 
       let vectorToCluster = {};
       // const isLastEpoch = epoch === MAX_EPOCHS - 1;
-      for (let { iVector, iCluster, distance } of sortedRunList) {
+      for (let { iVector, iCluster } of sortedRunList) {
         const size = this.funcIToSize(iVector);
         if (vectorToCluster[iVector] !== undefined) {
           continue;
