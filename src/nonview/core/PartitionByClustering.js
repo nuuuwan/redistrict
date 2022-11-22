@@ -16,32 +16,36 @@ export default class PartitionByClustering extends Partition {
       const { buddhist, christian, islam, hindu } = RegionIdx.getReligionInfo([
         data.id,
       ]);
-      const { sinhalese, tamil, moor } = RegionIdx.getEthnicityInfo([
-        data.id,
-      ]);
+      const { sinhalese, tamil, moor } = RegionIdx.getEthnicityInfo([data.id]);
       const [lat, lng] = data.centroid;
       const values = [
-          // religion
-          buddhist, christian, islam, hindu, 
-          // ethnicity
-          sinhalese, tamil, moor, 
-          // space
-          lat * K_SPACE, lng * K_SPACE,
+        // religion
+        buddhist,
+        christian,
+        islam,
+        hindu,
+        // ethnicity
+        sinhalese,
+        tamil,
+        moor,
+        // space
+        lat * K_SPACE,
+        lng * K_SPACE,
       ];
       return new Vector(values);
     };
     const funcIToSize = function (i) {
       return dataList[i].pop;
     };
-    
+
     const clustering = new KMeansClustering(k, n, funcIToVector, funcIToSize);
-    const cluterToI = clustering.cluster();  
+    const cluterToI = clustering.cluster();
 
     const newNSeats = nSeats / k;
     this.groupToIDListAndNSeats = {};
     for (let iCluster = 0; iCluster < k; iCluster++) {
       const vectors = cluterToI[iCluster];
-      if (vectors.length === 0)  {
+      if (vectors.length === 0) {
         continue;
       }
       const idList = vectors.map((iVector) => dataList[iVector].id);
