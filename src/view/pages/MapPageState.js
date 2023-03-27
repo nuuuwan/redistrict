@@ -3,7 +3,8 @@ import { Component } from "react";
 import { ENT_TYPES } from "../../nonview/base/EntTypes";
 import Ents from "../../nonview/base/Ents";
 import CommonStore from "../../nonview/core/CommonStore";
-import PartitionByClustering from "../../nonview/core/PartitionByClustering";
+// import PartitionByClustering from "../../nonview/core/PartitionByClustering";
+import Partition from "../../nonview/core/Partition";
 
 const DEFAULT_N_SEATS = 20;
 const DEFAULT_MAX_SEATS_PER_GROUP = 1;
@@ -109,7 +110,7 @@ export default class MapPageState extends Component {
         regionID,
         subRegionType
       );
-      partition = new PartitionByClustering(regionIdx, nSeats);
+      partition = new Partition(regionIdx, nSeats);
       partition.partitionAll(maxSeatsPerGroup);
     }
 
