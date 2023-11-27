@@ -6,9 +6,9 @@ import CommonStore from "../../nonview/core/CommonStore";
 // import PartitionByClustering from "../../nonview/core/PartitionByClustering";
 import Partition from "../../nonview/core/Partition";
 
-const DEFAULT_N_SEATS = 20;
-const DEFAULT_MAX_SEATS_PER_GROUP = 1;
-const DEFAULT_SUBREGION_TYPE = ENT_TYPES.GND;
+const DEFAULT_N_SEATS = 14;
+const DEFAULT_MAX_SEATS_PER_GROUP = 3;
+const DEFAULT_SUBREGION_TYPE = ENT_TYPES.DSD;
 const DEFAULT_REGION_ID = "EC-01";
 const DEFAULT_COLOR_MODE = "Polling Divisions";
 

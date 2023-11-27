@@ -29,8 +29,8 @@ export default class PartitionByClustering extends Partition {
         tamil,
         moor,
         // space
-        lat * K_SPACE,
-        lng * K_SPACE,
+        // lat * K_SPACE,
+        // lng * K_SPACE,
       ];
       return new Vector(values);
     };
